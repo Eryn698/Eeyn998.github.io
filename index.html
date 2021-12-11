@@ -85,6 +85,10 @@
 		        
 					<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 		        
+					<a class="qq" target="_blank" href="#" title="qq"><i class="icon-qq"></i></a>
+		        
+					<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
+		        
 			</div>
 		</nav>
 	</header>		
@@ -126,6 +130,10 @@
 			        
 						<a class="zhihu" target="_blank" href="#" title="zhihu"><i class="icon-zhihu"></i></a>
 			        
+						<a class="qq" target="_blank" href="#" title="qq"><i class="icon-qq"></i></a>
+			        
+						<a class="weixin" target="_blank" href="#" title="weixin"><i class="icon-weixin"></i></a>
+			        
 				</div>
 			</nav>
 
@@ -152,19 +160,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-我的第一篇文章" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-vue-cli3中配置生成环境和开发环境" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">我的第一篇文章</a>
+      <a class="article-title" href="/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">vue-cli3中配置生成环境和开发环境</a>
     </h1>
   
 
         
-        <a href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/" class="archive-article-date">
+        <a href="/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="archive-article-date">
   	<time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
 </a>
         
@@ -172,7 +180,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h2><p>内容</p>
+        <h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
+<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
+</ol>
+<ul>
+<li>.env.development<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>.env.production<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
+<li>.env.staging </li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在封装的axios网络请求中配置baseURL  </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>配置package.json文件  </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
 <h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
 <h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a target="_blank" rel="noopener" href="http://www.hahah.com/">www.hahah.com</a></p>
 
@@ -187,7 +215,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">展开全文 >></a>
         </p>
       
 
@@ -217,27 +245,54 @@
 
 
   
-    <article id="post-我的第一篇博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-git" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">我的第一篇博客</a>
+      <a class="article-title" href="/2021/12/11/git/">git命令</a>
     </h1>
   
 
         
-        <a href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2021-12-11T03:03:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
+        <a href="/2021/12/11/git/" class="archive-article-date">
+  	<time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-12-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>git init 初始化git本地仓库</p>
+<p>git status 查看监听的状态  (可选)</p>
+<p>git add .  全部添加到可操作的状态 （当前状态应该为绿色）</p>
+<p>git commit -m ‘first’  把监听的文件添加到本地仓库       </p>
+<p>git log    查看修改日志   (可选)</p>
+<p>git remote add origin http  http是你的运程仓库地址  需要你在 github 或者 码云上创建    </p>
+<p>git push -u origin master  提交到主分支上   </p>
+<p>git branch 分支名称 创建新分支</p>
+<p>git checkout -b 分支的名称  创建并切换到新分支   </p>
+<p>git branch     查看分支  </p>
+<p>git checkout 分支名称   切换分支  </p>
+<p>git push -u origin  分支名称</p>
+<p>git reset –hard commit_id   代码回退  </p>
+<h3 id="1-2-合并"><a href="#1-2-合并" class="headerlink" title="1.2 合并"></a>1.2 合并</h3><p>git merge 分支名称      要确保你是在master 分支上操作</p>
+<h3 id="1-3-删除"><a href="#1-3-删除" class="headerlink" title="1.3 删除"></a>1.3 删除</h3><p>git branch -d 分支名称 删除本地分支</p>
+<p>git branch -D 分支名称 强制删除本地分支</p>
+<p>git push origin –delete 分支名称 删除远程分支</p>
+<h3 id="1-4-重命名"><a href="#1-4-重命名" class="headerlink" title="1.4 重命名"></a>1.4 重命名</h3><p>git branch -m 要改的本地分支名 修改后的分支名(修改本地分支)</p>
+<p>git push origin :远程修改前的分支名（删除远程分支）</p>
+<p>git push origin 修改后的分支名:修改后的分支名（push 到远程分支）</p>
+<p>git branch –set-upstream  修改后的分支名 origin/修改后的分支名（绑定远程分支）</p>
+<h3 id="1-5-代码拉取"><a href="#1-5-代码拉取" class="headerlink" title="1.5 代码拉取"></a>1.5 代码拉取</h3><p>git pull origin master </p>
+<h3 id="1-6-强制删除远程分支"><a href="#1-6-强制删除远程分支" class="headerlink" title="1.6 强制删除远程分支"></a>1.6 强制删除远程分支</h3><p>git push origin –delete 分支名称   </p>
+<p>出现这个问题是因为gitee中的文件不在本地代码目录中，可以通过如下命令进行代码合并,之后在提交<br>代码合并 </p>
+<p>git merge 分支名称     本地合并   </p>
+<p>git push              提交到远程  </p>
+<p>git pull –rebase origin master   同步远程和本地的代码  </p>
+
       
 
       
@@ -249,7 +304,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2021/12/11/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">展开全文 >></a>
+          <a class="article-more-a" href="/2021/12/11/git/">展开全文 >></a>
         </p>
       
 
@@ -495,11 +550,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="http://www.baidu.com/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>百度</a>
             </li>
           
             <li class="search-li">
