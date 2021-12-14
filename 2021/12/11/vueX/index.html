@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>vue-cli3中配置生成环境和开发环境 |  Hexo</title>
+      <title>vueX快速上手 |  Hexo</title>
   <meta name="generator" content="hexo-theme-ayer">
        
 <link rel="stylesheet" href="/dist/main.css">
@@ -55,7 +55,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-vue-cli3中配置生成环境和开发环境"
+  id="post-vueX"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -66,7 +66,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  vue-cli3中配置生成环境和开发环境
+  vueX快速上手
 </h1>
  
 
@@ -74,7 +74,7 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-date">
+      <a href="/2021/12/11/vueX/" class="article-date">
   <time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished">2021-12-11</time>
 </a>   
 <div class="word_count">
@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">341</span>
+            <span class="post-count">240</span>
         </span>
     </span>
 
@@ -106,29 +106,29 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
-<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
-</ol>
-<ul>
-<li>.env.development<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>.env.production<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
-<li>.env.staging </li>
+  <h2 id="一、什么是vuex？"><a href="#一、什么是vuex？" class="headerlink" title="一、什么是vuex？"></a>一、什么是vuex？</h2><ul>
+<li>官方的解释是：Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</li>
 </ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>在封装的axios网络请求中配置baseURL  </p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-<li><p>配置package.json文件  </p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<h2 id="二、为什么要用vuex？"><a href="#二、为什么要用vuex？" class="headerlink" title="二、为什么要用vuex？"></a>二、为什么要用vuex？</h2><ol>
+<li><p>对于父子组件之前的通信，父组件通过porps传递到子组件，子组件通过$emit发送事件到父组件;父组件还可以通过ref的方式拿子组件的值并共享；</p>
+</li>
+<li><p>对于组件与组件之间的通信，可以new一个新的Vue实例，专门用来做event bus进行通信。怎么用？</p>
+</li>
+<li><p>当多个组件之间共享一个状态时，event bus可能就变成乱了</p>
+<p><img src="../../public/img/1.jpg"></p>
+</li>
 </ol>
-<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a target="_blank" rel="noopener" href="http://www.hahah.com/">www.hahah.com</a></p>
+<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="./vuex.png"></p>
+<ol>
+<li><p>Vue Components    用户  </p>
+</li>
+<li><p>State                         点餐员   </p>
+</li>
+<li><p>Actions                     用户的需求</p>
+</li>
+<li><p>Motations               厨师     把 用户的需求 和食材 做成成品，返回新的数据   </p>
+</li>
+</ol>
  
       <!-- reward -->
       
@@ -199,7 +199,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/11/vueX/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -210,10 +210,19 @@
    
   <nav class="article-nav">
     
-    
       <a href="/2021/12/11/git/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Git命令
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2021/12/11/nodejs/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Git命令</div>
+        <div class="article-nav-title">Node.js</div>
       </a>
     
   </nav>
