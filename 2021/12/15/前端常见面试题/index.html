@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Git命令 |  Hexo</title>
+      <title>前端常见面试题 |  Hexo</title>
   <meta name="generator" content="hexo-theme-ayer">
        
 <link rel="stylesheet" href="/dist/main.css">
@@ -55,7 +55,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-git"
+  id="post-前端常见面试题"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -66,7 +66,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Git命令
+  前端常见面试题
 </h1>
  
 
@@ -74,15 +74,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/12/11/git/" class="article-date">
-  <time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished">2021-12-11</time>
+      <a href="/2021/12/15/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" class="article-date">
+  <time datetime="2021-12-15T13:23:31.000Z" itemprop="datePublished">2021-12-15</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">445</span>
+            <span class="post-count">1.2k</span>
         </span>
     </span>
 
@@ -91,7 +91,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">4 min</span>
         </span>
     </span>
 </div>
@@ -106,33 +106,53 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>$ git init 初始化git本地仓库</p>
-<p>$ git status 查看监听的状态  (可选)</p>
-<p>git add .  全部添加到可操作的状态 （当前状态应该为绿色）</p>
-<p>git commit -m ‘first’  把监听的文件添加到本地仓库       </p>
-<p>git log    查看修改日志   (可选)</p>
-<p>git remote add origin http  http是你的运程仓库地址  需要你在 github 或者 码云上创建    </p>
-<p>git push -u origin master  提交到主分支上   </p>
-<p>git branch 分支名称 创建新分支</p>
-<p>git checkout -b 分支的名称  创建并切换到新分支   </p>
-<p>git branch     查看分支  </p>
-<p>git checkout 分支名称   切换分支  </p>
-<p>git push -u origin  分支名称</p>
-<p>git reset –hard commit_id   代码回退  </p>
-<h3 id="1-2-合并"><a href="#1-2-合并" class="headerlink" title="1.2 合并"></a>1.2 合并</h3><p>git merge 分支名称      要确保你是在master 分支上操作</p>
-<h3 id="1-3-删除"><a href="#1-3-删除" class="headerlink" title="1.3 删除"></a>1.3 删除</h3><p>git branch -d 分支名称 删除本地分支</p>
-<p>git branch -D 分支名称 强制删除本地分支</p>
-<p>git push origin –delete 分支名称 删除远程分支</p>
-<h3 id="1-4-重命名"><a href="#1-4-重命名" class="headerlink" title="1.4 重命名"></a>1.4 重命名</h3><p>git branch -m 要改的本地分支名 修改后的分支名(修改本地分支)</p>
-<p>git push origin :远程修改前的分支名（删除远程分支）</p>
-<p>git push origin 修改后的分支名:修改后的分支名（push 到远程分支）</p>
-<p>git branch –set-upstream  修改后的分支名 origin/修改后的分支名（绑定远程分支）</p>
-<h3 id="1-5-代码拉取"><a href="#1-5-代码拉取" class="headerlink" title="1.5 代码拉取"></a>1.5 代码拉取</h3><p>git pull origin master </p>
-<h3 id="1-6-强制删除远程分支"><a href="#1-6-强制删除远程分支" class="headerlink" title="1.6 强制删除远程分支"></a>1.6 强制删除远程分支</h3><p>git push origin –delete 分支名称   </p>
-<p>出现这个问题是因为gitee中的文件不在本地代码目录中，可以通过如下命令进行代码合并,之后在提交<br>代码合并 </p>
-<p>git merge 分支名称     本地合并   </p>
-<p>git push              提交到远程  </p>
-<p>git pull –rebase origin master   同步远程和本地的代码  </p>
+  <h1 id="一-对前端界面工程师这个职位是怎么样理解的？"><a href="#一-对前端界面工程师这个职位是怎么样理解的？" class="headerlink" title="一.对前端界面工程师这个职位是怎么样理解的？"></a>一.对前端界面工程师这个职位是怎么样理解的？</h1><p>  a. 前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好</p>
+<p>  b. 参与项目，快速高质量完成实现效果图，精确到1px；</p>
+<p>  c. 与团队成员，UI设计，产品经理的沟通；</p>
+<p>  d. 做好的页面结构，页面重构和用户体验；</p>
+<p>  e. 处理hack，兼容、写出优美的代码格式；</p>
+<p>  f. 针对服务器的优化、拥抱最新前端技术。</p>
+<h1 id="二-你在现在的团队处于什么样的角色，起到了什么明显的作用？"><a href="#二-你在现在的团队处于什么样的角色，起到了什么明显的作用？" class="headerlink" title="二.你在现在的团队处于什么样的角色，起到了什么明显的作用？"></a>二.你在现在的团队处于什么样的角色，起到了什么明显的作用？</h1><p>  请自行根据自己情况做回答，这个没有统一标准答案。</p>
+<h1 id="三-你的优点是什么？缺点是什么？"><a href="#三-你的优点是什么？缺点是什么？" class="headerlink" title="三.你的优点是什么？缺点是什么？"></a>三.你的优点是什么？缺点是什么？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。  </p>
+<h1 id="四-如何管理前端团队"><a href="#四-如何管理前端团队" class="headerlink" title="四.如何管理前端团队?"></a>四.如何管理前端团队?</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
+<h1 id="五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？"><a href="#五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？" class="headerlink" title="五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？"></a>五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
+<h1 id="六-平时如何管理你的项目？"><a href="#六-平时如何管理你的项目？" class="headerlink" title="六.平时如何管理你的项目？"></a>六.平时如何管理你的项目？</h1><p>  a. 先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；</p>
+<p>  b. 编写习惯必须一致（例如都是采用继承式的写法，单样式都写成一行）；</p>
+<p>  c. 标注样式编写人，各模块都及时标注（标注关键样式调用的地方）；</p>
+<p>  d. 页面进行标注（例如 页面 模块 开始和结束）；</p>
+<p>  e. CSS跟HTML 分文件夹并行存放，命名都得统一（例如style.css）；</p>
+<p>  f. JS 分文件夹存放 命名以该JS功能为准的英文翻译。</p>
+<p>  g. 图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理</p>
+<h1 id="七-说说最近最流行的一些东西吧？常去哪些网站？"><a href="#七-说说最近最流行的一些东西吧？常去哪些网站？" class="headerlink" title="七.说说最近最流行的一些东西吧？常去哪些网站？"></a>七.说说最近最流行的一些东西吧？常去哪些网站？</h1><p>  CSDN、SegmentFault、php.net、MDN、css参考手册、iconfont、</p>
+<p>  underscore、github、Bootstrap、W3Shool、W3Cplus、caniuse</p>
+<h1 id="八-你都使用哪些工具来测试代码的性能？"><a href="#八-你都使用哪些工具来测试代码的性能？" class="headerlink" title="八. 你都使用哪些工具来测试代码的性能？"></a>八. 你都使用哪些工具来测试代码的性能？</h1><p>  JSPerf, Dromaeo</p>
+<h1 id="九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"><a href="#九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？" class="headerlink" title="九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"></a>九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</h1><h1 id="十-AMD和CMD-规范的区别？"><a href="#十-AMD和CMD-规范的区别？" class="headerlink" title="十. AMD和CMD 规范的区别？"></a>十. AMD和CMD 规范的区别？</h1><p>  AMD 提前执行依赖 - 尽早执行，requireJS 是它的实现</p>
+<p>  CMD 按需执行依赖 - 懒执行，seaJS 是它的实现</p>
+<h1 id="十一-网站重构的理解"><a href="#十一-网站重构的理解" class="headerlink" title="十一. 网站重构的理解"></a>十一. 网站重构的理解</h1><p>  重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。</p>
+<p>  a. 使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)</p>
+<p>  b. 对于移动平台的优化，针对于SEO进行优化</p>
+<p>  c. 减少代码间的耦合，让代码保持弹性</p>
+<p>  d. 压缩或合并JS、CSS、image等前端资源</p>
+<h1 id="十二-一次js请求一般情况下有哪些地方会有缓存处理？"><a href="#十二-一次js请求一般情况下有哪些地方会有缓存处理？" class="headerlink" title="十二. 一次js请求一般情况下有哪些地方会有缓存处理？"></a>十二. 一次js请求一般情况下有哪些地方会有缓存处理？</h1><p>  a. 浏览器端存储</p>
+<p>  b. 浏览器端文件缓存</p>
+<p>  c. HTTP缓存304</p>
+<p>  d. 服务器端文件类型缓存</p>
+<p>  e. 表现层&amp;DOM缓存</p>
+<h1 id="十三-谈谈以前端角度出发做好SEO需要考虑什么？"><a href="#十三-谈谈以前端角度出发做好SEO需要考虑什么？" class="headerlink" title="十三. 谈谈以前端角度出发做好SEO需要考虑什么？"></a>十三. 谈谈以前端角度出发做好SEO需要考虑什么？</h1><p>  a. 了解搜索引擎如何抓取网页和如何索引网页</p>
+<p>  b. meta标签优化</p>
+<p>  c. 关键词分析</p>
+<p>  d. 付费给搜索引擎</p>
+<p>  e. 链接交换和链接广泛度（Link Popularity）</p>
+<p>  f. 合理的标签使用</p>
+<h1 id="十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。"><a href="#十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。" class="headerlink" title="十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。"></a>十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。</h1><p>  a. 图片懒加载，滚动到相应位置才加载图片。</p>
+<p>  b. 图片预加载，如果为幻灯片、相册等，将当前展示图片的前一张和后一张优先下载。</p>
+<p>  c. 使用CSSsprite，SVGsprite，Iconfont、Base64等技术，如果图片为css图片的话。</p>
+<p>  d. 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。</p>
+<h1 id="十五-谈谈你对前端性能优化的理解"><a href="#十五-谈谈你对前端性能优化的理解" class="headerlink" title="十五. 谈谈你对前端性能优化的理解"></a>十五. 谈谈你对前端性能优化的理解</h1><p>  a. 请求数量：合并脚本和样式表，CSS Sprites，拆分初始化负载，划分主域</p>
+<p>  b. 请求带宽：开启GZip，精简JavaScript，移除重复脚本，图像优化，将icon做成字体</p>
+<p>  c. 缓存利用：使用CDN，使用外部JavaScript和CSS，添加Expires头，减少DNS查找，配置ETag，使AjaX可缓存</p>
+<p>  d. 页面结构：将样式表放在顶部，将脚本放在底部，尽早刷新文档的输出</p>
+<p>  e. 代码校验：避免CSS表达式，避免重定向</p>
  
       <!-- reward -->
       
@@ -203,7 +223,7 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/11/git/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/15/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -214,19 +234,10 @@
    
   <nav class="article-nav">
     
-      <a href="/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            vue中配置生成环境和开发环境
-          
-        </div>
-      </a>
     
-    
-      <a href="/2021/12/11/vueX/" class="article-nav-link">
+      <a href="/2021/12/15/javascript/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">vueX快速上手</div>
+        <div class="article-nav-title">JavaScript</div>
       </a>
     
   </nav>
