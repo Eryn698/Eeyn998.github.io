@@ -1850,7 +1850,7 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>前端常见面试题</title>
+    <title>小程序技术栈整合</title>
     <url>/2022/01/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E6%A0%88%E6%95%B4%E5%90%88/</url>
     <content><![CDATA[<h1 id="小程序技术栈整合"><a href="#小程序技术栈整合" class="headerlink" title="小程序技术栈整合"></a>小程序技术栈整合</h1><h2 id="一、-mpvue配置"><a href="#一、-mpvue配置" class="headerlink" title="一、 mpvue配置"></a>一、 mpvue配置</h2><ol>
 <li>全局安装 vue-cli  </li>
