@@ -134,6 +134,149 @@
     
     
     <article
+  id="post-vue-cli3.0项目优化"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/10/vue-cli3.0%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/"
+    >ue-cli3.0 项目优化</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/01/10/vue-cli3.0%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" class="article-date">
+  <time datetime="2022-01-10T12:53:31.000Z" itemprop="datePublished">2022-01-10</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="Vue-cli3-0-项目优化"><a href="#Vue-cli3-0-项目优化" class="headerlink" title="Vue-cli3.0 项目优化"></a>Vue-cli3.0 项目优化</h1><h2 id="一-项目优化策略"><a href="#一-项目优化策略" class="headerlink" title="一. 项目优化策略"></a>一. 项目优化策略</h2><ol>
+<li><p>生成打包报告</p>
+</li>
+<li><p>第三方库启用 CDN </p>
+</li>
+<li><p>ui 组件按需加载</p>
+</li>
+<li><p>路由懒加载</p>
+</li>
+<li><p>首屏内容定制</p>
+</li>
+</ol>
+<h2 id="二-项目添加-nprogress-进度条"><a href="#二-项目添加-nprogress-进度条" class="headerlink" title="二. 项目添加 nprogress 进度条"></a>二. 项目添加 nprogress 进度条</h2><ol>
+<li>安装依赖包 </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add nprogress -S </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在main.js 中导入依赖包和样式 </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NProgress <span class="keyword">from</span> <span class="string">&#x27;nprogress&#x27;</span> </span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;nprogress/nprogress.css&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在axios请求拦截器和响应拦截器中配置启动和结束</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// axios 请求拦截</span></span><br><span class="line">axios.interceptors.request.use(<span class="function"><span class="keyword">function</span> (<span class="params">config</span>) </span>&#123;</span><br><span class="line">  NProgress.start()</span><br><span class="line">  <span class="keyword">return</span> config</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// axios 响应拦截</span></span><br><span class="line">axios.interceptors.response.use(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</span><br><span class="line">  NProgress.done()</span><br><span class="line">  <span class="keyword">return</span> response</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="三-自动移除-console-log"><a href="#三-自动移除-console-log" class="headerlink" title="三. 自动移除 console.log"></a>三. 自动移除 console.log</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add babel-plugin-transform-remove-console -D </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在 .babelrc  | babel.config.js 文件中配置 plugins 插件 </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> prodPlugins = []</span><br><span class="line"><span class="comment">// 生产环境移除console</span></span><br><span class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">  prodPlugins.push(<span class="string">&#x27;transform-remove-console&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="string">&#x27;presets&#x27;</span>: [</span><br><span class="line">    <span class="string">&#x27;@vue/app&#x27;</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    [</span><br><span class="line">      <span class="string">&#x27;import&#x27;</span>,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="string">&#x27;libraryName&#x27;</span>: <span class="string">&#x27;vant&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;libraryDirectory&#x27;</span>: <span class="string">&#x27;es&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;style&#x27;</span>: <span class="literal">true</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="string">&#x27;vant&#x27;</span></span><br><span class="line">    ],</span><br><span class="line">    ...prodPlugins</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四-生成打包报告"><a href="#四-生成打包报告" class="headerlink" title="四. 生成打包报告"></a>四. 生成打包报告</h2><ol>
+<li>直接在命令行添加参数  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue-cli-service build --report</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>通过可视化的 ui 面板查看报告（推荐）</li>
+</ol>
+<p>  在可视化的ui面板中，通过<em><strong>控制台</strong></em>和<em><strong>分析</strong></em>面板， 可以方便的查看存在的问题</p>
+<h2 id="五-vue-cli3-0-webpack全局配置-vue-config-js"><a href="#五-vue-cli3-0-webpack全局配置-vue-config-js" class="headerlink" title="五. vue-cli3.0 webpack全局配置 vue.config.js"></a>五. vue-cli3.0 webpack全局配置 vue.config.js</h2><p><a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config">https://cli.vuejs.org/zh/config</a></p>
+<h2 id="六-为开发模式与发布模式设置不同的打包入口"><a href="#六-为开发模式与发布模式设置不同的打包入口" class="headerlink" title="六. 为开发模式与发布模式设置不同的打包入口"></a>六. 为开发模式与发布模式设置不同的打包入口</h2><ol>
+<li><p>配置开发入口文件 src/main-dev.js 和发布模式入口文件 src/main-prod.js</p>
+</li>
+<li><p>通过 configureWebpack 或者 chainWebpack  来修改默认的配置</p>
+</li>
+</ol>
+<p>  configureWebpack 通过对象形式操作</p>
+<p>  chainWebpack        通过链式形式操作</p>
+<ol start="3">
+<li>在 vue.config.js 文件中通过 chainWebpack 修改入口文件  </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">chainWebpack</span>: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 发布模式</span></span><br><span class="line">    config.when(process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">      config</span><br><span class="line">        .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">        .clear()</span><br><span class="line">        .add(<span class="string">&#x27;./src/main-prod.js&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// 开发模式</span></span><br><span class="line">    config.when(process.env.NODE_ENV === <span class="string">&#x27;development&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">      config</span><br><span class="line">        .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">        .clear()</span><br><span class="line">        .add(<span class="string">&#x27;./src/main-dev.js&#x27;</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="七-通过-externals-加载外部-CDN-资源"><a href="#七-通过-externals-加载外部-CDN-资源" class="headerlink" title="七. 通过 externals 加载外部 CDN 资源"></a>七. 通过 externals 加载外部 CDN 资源</h2><ol>
+<li>配置 vue.config.js </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="attr">chainWebpack</span>: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 发布模式</span></span><br><span class="line">  config.when(process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config</span><br><span class="line">      .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">      .clear()</span><br><span class="line">      .add(<span class="string">&#x27;./src/main-prod.js&#x27;</span>)</span><br><span class="line">    config</span><br><span class="line">      .set(<span class="string">&#x27;externals&#x27;</span>, &#123;</span><br><span class="line">       	<span class="attr">vant</span>: <span class="string">&#x27;Vant&#x27;</span></span><br><span class="line">        <span class="attr">vue</span>: <span class="string">&#x27;Vue&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;vue-router&#x27;</span>: <span class="string">&#x27;VueRouter&#x27;</span>,</span><br><span class="line">        <span class="attr">axios</span>: <span class="string">&#x27;axios&#x27;</span>,</span><br><span class="line">        <span class="attr">nprogress</span>: <span class="string">&#x27;NProgress&#x27;</span>,</span><br><span class="line">        <span class="attr">moment</span>: <span class="string">&#x27;moment&#x27;</span></span><br><span class="line">      &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 开发模式</span></span><br><span class="line">  config.when(process.env.NODE_ENV === <span class="string">&#x27;development&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config</span><br><span class="line">      .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">      .clear()</span><br><span class="line">      .add(<span class="string">&#x27;./src/main-dev.js&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在 index.html 文件中引入 CDN服务依赖文件  </p>
+<p><a target="_blank" rel="noopener" href="http://www.staticfile.org/">http://www.staticfile.org/</a></p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- nprogress 的样式表文件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css&quot;</span> /&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- vant 的样式表文件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vant@2.1/lib/index.css&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/vue/2.5.22/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/vue-router/3.0.1/vue-router.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/axios/0.18.0/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- nprogress 的 js 文件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- moment 的 js 文件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/moment.js/2.24.0/moment.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"> <span class="comment">&lt;!-- vant 的 js 文件 --&gt;</span></span><br><span class="line"> <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"> ps: vant ui  引入CDN文件之后，可以直接去掉 按需引入</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="八-首页内容定制"><a href="#八-首页内容定制" class="headerlink" title="八. 首页内容定制"></a>八. 首页内容定制</h2><ol>
+<li>配置 vue.config.js </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 发布模式</span></span><br><span class="line">  config.when(process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 配置入口文件</span></span><br><span class="line">    config</span><br><span class="line">      .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">      .clear()</span><br><span class="line">      .add(<span class="string">&#x27;./src/main-prod.js&#x27;</span>)</span><br><span class="line">    <span class="comment">// 配置CDN</span></span><br><span class="line">    config</span><br><span class="line">      .set(<span class="string">&#x27;externals&#x27;</span>, &#123;</span><br><span class="line">      	<span class="attr">vant</span>: <span class="string">&#x27;Vant&#x27;</span></span><br><span class="line">        <span class="attr">vue</span>: <span class="string">&#x27;Vue&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;vue-router&#x27;</span>: <span class="string">&#x27;VueRouter&#x27;</span>,</span><br><span class="line">        <span class="attr">axios</span>: <span class="string">&#x27;axios&#x27;</span>,</span><br><span class="line">        <span class="attr">nprogress</span>: <span class="string">&#x27;NProgress&#x27;</span>,</span><br><span class="line">        <span class="attr">moment</span>: <span class="string">&#x27;moment&#x27;</span></span><br><span class="line">      &#125;)</span><br><span class="line">    <span class="comment">// 配置首页定制</span></span><br><span class="line">    config.plugin(<span class="string">&#x27;html&#x27;</span>).tap(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">      args[<span class="number">0</span>].isProd = <span class="literal">true</span></span><br><span class="line">      <span class="keyword">return</span> args</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="comment">// 开发模式</span></span><br><span class="line">  config.when(process.env.NODE_ENV === <span class="string">&#x27;development&#x27;</span>, <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    config</span><br><span class="line">      .entry(<span class="string">&#x27;app&#x27;</span>)</span><br><span class="line">      .clear()</span><br><span class="line">      .add(<span class="string">&#x27;./src/main-dev.js&#x27;</span>)</span><br><span class="line">    <span class="comment">// 配置首页定制</span></span><br><span class="line">    config.plugin(<span class="string">&#x27;html&#x27;</span>).tap(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">      args[<span class="number">0</span>].isProd = <span class="literal">false</span></span><br><span class="line">      <span class="keyword">return</span> args</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在index.html中通过流程控制 是否加载CDN资源</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>&lt;%= htmlWebpackPlugin.options.isProd ? &#x27;&#x27; : &#x27;dev - &#x27; %&gt;mall-vue<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">&lt;% if(htmlWebpackPlugin.options.isProd)&#123; %&gt;</span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>vue-ssr<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- nprogress 的样式表文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.css&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- vant 的样式表文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vant@2.1/lib/index.css&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/vue/2.5.22/vue.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/vue-router/3.0.1/vue-router.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/axios/0.18.0/axios.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- nprogress 的 js 文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/nprogress/0.2.0/nprogress.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- moment 的 js 文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.staticfile.org/moment.js/2.24.0/moment.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- vant 的 js 文件 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.jsdelivr.net/npm/vant@2.1/lib/vant.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">&lt;%&#125;%&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="九-实现路由懒加载"><a href="#九-实现路由懒加载" class="headerlink" title="九. 实现路由懒加载"></a>九. 实现路由懒加载</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn add @babel/plugin-syntax-dynamic-import -D </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置 babel.config.js </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plugins: [</span><br><span class="line">  <span class="string">&#x27;@babel/plugin-syntax-dynamic-import&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>按需加载路由组件 </li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> About = <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;./views/About.vue&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-小程序技术栈整合"
   class="article article-type-post"
   itemscope
@@ -204,6 +347,120 @@
 
 <h2 id="四、使用Promise封装小程序网络请求"><a href="#四、使用Promise封装小程序网络请求" class="headerlink" title="四、使用Promise封装小程序网络请求"></a>四、使用Promise封装小程序网络请求</h2><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 基于Promise的网络请求库, 包含GET POST请求</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.先引入： import &#123; get, post,... &#125; from 本文件;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.get请求: get(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. post请求: post(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 服务器请求地址 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> domain = <span class="string">&#x27;http://203.195.181.208:8888/&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起get请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数 get请求的参数会自动拼到地址后面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> get = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;GET&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起post请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> post = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;POST&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 接口请求基类方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>method 请求方法 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>header 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">method, url, data, header = &#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    url = domain + url;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url,</span><br><span class="line"></span><br><span class="line">      method,</span><br><span class="line"></span><br><span class="line">      data,</span><br><span class="line"></span><br><span class="line">      header,</span><br><span class="line"></span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> response.success = res,</span><br><span class="line"></span><br><span class="line">      <span class="attr">fail</span>: <span class="function">(<span class="params">error</span>) =&gt;</span> response.fail = error,</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        wx.hideLoading();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response.success) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (response.success.statusCode != <span class="number">200</span>) &#123;</span><br><span class="line"></span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;网络出错，稍后再试&quot;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          resolve(response.success.data);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;数据请求失败，请稍后重试&quot;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;数据请求失败&#x27;</span>, response.fail)</span><br><span class="line"></span><br><span class="line">          reject(response.fail);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"><span class="comment">// const host = &#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;<span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;app.globalData.baseURL&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      <span class="comment">// url: host + url,</span></span><br><span class="line">      <span class="attr">method</span>: options.method,</span><br><span class="line">      <span class="attr">data</span>: options.method === <span class="string">&#x27;GET&#x27;</span> ? options.data : <span class="built_in">JSON</span>.stringify(options.data),</span><br><span class="line">      <span class="attr">header</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;x-token&#x27;</span>: <span class="string">&#x27;x-token&#x27;</span>  <span class="comment">// 看自己是否需要</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: resolve,</span><br><span class="line">      <span class="attr">fail</span>: reject,</span><br><span class="line">      <span class="comment">// success(request) &#123;</span></span><br><span class="line">      <span class="comment">//   // console.log(request)</span></span><br><span class="line">      <span class="comment">//   if (request.statusCode === 200) &#123;</span></span><br><span class="line">      <span class="comment">//     resolve(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125; else &#123;</span></span><br><span class="line">      <span class="comment">//     reject(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125;</span></span><br><span class="line">      <span class="comment">// &#125;,</span></span><br><span class="line">      <span class="comment">// fail(error) &#123;</span></span><br><span class="line">      <span class="comment">//   reject(error.data)</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      	wx.hideLoading()</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> get = <span class="function">(<span class="params">url, options = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> post = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> put = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能声明DELETE（关键字）</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  get,</span><br><span class="line">  post,</span><br><span class="line">  put,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-storage二次封装"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/31/storage%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85/"
+    >storage二次封装</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/12/31/storage%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85/" class="article-date">
+  <time datetime="2021-12-31T12:39:31.000Z" itemprop="datePublished">2021-12-31</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Storage二次封装</span></span><br><span class="line"><span class="keyword">const</span> namespace = <span class="string">&#x27;mall&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 存</span></span><br><span class="line">  <span class="function"><span class="title">setItem</span>(<span class="params">key, val</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    storage[key] = val</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取</span></span><br><span class="line">  <span class="function"><span class="title">getItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getStorage()[key]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取所有</span></span><br><span class="line">  <span class="function"><span class="title">getStorage</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">window</span>.localStorage.getItem(namespace) || <span class="string">&quot;&#123;&#125;&quot;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 删</span></span><br><span class="line">  <span class="function"><span class="title">clearItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    <span class="keyword">delete</span> storage[key]</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 清空所有</span></span><br><span class="line">  <span class="function"><span class="title">clearAll</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.localStorage.clear(namespace, <span class="string">&#x27;&#123;&#125;&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-rem适配方案"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/"
+    >Rem适配方案</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/" class="article-date">
+  <time datetime="2021-12-31T12:30:31.000Z" itemprop="datePublished">2021-12-31</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="1-直接引入-rem-js-文件"><a href="#1-直接引入-rem-js-文件" class="headerlink" title="1. 直接引入 rem.js 文件"></a>1. 直接引入 rem.js 文件</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var devicePixelRatio = 1;</span></span><br><span class="line">  <span class="comment">// var scale = 1 / devicePixelRatio;</span></span><br><span class="line">  <span class="comment">// document.querySelector(&#x27;meta[name=&quot;viewport&quot;]&#x27;).setAttribute(&#x27;content&#x27;,&#x27;initial-scale=&#x27; + scale + &#x27;, maximum-scale=&#x27; + scale + &#x27;, minimum-scale=&#x27; + scale + &#x27;, user-scalable=no&#x27;);</span></span><br><span class="line">  <span class="comment">// 7.5根据设计稿的横向分辨率/100得来</span></span><br><span class="line">  <span class="comment">// alert(document.documentElement.clientWidth)</span></span><br><span class="line">  <span class="keyword">var</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// var deviceWidth = window.screen.availWidth</span></span><br><span class="line">  <span class="comment">// alert(navigator.userAgent)</span></span><br><span class="line">  <span class="comment">// alert(deviceWidth)</span></span><br><span class="line">  <span class="comment">// console.log(navigator.userAgent)</span></span><br><span class="line">  <span class="keyword">if</span> (deviceWidth &gt; <span class="number">750</span>) &#123;</span><br><span class="line">    <span class="comment">// deviceWidth = 750;</span></span><br><span class="line">    deviceWidth = <span class="number">7.5</span> * <span class="number">50</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = deviceWidth / <span class="number">7.5</span> + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 禁止双击放大</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">var</span> lastTouchEnd = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchend&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTouchEnd &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">    lastTouchEnd = now;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-淘宝的适配方案"><a href="#2-淘宝的适配方案" class="headerlink" title="2. 淘宝的适配方案"></a>2. 淘宝的适配方案</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yarn add lib-flexible -S   </span><br><span class="line"></span><br><span class="line">yarn add  postcss-px2rem -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在main.js 文件中引入  </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在vue.config.js 文件中配置 css 属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">css</span>: &#123;</span><br><span class="line">        <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">            <span class="attr">css</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">postcss</span>: &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [</span><br><span class="line">                    <span class="built_in">require</span>(<span class="string">&#x27;postcss-px2rem&#x27;</span>)(&#123;</span><br><span class="line">                        <span class="attr">remUnit</span>: <span class="number">37.5</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ 
       <!-- reward -->
       
     </div>
@@ -2221,237 +2478,14 @@ git push origin v1.1
 </article>
 
     
-    <article
-  id="post-vueX"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/11/vueX/"
-    >vueX快速上手</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/12/11/vueX/" class="article-date">
-  <time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished">2021-12-11</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h2 id="一、什么是vuex？"><a href="#一、什么是vuex？" class="headerlink" title="一、什么是vuex？"></a>一、什么是vuex？</h2><ul>
-<li>官方的解释是：Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</li>
-</ul>
-<h2 id="二、为什么要用vuex？"><a href="#二、为什么要用vuex？" class="headerlink" title="二、为什么要用vuex？"></a>二、为什么要用vuex？</h2><ol>
-<li><p>对于父子组件之前的通信，父组件通过porps传递到子组件，子组件通过$emit发送事件到父组件;父组件还可以通过ref的方式拿子组件的值并共享；</p>
-</li>
-<li><p>对于组件与组件之间的通信，可以new一个新的Vue实例，专门用来做event bus进行通信。怎么用？</p>
-</li>
-<li><p>当多个组件之间共享一个状态时，event bus可能就变成乱了</p>
-<p><img src="../../public/img/1.jpg"></p>
-</li>
-</ol>
-<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="./vuex.png"></p>
-<ol>
-<li><p>Vue Components    用户  </p>
-</li>
-<li><p>State                         点餐员   </p>
-</li>
-<li><p>Actions                     用户的需求</p>
-</li>
-<li><p>Motations               厨师     把 用户的需求 和食材 做成成品，返回新的数据   </p>
-</li>
-</ol>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-nodejs"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/11/nodejs/"
-    >Node.js</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/12/11/nodejs/" class="article-date">
-  <time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished">2021-12-11</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="NODEJS"><a href="#NODEJS" class="headerlink" title="NODEJS"></a>NODEJS</h1><h2 id="1-fs模块"><a href="#1-fs模块" class="headerlink" title="1. fs模块"></a>1. fs模块</h2><h3 id="1-1-文件读取"><a href="#1-1-文件读取" class="headerlink" title="1.1 文件读取"></a>1.1 文件读取</h3><p>fs.readFile(path[, options], callback)</p>
-<ul>
-<li><p>path 读取的文件路径</p>
-</li>
-<li><p>options 可选的参数 默认为 null 其实得到是buff二进制</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li><p>err 错误对象</p>
-</li>
-<li><p>data 读取的数据 </p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// if (err) throw</span></span><br><span class="line">  <span class="comment">// 设置参数2 utf8</span></span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  <span class="comment">// 显示转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">  <span class="comment">// 隐式转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data + <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="1-2-文件写入、文件追加"><a href="#1-2-文件写入、文件追加" class="headerlink" title="1.2 文件写入、文件追加"></a>1.2 文件写入、文件追加</h3><p>fs.writeFile(file, data[, options], callback)<br>fs.appendFile(path, data[, options], callback)</p>
-<ul>
-<li><p>file 写入的文件路径</p>
-</li>
-<li><p>data 写入的数据</p>
-</li>
-<li><p>options 可选的参数 默认为 utf8</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;复方草珊瑚1111&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-3-文件拷贝"><a href="#1-3-文件拷贝" class="headerlink" title="1.3 文件拷贝"></a>1.3 文件拷贝</h3><p>fs.copyFile(src, dest[, mode], callback)</p>
-<ul>
-<li><p>src 拷贝的文件地址</p>
-</li>
-<li><p>dest 写入的文件地址</p>
-</li>
-<li><p>mode 可选的参数 </p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="comment">//  把文件1.txt 的数据复制一份到 1-copy.txt 中   </span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./files/1-copy.txt&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步： 同一个时间段内，只能执行一件事情   如：手机通话</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步：同一个时间段内，可以执行多件事情    如：qq聊天</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2 v8.5.0+</span></span><br><span class="line">fs.copyFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;./files/1-copy.txt&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2021/12/11/hello-world/"
-    >Hello World</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2021/12/11/hello-world/" class="article-date">
-  <time datetime="2021-12-11T02:59:33.265Z" itemprop="datePublished">2021-12-11</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
+  
+  <nav class="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+  </nav>
   
 </section>
 </div>
