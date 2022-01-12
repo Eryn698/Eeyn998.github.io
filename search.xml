@@ -1,52 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/12/11/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>vue中配置生成环境和开发环境</title>
-    <url>/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
-<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
-</ol>
-<ul>
-<li>.env.development<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>.env.production<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
-<li>.env.staging </li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>在封装的axios网络请求中配置baseURL  </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-<li><p>配置package.json文件  </p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a href="http://www.hahah.com/">www.hahah.com</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Git命令</title>
     <url>/2021/12/11/git/</url>
     <content><![CDATA[<h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>$ git init 初始化git本地仓库</p>
@@ -196,543 +150,21 @@ git push origin v1.1
 ]]></content>
   </entry>
   <entry>
-    <title>vueX快速上手</title>
-    <url>/2021/12/11/vueX/</url>
-    <content><![CDATA[<h2 id="一、什么是vuex？"><a href="#一、什么是vuex？" class="headerlink" title="一、什么是vuex？"></a>一、什么是vuex？</h2><ul>
-<li>官方的解释是：Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</li>
-</ul>
-<h2 id="二、为什么要用vuex？"><a href="#二、为什么要用vuex？" class="headerlink" title="二、为什么要用vuex？"></a>二、为什么要用vuex？</h2><ol>
-<li><p>对于父子组件之前的通信，父组件通过porps传递到子组件，子组件通过$emit发送事件到父组件;父组件还可以通过ref的方式拿子组件的值并共享；</p>
-</li>
-<li><p>对于组件与组件之间的通信，可以new一个新的Vue实例，专门用来做event bus进行通信。怎么用？</p>
-</li>
-<li><p>当多个组件之间共享一个状态时，event bus可能就变成乱了</p>
-<p><img src="../../public/img/1.jpg"></p>
-</li>
-</ol>
-<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="./vuex.png"></p>
-<ol>
-<li><p>Vue Components    用户  </p>
-</li>
-<li><p>State                         点餐员   </p>
-</li>
-<li><p>Actions                     用户的需求</p>
-</li>
-<li><p>Motations               厨师     把 用户的需求 和食材 做成成品，返回新的数据   </p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
-    <title>Node.js</title>
-    <url>/2021/12/11/nodejs/</url>
-    <content><![CDATA[<h1 id="NODEJS"><a href="#NODEJS" class="headerlink" title="NODEJS"></a>NODEJS</h1><h2 id="1-fs模块"><a href="#1-fs模块" class="headerlink" title="1. fs模块"></a>1. fs模块</h2><h3 id="1-1-文件读取"><a href="#1-1-文件读取" class="headerlink" title="1.1 文件读取"></a>1.1 文件读取</h3><p>fs.readFile(path[, options], callback)</p>
-<ul>
-<li><p>path 读取的文件路径</p>
-</li>
-<li><p>options 可选的参数 默认为 null 其实得到是buff二进制</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li><p>err 错误对象</p>
-</li>
-<li><p>data 读取的数据 </p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// if (err) throw</span></span><br><span class="line">  <span class="comment">// 设置参数2 utf8</span></span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  <span class="comment">// 显示转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">  <span class="comment">// 隐式转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data + <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+    <title>Hello World</title>
+    <url>/2021/12/11/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<h3 id="1-2-文件写入、文件追加"><a href="#1-2-文件写入、文件追加" class="headerlink" title="1.2 文件写入、文件追加"></a>1.2 文件写入、文件追加</h3><p>fs.writeFile(file, data[, options], callback)<br>fs.appendFile(path, data[, options], callback)</p>
-<ul>
-<li><p>file 写入的文件路径</p>
-</li>
-<li><p>data 写入的数据</p>
-</li>
-<li><p>options 可选的参数 默认为 utf8</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;复方草珊瑚1111&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-
-<h3 id="1-3-文件拷贝"><a href="#1-3-文件拷贝" class="headerlink" title="1.3 文件拷贝"></a>1.3 文件拷贝</h3><p>fs.copyFile(src, dest[, mode], callback)</p>
-<ul>
-<li><p>src 拷贝的文件地址</p>
-</li>
-<li><p>dest 写入的文件地址</p>
-</li>
-<li><p>mode 可选的参数 </p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="comment">//  把文件1.txt 的数据复制一份到 1-copy.txt 中   </span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./files/1-copy.txt&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步： 同一个时间段内，只能执行一件事情   如：手机通话</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步：同一个时间段内，可以执行多件事情    如：qq聊天</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2 v8.5.0+</span></span><br><span class="line">fs.copyFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;./files/1-copy.txt&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>JavaScript</title>
-    <url>/2021/12/15/javascript/</url>
-    <content><![CDATA[<h1 id="一、js的数据类型"><a href="#一、js的数据类型" class="headerlink" title="一、js的数据类型"></a>一、js的数据类型</h1><p>值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol,大数值类型(BigInt)</p>
-<p>引用数据类型：对象(Object)、数组(Array)、函数(Function)、日期(Date)。</p>
-<p>注：Symbol 是 ES6 引入了一种新的原始数据类型，表示独一无二的值(标识符)。</p>
-<h1 id="二、什么是函数"><a href="#二、什么是函数" class="headerlink" title="二、什么是函数"></a>二、什么是函数</h1><p>JS函数的概念</p>
-<blockquote>
-<p>函数就是把特定功能的代码抽取出来，使之成为程序中的一个独立实体。</p>
-</blockquote>
-<ol start="2">
-<li>函数的作用</li>
-</ol>
-<blockquote>
-<p>正如函数的概念, 我们可以根据需要, 将特定的功能用函数来包裹(封装)</p>
-</blockquote>
-<ol start="3">
-<li>使用函数的好处</li>
-</ol>
-<blockquote>
-<p>1, 函数可以在同一个程序或其他程序中多次重复使用（通过函数名调用）<br>2, 使程序变得更简短而清晰 ， 提高可读性<br>3, 有利于程序维护</p>
-</blockquote>
-<h1 id="三、本地对象、内置对象和宿主对象"><a href="#三、本地对象、内置对象和宿主对象" class="headerlink" title="三、本地对象、内置对象和宿主对象"></a>三、本地对象、内置对象和宿主对象</h1><h4 id="1-内置对象"><a href="#1-内置对象" class="headerlink" title="1.内置对象"></a>1.内置对象</h4><blockquote>
-<p>js中的内部对象包括Array、Boolean、Date、Function、Global、Math、Number、Object、&gt;RegExp、String以及各种错误类对象，包括Error、EvalError、RangeError、ReferenceError、&gt;SyntaxError和TypeError。</p>
-</blockquote>
-<p>其中Global和Math这两个对象又被称为“内置对象”，这两个对象在脚本程序初始化时被创建，不必实例化这两个对象。</p>
-<h4 id="2-宿主对象"><a href="#2-宿主对象" class="headerlink" title="2.宿主对象"></a>2.宿主对象</h4><blockquote>
-<p>宿主对象就是执行JS脚本的环境提供的对象。对于嵌入到网页中的JS来说，其宿主对象就是浏览器<br>提供的对象，所以又称为浏览器对象，如IE、Firefox等浏览器提供的对象。不同的浏览器提供的<br>宿主对象可能不同，即使提供的对象相同，其实现方式也大相径庭！这会带来浏览器兼容问题，<br>增加开发难度。浏览器对象有很多，如Window和Document等等。</p>
-</blockquote>
-<h4 id="3-自定义对象"><a href="#3-自定义对象" class="headerlink" title="3.自定义对象"></a>3.自定义对象</h4><blockquote>
-<p>顾名思义，就是开发人员自己定义的对象。JS允许使用自定义对象，使JS应用及功能得到扩充</p>
-</blockquote>
-<h1 id="四、数组-Array"><a href="#四、数组-Array" class="headerlink" title="四、数组(Array)"></a>四、数组(Array)</h1><h4 id="1-基本方法"><a href="#1-基本方法" class="headerlink" title="1.基本方法"></a>1.基本方法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">push() 从后面添加元素，返回值为添加完后的数组的长度</span><br><span class="line">pop() 从后面删除元素，只能是一个，返回值是删除的元素</span><br><span class="line">shift() 从前面删除元素，只能删除一个 返回值是删除的元素</span><br><span class="line">unshift() 从前面添加元素, 返回值是添加完后的数组的长度</span><br><span class="line">splice(i,n) 删除从i(索引值)开始之后的那个元素。返回值是删除的元素</span><br><span class="line">concat() 连接两个数组 返回值为连接后的新数组</span><br><span class="line">split() 将字符串转化为数组</span><br><span class="line">sort() 将数组进行排序,默认根据ASCII码比较,返回值是排好的数组</span><br><span class="line">reverse() 将数组反转,返回值是反转后的数组</span><br><span class="line">slice(start,end) 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</span><br><span class="line">indexOf() 查找某个元素的索引值，若有重复的，则返回第一个查到的索引值若不存在，则返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
-<h4 id="2-高阶函数-1"><a href="#2-高阶函数-1" class="headerlink" title="2.高阶函数(1)"></a>2.高阶函数(1)</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line">forEach(callback) 遍历数组,无return  即使有return，也不会返回任何值，并且会影响原来的数组</span><br><span class="line">map(callback) 映射数组(遍历数组),有return 返回一个新数组 。</span><br></pre></td></tr></table></figure>
-<p>注意:<code>forEach()和map()的区别</code></p>
-<blockquote>
-<ol>
-<li>arr.forEach()是和for循环一样，是代替for。arr.map()是修改数组其中的数据，并返回新的数据。</li>
-<li>arr.forEach() 没有return  arr.map() 有return</li>
-</ol>
-</blockquote>
-<h4 id="3-高阶函数-2"><a href="#3-高阶函数-2" class="headerlink" title="3.高阶函数(2)"></a>3.高阶函数(2)</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">filter(callback) 过滤数组，返回一个满足要求的数组 </span><br><span class="line">every(callback) 依据判断条件，数组的元素是否全满足，若满足则返回ture</span><br><span class="line">some() 依据判断条件，数组的元素是否有一个满足，若有一个满足则返回ture</span><br><span class="line">reduce(callback, initialValue) 迭代数组的所有项，累加器，数组中的每个值（从左到右）合并，最终计算为一个值</span><br></pre></td></tr></table></figure>
-
-<p>lastIndexOf()   和arr.indexOf()的功能一样，不同的是从后往前查找<br>Array.from() 将伪数组变成数组，就是只要有length的就可以转成数组。 —es6<br>Array.of() 将一组值转换成数组，类似于声明数组    —es6<br>find(callback) 找到第一个符合条件的数组成员<br>findIndex(callback) 找到第一个符合条件的数组成员的索引值<br>fill(target, start, end) 使用给定的值，填充一个数组<br>includes() 判断数中是否包含给定的值<br>keys() 遍历数组的键名<br>values() 遍历数组键值<br>entries() 遍历数组的键名和键值</p>
-<h1 id="五、字符串-String"><a href="#五、字符串-String" class="headerlink" title="五、字符串(String)"></a>五、字符串(String)</h1><h4 id="字符串的恒定性"><a href="#字符串的恒定性" class="headerlink" title="字符串的恒定性"></a>字符串的恒定性</h4><p>字符串的方法修改字符,不会改变原来的字符串,叫做恒定性</p>
-<h4 id="字符串的方法"><a href="#字符串的方法" class="headerlink" title="字符串的方法"></a>字符串的方法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">charAt(): 返回指定下标位置的字符。如果index不在<span class="number">0</span>-str.length(不包含str.length)之间，返回空字符串。</span><br><span class="line">charCodeAt(): 返回指定下标位置的字符的unicode编码,这个返回值是 <span class="number">0</span> - <span class="number">65535</span> 之间的整数。</span><br><span class="line">indexOf(): 返回某个指定的子字符串在字符串中第一次出现的位置</span><br><span class="line">toLowerCase()把字符串转为小写，返回新的字符串。</span><br><span class="line">toUpperCase(): 把字符串转为大写，返回新的字符串。</span><br><span class="line">lastIndexOf(): 返回某个指定的子字符串在字符串中最后出现的位置。</span><br><span class="line">slice(): 返回字符串中提取的子字符串。</span><br><span class="line">substring(): 提取字符串中介于两个指定下标之间的字符。</span><br><span class="line">split(): 把字符串分割成字符串数组。</span><br><span class="line">substr(): 返回从指定下标开始指定长度的的子字符串</span><br><span class="line">replace(): 在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</span><br><span class="line">match(): 返回所有查找的关键字内容的数组。</span><br></pre></td></tr></table></figure>
-
-<h1 id="六、浏览器渲染页面的原理及流程"><a href="#六、浏览器渲染页面的原理及流程" class="headerlink" title="六、浏览器渲染页面的原理及流程"></a>六、浏览器渲染页面的原理及流程</h1><p>浏览器将域名通过网络通信从服务器拿到html文件后，如何渲染页面呢？</p>
-<blockquote>
-<p>1.根据html文件构建DOM树和CSSOM树。构建DOM树期间，如果遇到JS，阻塞DOM树及CSSOM树的构建，优先加载JS文件，加载完毕，再继续构建DOM树及CSSOM树。<br>2.构建渲染树（Render Tree）。<br>3.页面的重绘（repaint）与重排（reflow，也有称回流）。页面渲染完成后，若JS操作了DOM节点，根据JS对DOM操作动作的大小，浏览器对页面进行重绘或是回流</p>
-</blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/3534846-00ef9f3d405462ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624/format/webp"></p>
-<h1 id="七、重绘和回流（repaint-amp-reflow"><a href="#七、重绘和回流（repaint-amp-reflow" class="headerlink" title="七、重绘和回流（repaint&amp;reflow)"></a>七、重绘和回流（repaint&amp;reflow)</h1><p>当Render Tree中部分或全部元素的尺寸、结构、或某些属性发生改变时，浏览器重新渲染部分或全部文档的过程称为<strong>回流</strong>。</p>
-<p>导致回流的操作：</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、页面首次渲染</span><br><span class="line"><span class="number">2</span>、浏览器窗口大小发生改变</span><br><span class="line"><span class="number">3</span>、元素尺寸或位置发生改变</span><br><span class="line"><span class="number">4</span>、元素内容变化（文字数量或图片大小改变而引起的计算值宽度和高度改变）</span><br><span class="line"><span class="number">5</span>、元素字体大小变化</span><br><span class="line"><span class="number">6</span>、添加或者删除可见的DOM元素</span><br><span class="line"><span class="number">7</span>、激活CSS伪类（例如：:hover）</span><br><span class="line"><span class="number">8</span>、查询某些属性或调用某些方法</span><br><span class="line"><span class="number">9</span>、offsetWidth,width,clientWidth,scrollTop/scrollHeight的计算,会使浏览器将渐进回流队列Flush,立即执行回流。</span><br></pre></td></tr></table></figure>
-
-<p>当页面中元素样式的改变并不影响它在文档流中的位置时（例如：color、background-color、visibility等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为<strong>重绘</strong>。</p>
-<p><strong>回流必定会发生重绘，重绘不一定会引发回流。</strong></p>
-<h1 id="八、如何避免重绘和回流？"><a href="#八、如何避免重绘和回流？" class="headerlink" title="八、如何避免重绘和回流？"></a>八、如何避免重绘和回流？</h1><p><strong>css：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>避免使用table布局，可能很小的一个小改动会造成整个table的重新布局</span><br><span class="line"><span class="number">2.</span>尽可能在DOM树的最末端改变<span class="class"><span class="keyword">class</span>。</span></span><br><span class="line"><span class="class">3.避免设置多层内联样式。</span></span><br><span class="line"><span class="class">4.将动画效果应用到<span class="title">position</span>属性为<span class="title">absolute</span>或<span class="title">fixed</span>的元素上。</span></span><br><span class="line"><span class="class">5.动画实现的速度的选择，动画速度越快，回流次数越多，也可以选择使用<span class="title">requestAnimationFrame</span></span></span><br><span class="line"><span class="class">6.避免使用<span class="title">CSS</span>表达式（例如：<span class="title">calc</span>()）</span></span><br><span class="line"><span class="class">7.使用<span class="title">transform</span>替代<span class="title">top</span></span></span><br><span class="line"><span class="class">8.使用<span class="title">visibility</span>替换<span class="title">display</span>: <span class="title">none</span>，因为前者只会引起重绘，后者会引发回流（改变了布局）</span></span><br><span class="line"><span class="class">将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>js：</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>避免频繁操作样式，最好一次性重写style属性,cssText，或者将样式列表定义为<span class="class"><span class="keyword">class</span>并一次性更改<span class="title">class</span>属性。</span></span><br><span class="line"><span class="class">2.避免频繁操作<span class="title">DOM</span>，创建一个<span class="title">documentFragment</span>，在它上面应用所有<span class="title">DOM</span>操作，最后再把它添加到文档中。</span></span><br><span class="line"><span class="class">3.也可以先为元素设置<span class="title">display</span>: <span class="title">none</span>，操作结束后再把它显示出来。因为在<span class="title">display</span>属性为<span class="title">none</span>的元素上进行的<span class="title">DOM</span>操作不会引发回流和重绘。</span></span><br><span class="line"><span class="class">4.避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。</span></span><br><span class="line"><span class="class">5.对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。</span></span><br></pre></td></tr></table></figure>
-<h1 id="九、什么是闭包-Closure"><a href="#九、什么是闭包-Closure" class="headerlink" title="九、什么是闭包(Closure)"></a>九、什么是闭包(Closure)</h1><p>闭包是这样一种机制: </p>
-<p>**函数嵌套函数,内部函数可以引用外部函数的参数和变量,参数和变量不会被垃圾回收机制所收回. **</p>
-<p>闭包的好处：</p>
-<blockquote>
-<ol>
-<li>可以让一个变量长期驻扎在内存当中不被释放</li>
-<li>避免全局变量的污染, 和全局变量不同, 闭包中的变量无法被外部使用</li>
-</ol>
-</blockquote>
-<p><strong>闭包的用途</strong></p>
-<p>1.实现缓存</p>
-<p>2.存储值与避免变量全局污染</p>
-<p><strong>使用闭包的注意点</strong></p>
-<blockquote>
-<p>（1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。<br>（2）闭包会在父函数外部，改变父函数内部变量的值。</p>
-</blockquote>
-<h3 id="十、垃圾回收机制-GC"><a href="#十、垃圾回收机制-GC" class="headerlink" title="十、垃圾回收机制(GC)"></a>十、垃圾回收机制(GC)</h3><p>​      JS引擎会在一定的时间间隔来自动对内存进行回收(把内存释放)</p>
-<p>JS垃圾回收机制有两种:  1, 标记清除,  2, 引用计数</p>
-<p>​    1, <strong>标记清除</strong>:  js会对变量做一个标记Yes or No的标签以供js引擎来处理,  当变量在某个环境下被使用则标记为yes, 当超出该环境(可以理解为超出作用域)则标记为no, js引擎会在一定时间间隔来进行扫描, 会对有no标签的变量进行释放(将该变量所占的内存释放掉)</p>
-<p>​    2, <strong>引用计数</strong>:  对于js中引用类型的变量, 采用引用计数的内存回收机制, 当一个引用类型的变量赋值给另一个变量时, 引用计数会+1, 而当其中有一个变量不再等于值时, 引用计数会-1, 如果引用计数为0, 则js引擎会将其释放掉</p>
-<h1 id="十一、什么是回调函数-callback"><a href="#十一、什么是回调函数-callback" class="headerlink" title="十一、什么是回调函数(callback)"></a>十一、什么是回调函数(callback)</h1><p>回调函数也是一种高阶函数,把一个函数当做另外一个函数的参数,在另外一个函数内部被执行和传递参数</p>
-<p>好处:</p>
-<blockquote>
-<p>1.解决异步<br>2.对函数进行功能扩展</p>
-</blockquote>
-<p>缺点:</p>
-<blockquote>
-<p>1.容易造成回调地狱,回调地狱不方便维护与理解,<br>2.解决方案使用 promise + async + await</p>
-</blockquote>
-<h1 id="十二、什么是ajax"><a href="#十二、什么是ajax" class="headerlink" title="十二、什么是ajax"></a>十二、什么是ajax</h1><p>AJAX (阿贾克斯 Asynchronous Javascript And Xml ) 异步JavaScript和XML，是指一种创建交互式网页应用的网页开发技术, 可以<strong>访问服务器数据的局部刷新的技术</strong></p>
-<p>核心对象: <strong>XMLHttpRequest</strong></p>
-<p>ajax的异步如何获取到数据?</p>
-<blockquote>
-<p>使用<code>onreadystatechange</code>事件(事件队列event loop的宏任务),并结合<code>callback</code>回调函数</p>
-</blockquote>
-<p><code>ajax的同步,发送请求时会占据 (thread main)主线程,造成阻塞,不推荐使用</code></p>
-<h1 id="十三、get请求与post请求的区别"><a href="#十三、get请求与post请求的区别" class="headerlink" title="十三、get请求与post请求的区别?"></a>十三、get请求与post请求的区别?</h1><blockquote>
-<p>GET在浏览器回退时是无害的，而POST会再次提交请求。<br>GET请求会被浏览器主动cache，而POST不会，除非手动设置。<br>GET请求只能进行url编码，而POST支持多种编码(文字,图片,电影..)方式。<br>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。<br>GET请求在URL中传送的参数是有长度限制的，而POST么有。<br>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。<br>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。<br>GET参数通过URL传递，POST放在Request body中。<br>GET产生的URL地址可以被Bookmark，而POST不可以。</p>
-</blockquote>
-<p><strong>注意:GET产生一个TCP数据包；POST产生两个TCP数据包。Firefox就只发送一次</strong></p>
-<h1 id="十四、HTTP协议"><a href="#十四、HTTP协议" class="headerlink" title="十四、HTTP协议"></a>十四、HTTP协议</h1><h4 id="1-什么是http协议"><a href="#1-什么是http协议" class="headerlink" title="1.什么是http协议"></a>1.什么是http协议</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">超文本传输协议HyperText Transfer Protocol</span><br><span class="line">它是基于TCP协议的应用层传输协议，</span><br><span class="line">简单来说就是客户端和服务端进行数据传输的一种规则</span><br></pre></td></tr></table></figure>
-<h4 id="2-http-协议一共有五大特点："><a href="#2-http-协议一共有五大特点：" class="headerlink" title="2.http 协议一共有五大特点："></a>2.http 协议一共有五大特点：</h4><p>HTTP 是一个属于应用层的面向对象的协议有五大特点</p>
-<p>1.<strong>支持客户/服务器模式</strong>。<br>2.<strong>简单快速</strong>：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种    方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。<br>3.<strong>灵活</strong>：HTTP允许传输任意类型的数据对象。正在传输的类型由<strong>Content-Type</strong>（Content-Type是HTTP包中用来表示内容类型的标识）加以标记。<br>4.<strong>无连接</strong>：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即<strong>断开式连接</strong>。采用这种方式可以节省传输时间。<br>5.<strong>无状态</strong>：HTTP协议是无状态协议。无状态是指协议对于<strong>事务处理没有记忆能力</strong>。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
-<h4 id="3-请求报文-request"><a href="#3-请求报文-request" class="headerlink" title="3.请求报文(request)"></a>3.请求报文(request)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.请求行    [请求方式  url地址  协议(1.0/1.1/2.0) ]</span><br><span class="line">2.请求头部  [content-type,cookie]</span><br><span class="line">3.请求体    [数据]</span><br></pre></td></tr></table></figure>
-
-
-
-<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180322001733298-201433635.jpg" alt="请求报文格式"></p>
-<p><img src="https://images2018.cnblogs.com/blog/877318/201804/877318-20180418160914403-902015370.png" alt="请求报文"></p>
-<h4 id="4-响应报文-response"><a href="#4-响应报文-response" class="headerlink" title="4.响应报文 (response)"></a>4.响应报文 (response)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.状态行  [协议, 状态码,短语]</span><br><span class="line">2.响应头  [content-Type,...]</span><br><span class="line">3.响应体  [数据]</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180322001744323-654009411.jpg" alt="响应报文"></p>
-<p><img src="https://images2018.cnblogs.com/blog/877318/201804/877318-20180418161014087-738990087.png" alt="响应报文"></p>
-<h1 id="十五、Promise"><a href="#十五、Promise" class="headerlink" title="十五、Promise"></a>十五、Promise</h1><p>  回调函数是用来解决异步或对函数进行功能扩展,如果滥用回调函数的嵌套,就会形参<strong>回调地狱</strong><br>  <strong>回调地狱</strong>,不方便维护与代码的理解,就可以采用Promise.<br>  promsie是一个类,需要被实例化<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">promsie 有三种状态</span><br><span class="line">1.pending 等待 默认是 等待</span><br><span class="line">2.fulfilled 完成</span><br><span class="line">3.rejected  拒绝</span><br><span class="line">它们是不可以逆</span><br></pre></td></tr></table></figure></p>
-<h4 id="promsie的原型方法"><a href="#promsie的原型方法" class="headerlink" title="promsie的原型方法"></a>promsie的原型方法</h4><p>  then() 里面有2个函数,第1个函数取resolve的结果,第2个参数取reject的结果<br>  catch() 捕获 reject的结果<br>  finally() 只要执行resolve或reject后,都会执行finally</p>
-<h4 id="promise的静态方法"><a href="#promise的静态方法" class="headerlink" title="promise的静态方法"></a>promise的静态方法</h4><p>Promise.all() ,all方法里需要填入一个数组,数组里必须都是支持promise的方法,所有的结果</p>
-<p>Promise.race(),race方法里需要填入一个数组,谁先执行,就只取谁的结果</p>
-<p>Promise.resolve() 只执成功,并返回一个新的promise对象</p>
-<p>Promise.reject()  只执失败,并返回一个新的promise对象</p>
-<h4 id="ES7-async-await"><a href="#ES7-async-await" class="headerlink" title="ES7 async await"></a>ES7 async await</h4><p>await关键字后面必须接promise对象,有await关键字的地方,必须是一个async 异步函数</p>
-<p>它能解决,<strong>把异步像同步一样的被调用</strong></p>
-<h3 id="十六、同源策略"><a href="#十六、同源策略" class="headerlink" title="十六、同源策略"></a>十六、同源策略</h3><p>同源策略是一种ajax的安全机制,</p>
-<p>如果出现 <strong>协议,域名,端口</strong>,三者不统一,就会产生跨域</p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">https:<span class="comment">//www.baidu.com</span></span><br><span class="line">http:<span class="comment">//www.baidu.com   //协议不同,跨域</span></span><br><span class="line"></span><br><span class="line">http:<span class="comment">//www.baidu.com</span></span><br><span class="line">http:<span class="comment">//mail.baidu.com    二级域名</span></span><br><span class="line">http:<span class="comment">//aaa.bbb.baidu.com 三级域名    域名不同,跨域</span></span><br><span class="line"></span><br><span class="line">http:<span class="comment">//www.baidu.com:8080</span></span><br><span class="line">http:<span class="comment">//www.baidu.com:5500  端口不一致,跨域</span></span><br></pre></td></tr></table></figure>
-
-<p>如何解决跨域(<strong>CORS</strong>)呢?</p>
-<p>目前常见的方案</p>
-<ol>
-<li><p>在后端的<strong>响应头</strong>加上一句 <code>Access-Control-Allow-Origin:*</code>,这里的*表示所有请求,都可以访问该服务</p>
-</li>
-<li><p>采用非官方的跨域方案 ,JSONP, 它算不上真正ajax请求,它只能算get请求,因为它是利用了带<code>src</code>属性的</p>
-<p><code>script</code>,不受限制的访问外部资源,再又结合<code>callback</code>回调函数获取数据.</p>
-<p>还要和后端配合使用</p>
-</li>
-<li><p>前端使用webpack模块中的server proxy ,实现服务器端代理,来解决跨域</p>
-</li>
-</ol>
-<h3 id="十七、什么是xss攻击"><a href="#十七、什么是xss攻击" class="headerlink" title="十七、什么是xss攻击?"></a>十七、什么是xss攻击?</h3><p><strong>跨站脚本攻击。</strong>XSS的重点不在于跨站点，而在于脚本的执行</p>
-<p>恶意攻击者在web页面中会插入一些恶意的script代码。当用户浏览该页面的时候，那么嵌入到web页面中script代码会执行，因此会达到恶意攻击用户的目的</p>
-<p><strong>如何防范？</strong></p>
-<ol>
-<li>后端需要对提交的数据进行过滤(<script>、<img>、<a>等标签进行过滤)。</li>
-<li>前端也可以做一下处理方式，比如对script标签，将特殊字符替换成HTML编码这些等。</li>
-<li>避免SQL注入</li>
-<li>不使用eval()函数</li>
-</ol>
-<h3 id="十八、JSONP和JSON的区别"><a href="#十八、JSONP和JSON的区别" class="headerlink" title="十八、JSONP和JSON的区别 ?"></a>十八、JSONP和JSON的区别 ?</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jsonp 是一种非官方的跨域解决方案,它是利用script的src,不受限制的访问外部资源,并结合callback拿到数据</span><br><span class="line">它并不是真正的ajax,它是一个get请求,更加适合做查询.</span><br><span class="line">json  是一种轻量级的数据结构,能跨平台进行网络传输,能做配置文件.</span><br><span class="line">xml   可扩展性标记语言,是一种重量级的数据格式,也能做跨平台进行网络传输和做配置文件.</span><br></pre></td></tr></table></figure>
-
-<h3 id="十九、什么是oop-面向对象"><a href="#十九、什么是oop-面向对象" class="headerlink" title="十九、什么是oop(面向对象)"></a>十九、什么是oop(面向对象)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">oop是一种编程思想,又叫做面向对象编程</span><br><span class="line">它有三大特性</span><br><span class="line">封装 将相同的属性和方法提取成一个类</span><br><span class="line">继承 子类拥有父类的属性和方法</span><br><span class="line">多态  </span><br><span class="line">     重写 子类重写父类的属性和方法</span><br><span class="line">     重载 在同一个类中,同名不同参数 js没有重载</span><br><span class="line">补充: css3大特性</span><br><span class="line">    层叠性,继承性,优先级(特殊性)</span><br></pre></td></tr></table></figure>
-
-<h3 id="二十、继承"><a href="#二十、继承" class="headerlink" title="二十、继承"></a>二十、继承</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 对象冒充继承  使用 bind,call,apply</span><br><span class="line">		缺点:不能继承原型上的属性和方法</span><br><span class="line">2. 原型链继承   </span><br><span class="line">		缺点:不能让构造函数的属性,初始化</span><br><span class="line">3. 组合继承 (对象冒充+原型继承)</span><br><span class="line">	    缺点:原型中会有多余的属性,并且是undefined</span><br><span class="line">4. ES6的class和extends继承</span><br><span class="line">5. 寄生组合继承  Object.create(base.prototype);</span><br></pre></td></tr></table></figure>
-
-<h3 id="二十一、递归"><a href="#二十一、递归" class="headerlink" title="二十一、递归"></a>二十一、递归</h3><h4 id="1-什么是递归"><a href="#1-什么是递归" class="headerlink" title="1.什么是递归?"></a>1.什么是递归?</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">函数自己调用自己,要有零界点(结束条件)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-递归能做什么"><a href="#2-递归能做什么" class="headerlink" title="2.递归能做什么?"></a>2.递归能做什么?</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">循环的能做的事,递归都能实现</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-递归的使用场景"><a href="#3-递归的使用场景" class="headerlink" title="3.递归的使用场景"></a>3.递归的使用场景</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 快速排序使用递归</span><br><span class="line">2. nodejs磁盘文件的遍历,使用递归</span><br><span class="line">3. 管理系统的权限菜单栏(n级菜单栏)</span><br><span class="line">4. 对象的深拷贝</span><br></pre></td></tr></table></figure>
-
-<h3 id="二十二、节流-throttle-与防抖-debounce"><a href="#二十二、节流-throttle-与防抖-debounce" class="headerlink" title="二十二、节流(throttle)与防抖(debounce)"></a>二十二、节流(throttle)与防抖(debounce)</h3><h4 id="防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行"><a href="#防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行" class="headerlink" title="防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行"></a><strong>防抖</strong>：<strong>任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行</strong></h4><blockquote>
-<p>触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 1、防抖功能函数，接受传参</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,delay==<span class="number">600</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 2、创建一个标记用来存放定时器的返回值</span></span><br><span class="line">  <span class="keyword">let</span> timeout = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 3、每次当用户点击/输入的时候，把前一个定时器清除</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    <span class="comment">// 4、然后创建一个新的 setTimeout，</span></span><br><span class="line">    <span class="comment">// 这样就能保证点击按钮后的 interval 间隔内</span></span><br><span class="line">    <span class="comment">// 如果用户还点击了的话，就不会执行 fn 函数</span></span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="节流：指定时间间隔内只会执行一次任务。"><a href="#节流：指定时间间隔内只会执行一次任务。" class="headerlink" title="节流：指定时间间隔内只会执行一次任务。"></a><strong>节流</strong>：<strong>指定时间间隔内只会执行一次任务。</strong></h4><blockquote>
-<p>高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn,delay=<span class="number">600</span></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 1、通过闭包保存一个标记</span></span><br><span class="line">      <span class="keyword">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 2、在函数开头判断标志是否为 true，不为 true 则中断函数</span></span><br><span class="line">        <span class="keyword">if</span>(!canRun) &#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3、将 canRun 设置为 false，防止执行之前再被执行</span></span><br><span class="line">        canRun = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 4、定时器</span></span><br><span class="line">        <span class="built_in">setTimeout</span>( <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">          <span class="comment">// 5、执行完事件（比如调用完接口）之后，重新将这个标志设置为 true</span></span><br><span class="line">          canRun = <span class="literal">true</span>;</span><br><span class="line">        &#125;, delay);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>节流和防抖的共同点,都是减少执行频率.</p>
-<p> 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，</p>
-<p>而函数防抖只是在最后一次事件后才触发一次函数</p>
-<h3 id="二十三-、defer和async的区别"><a href="#二十三-、defer和async的区别" class="headerlink" title="二十三 、defer和async的区别"></a>二十三 、defer和async的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;./async1.js&quot;</span> <span class="keyword">async</span> defer&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>defer：在HTML解析完之后才会执行。如果是多个，则按照加载的顺序依次执行。</li>
-<li>async：在加载完之后立即执行。如果是多个，执行顺序和加载顺序无关</li>
-</ul>
-<h3 id="二十四、前端性能优化"><a href="#二十四、前端性能优化" class="headerlink" title="二十四、前端性能优化"></a>二十四、前端性能优化</h3><ol>
-<li><p><strong>减少 HTTP 请求数量</strong></p>
-<ul>
-<li>基本原理：在浏览器与服务器进行通信时，主要是通过 HTTP 进行通信。浏览器与服务器需要经过三次握手，每次握手需要花费大量时间。而且不同浏览器对资源文件并发请求数量有限（<a href="http://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">不同浏览器允许并发数</a>），一旦 HTTP 请求数量达到一定数量，资源请求就存在等待状态，这是很致命的，因此减少 HTTP 的请求数量可以很大程度上对网站性能进行优化。<ol>
-<li><strong>CSS Sprites：国内俗称 CSS 精灵</strong>，这是将多张图片合并成一张图片达到减少 HTTP 请求的一种解决方案，可以通过 CSS background 属性来访问图片内容。这种方案同时还可以减少图片总字节数，节省命名词汇量（由命名多张图片文件变成一张，哈哈哈）。</li>
-<li><strong>合并 CSS 和 JS 文件</strong>：现在前端有很多工程化打包工具，如：grunt、gulp、webpack等。为了减少 HTTP 请求数量，可以通过这些工具再发布前将多个 CSS 或者 多个 JS 合并成一个文件。</li>
-<li><strong>采用 lazyLoad：俗称懒加载</strong>，可以控制网页上的内容在一开始无需加载，不需要发请求，等到用户操作真正需要的时候立即加载出内容。这样就控制了网页资源一次性请求数量。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>控制资源文件加载优先级</strong></p>
-<ul>
-<li>基本原理：说到这里就需要知道浏览器加载 HTML 内容的原理，浏览器在加载 HTML 内容时，是将 HTML 内容从上至下依次解析，解析到 link 或者 script 标签就会加载 href 或者 src 对应链接内容，为了第一时间展示页面给用户，就需要将 CSS 提前加载，不要受 JS 加载影响。<ol>
-<li>遵循原则：主要文件放在 head 内部，次要文件放在 body 底部。一般情况下都是 CSS 在头部，JS 在底部。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>利用浏览器缓存</strong></p>
-<ul>
-<li>基本原理：浏览器缓存分强缓存和协商缓存，他们是将网络资源存储在本地，等待下次请求该资源时，如果命中就不需要到服务器重新请求该资源，直接在本地读取该资源。<ol>
-<li>强缓存：在 web 服务器返回的响应中添加 Expires 和 Cache-Control Header。</li>
-<li>协商缓存：通过【Last-Modified，If-Modified-Since】和【ETag、If-None-Match】这两对 Header 分别管理。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>使用 CDN</strong></p>
-<ul>
-<li>基本原理：CDN的全称是Content Delivery Network，即<a href="http://zsvalue.com/201405/foundation-of-cdn-%E3%80%8Acdn%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3%E3%80%8Bnote/">内容分发网络</a>。</li>
-</ul>
-</li>
-<li><p><strong>减少重排（Reflow）</strong></p>
-<ul>
-<li>基本原理：重排是 DOM 的变化影响到了元素的几何属性（宽和高），浏览器会重新计算元素的几何属性，会使渲染树中受到影响的部分失效，浏览器会验证 DOM 树上的所有其它结点的 visibility 属性，这也是 Reflow 低效的原因。如果 Reflow 的过于频繁，CPU 使用率就会急剧上升。<ol>
-<li>减少 Reflow，如果需要在 DOM 操作时添加样式，尽量使用 增加 class 属性，而不是通过 style 操作样式。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><p><strong>减少 DOM 操作</strong></p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">使用createDocumentFragment</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>图标使用 IconFont 替换</strong></p>
-</li>
-</ol>
-<p><a href="https://www.jianshu.com/p/d9c20eafa67e">https://www.jianshu.com/p/d9c20eafa67e</a> 网页性能优化</p>
-<p><a href="https://segmentfault.com/a/1190000017329980">https://segmentfault.com/a/1190000017329980</a> 你真的了解回流和重绘吗</p>
-<h3 id="二十五-、值类型和引用类型的区别"><a href="#二十五-、值类型和引用类型的区别" class="headerlink" title="二十五 、值类型和引用类型的区别"></a>二十五 、值类型和引用类型的区别</h3><p>【值类型】</p>
-<blockquote>
-<p>1.占用空间固定，保存在栈中，在当前环境执行结束时销毁<br>2.保存和赋值是值的本身<br>3.可以使用typeof检测数据类型<br>4.基本类型数据是值类型</p>
-</blockquote>
-<p>【引用类型】</p>
-<blockquote>
-<p>1.占用空间不固定，保存在堆中，只有在引用的它的变量不在时，会被垃圾回收机制回收。 (引用变量存储在栈中的是指向堆中的数组或者对象的地址 )<br>2.保存与复制的是指向对象的一个指针<br>3.使用instanceof检测数据类型<br>4.使用new()方法构造出的对象是引用型  </p>
-</blockquote>
-<h3 id="二十六-、什么是cookie"><a href="#二十六-、什么是cookie" class="headerlink" title="二十六 、什么是cookie?"></a>二十六 、什么是cookie?</h3><p>  基于http协议的一种本地’存储’技术     (它就相当于钱包)  </p>
-<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie=<span class="string">&quot;username=itzan; expires=有效时间 GMT; path=/&quot;</span>;domain=;secure;</span><br></pre></td></tr></table></figure>
-
-<p>  它的特点: </p>
-<blockquote>
-<p>1.基于http协议<br>2.它会随着请求携带到服务器<br>3.只能存储4k左右<br>4.能跨域(设置domain),默认不可以<br>5.容易被伪造,不安全,会造成 xss攻击 (站点伪造)   </p>
-</blockquote>
-<p> 它的使用场景:                                          </p>
-<blockquote>
-<p>1.免登录<br>2.购物车<br>3.简单的存储,非铭感数据                         </p>
-</blockquote>
-<p> http协议                                                  </p>
-<p>常见于 浏览器与服务器的通信,它是属于 应用层 (应用程序)<br>http 默认的端口是80<br> http协议的特点<br>短连接(断开式)  浏览器向服务器发送请求,服务器接受,并响应<br>无状态  不知道是谁访问了服务器,                           </p>
-<blockquote>
-<ol>
-<li> (cookie+session)                                      </li>
-<li>token 凭证    </li>
-</ol>
-</blockquote>
-<h3 id="二十七、cookie-、sessionStorage与localStorage的区别"><a href="#二十七、cookie-、sessionStorage与localStorage的区别" class="headerlink" title="二十七、cookie 、sessionStorage与localStorage的区别"></a>二十七、cookie 、sessionStorage与localStorage的区别</h3><table>
-<thead>
-<tr>
-<th>特性</th>
-<th></th>
-<th>sessionStorage</th>
-<th>localStorage</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>数据的生命期</td>
-<td>一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效</td>
-<td>仅在当前会话下有效，关闭页面或浏览器后被清除</td>
-<td>除非被清除，否则永久保存</td>
-</tr>
-<tr>
-<td>存放数据大小</td>
-<td>4K左右</td>
-<td>一般为5MB</td>
-<td>一般为5MB</td>
-</tr>
-<tr>
-<td>与服务器端通信</td>
-<td>每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题</td>
-<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
-<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
-</tr>
-<tr>
-<td>易用性</td>
-<td>需要程序员自己封装，源生的Cookie接口不友好</td>
-<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
-<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
-</tr>
-</tbody></table>
-<p>WebStorage(<strong>sessionStorage与localStorage</strong>)提供了一些方法，数据操作比cookie方便；</p>
-<blockquote>
-<p>1).setItem (key, value) ——  保存数据，以键值对的方式储存信息。<br>2).getItem (key) ——  获取数据，将键值传入，即可获取到对应的value值。<br>3).removeItem (key) ——  删除单个数据，根据键值移除对应的信息。<br>4).clear () ——  删除所有的数据<br>5).key (index) —— 获取某个索引的key</p>
-</blockquote>
-<h3 id="二十八、for-in-和-for-of的区别"><a href="#二十八、for-in-和-for-of的区别" class="headerlink" title="二十八、for..in 和 for..of的区别?"></a>二十八、for..in 和 for..of的区别?</h3><blockquote>
-<p>推荐在循环对象属性的时候, 使用for…in.<br>​在遍历数组的时候的时候使用for…of。<br>​for…in循环出的是key，for…of循环出的是value<br>​注意，for…of是ES6新引入的特性。修复了ES5引入的for…in的不足<br>​for…of不能循环普通的对象，需要通过和Object.keys()搭配使用<br>​for..of更加强大, 能遍历Array, Map, Set, String,<br> TypedArray，arguments, 而for in 不能遍历map</p>
-</blockquote>
-<h3 id="二十九、new操作符做了什么"><a href="#二十九、new操作符做了什么" class="headerlink" title="二十九、new操作符做了什么?"></a>二十九、new操作符做了什么?</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Perosn</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.在构造函数内部创建一个空对象</span></span><br><span class="line">    <span class="comment">// var obj = new Object();</span></span><br><span class="line">    <span class="comment">//2. obj.__proto__= Perosn.prototype;</span></span><br><span class="line">    <span class="comment">//3.1 Perosn.bind(obj) this指向obj</span></span><br><span class="line">    <span class="comment">//3.2 让空对象拥有 属性和方法 (让this有属性和方法)</span></span><br><span class="line">    <span class="built_in">this</span>.name = name; <span class="comment">//属性</span></span><br><span class="line">    <span class="built_in">this</span>.age = age;   <span class="comment">//属性</span></span><br><span class="line">    <span class="built_in">this</span>.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;<span class="comment">//方法</span></span><br><span class="line">    <span class="comment">//4.  return this; 是隐式 (看不见的,默认)</span></span><br><span class="line">    <span class="comment">// return this;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Perosn(<span class="string">&quot;旺旺&quot;</span>, <span class="number">6</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>1.在构造函数内部(隐式)创建一个空对象<br>2.空对象的指针(  __ proto __  )指向构造函数的原型(prototye)<br>3.把空构造函数的this指向空对象,并且让空对象拥有(自定义的)属性和方法<br>4.隐式的返回 return this<br><strong>所以new 能改变构造函数内部的this指向,函数内部的this默认是window</strong></p>
-</blockquote>
-<h3 id="三十-、什么是面向对象"><a href="#三十-、什么是面向对象" class="headerlink" title="三十 、什么是面向对象?"></a>三十 、什么是面向对象?</h3><p> 面向对象是<strong>利用对象进行编程</strong>的一种思想. 面向对象又被成为 <strong>OOP</strong> (Object Oriented Programming面向对象编程)</p>
-<h5 id="1-为什么要使用面向对象编程"><a href="#1-为什么要使用面向对象编程" class="headerlink" title="1).为什么要使用面向对象编程?"></a>1).为什么要使用面向对象编程?</h5><p> 这种编程方式,更加贴近现实;</p>
-<h5 id="2-哪些语言是面向对象"><a href="#2-哪些语言是面向对象" class="headerlink" title="2).哪些语言是面向对象?"></a>2).哪些语言是面向对象?</h5><p>  java,c#, c++ , js .. 面向对象编程,是主流;</p>
-<h5 id="3-面向对象的特点有哪些"><a href="#3-面向对象的特点有哪些" class="headerlink" title="3).面向对象的特点有哪些?"></a>3).面向对象的特点有哪些?</h5><pre><code>1)封装
-   把相同的属性和方法 提取成为一个类
-   类是抽象的,类是模板
-2)继承
-   子类拥有父类的属性和方法  (偷懒神器)
-3)多态
-   1).重写 (override)  (基于继承)
-        子类重写父类的属性和方法
-   2).重载 (overload)
-     同一个类中,同名不同参数 (在同一个类中,函数名称相同,参数的个数和类型不相同)
-     注意: js没有重载
-</code></pre>
-<h5 id="4-css也有三大特性"><a href="#4-css也有三大特性" class="headerlink" title="4).css也有三大特性?"></a>4).css也有三大特性?</h5><pre><code>1).继承性
-2).层叠性
-3).优先级
-c/s   client  -- server  客户端--服务器    功能强大,不方便维护 (需安装)
-b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (无须安装)
-</code></pre>
-<h5 id="5-什么是面向过程-与面向对象有什么区别"><a href="#5-什么是面向过程-与面向对象有什么区别" class="headerlink" title="5).什么是面向过程?与面向对象有什么区别?"></a>5).什么是面向过程?与面向对象有什么区别?</h5><h5 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程:"></a>面向过程:</h5><blockquote>
-<p>就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，<br>使用的时候一个一个依次调用就可以了。</p>
-</blockquote>
-<h5 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象:"></a>面向对象:</h5><blockquote>
-<p>是把构成问题的事务分解成各个对象，每个对象都有自己独立的属性和行为,<br>对象可以将整个问题事务进行分工, 不同的对象做不同的事情,<br>这种面向对象的编程思想由于更加贴近实际生活, 所以被计算机语言广泛应用。</p>
-</blockquote>
-<h5 id="js有2种编程模式"><a href="#js有2种编程模式" class="headerlink" title="js有2种编程模式"></a>js有2种编程模式</h5><p>1.面对过程<br>2.面向对象</p>
-<h3 id="三十一、类和对象的关系"><a href="#三十一、类和对象的关系" class="headerlink" title="三十一、类和对象的关系"></a>三十一、类和对象的关系</h3><p><strong>类是对象的抽象，而对象是类的具体实例</strong>。</p>
-<p>类是抽象的，不占用内存，而对象是具体的，占用存储空间。</p>
-<p>类是用于创建对象的蓝图，它是一个定义包括在特定类型的对象中的方法和变量的软件模板。</p>
-<p>类与对象的关系就如模具和铸件的关系 </p>
-<p>类的实例化结果就是对象，而对一类对象的抽象就是类，</p>
-<p><strong>类描述了一组有相同属性和相同方法的对象</strong></p>
-<p>​     </p>
-<h3 id="三十二、原型"><a href="#三十二、原型" class="headerlink" title="三十二、原型"></a>三十二、原型</h3><h5 id="1-什么是原型"><a href="#1-什么是原型" class="headerlink" title="1.什么是原型?"></a>1.什么是原型?</h5><blockquote>
-<p>原型, 英文名prototype是函数中一个自带的属性,我们创建的每个函数都有一个<br>prototype(原型)属性,这个属性是一个对象. </p>
-</blockquote>
-<h5 id="2-原型的作用"><a href="#2-原型的作用" class="headerlink" title="2.原型的作用?"></a>2.原型的作用?</h5><blockquote>
-<p>原型的作用是: 可以让同一个构造函数创建的所有对象共享属性和方法. 也就是说, 你可以不在<br> 构造函数中定义对象的属性和方法,<br>而是可以直接将这些信息添加到原型对象中。</p>
-</blockquote>
-<h5 id="3-原型的好处"><a href="#3-原型的好处" class="headerlink" title="3.原型的好处?"></a>3.原型的好处?</h5><p>优点:<br>1, 实例对象都有自己的独有属性<br>2, 同时共享了原型中的方法,最大限度的节省了内存<br>3, 支持向构造函数传递参数 (初始值)</p>
-<h5 id="4-什么是原型链"><a href="#4-什么是原型链" class="headerlink" title="4.什么是原型链?"></a>4.什么是原型链?</h5><p>当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构，我们称为原型链<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC93ZWJwLzExOTY2NDUvMTU5MTE3MTk5OTc2My1lN2RlNTlmZi05MWYyLTRhZDktOGZmZi03NjE2M2Y1YzAxOTEud2VicA?x-oss-process=image/format,png"></p>
-<h3 id="三十三-、进程与线程的区别"><a href="#三十三-、进程与线程的区别" class="headerlink" title="三十三 、进程与线程的区别?"></a>三十三 、进程与线程的区别?</h3><ol>
-<li><p>线程是<strong>程序执行的最小单位</strong>，而进程是操作<strong>系统分配资源的最小单位</strong>；</p>
-</li>
-<li><p>一个进程由一个或多个线程组成，线程是一个进程中代码的不同执行路线</p>
-</li>
-<li><p>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段，数据集，堆等)及一些进程级的资源(如打开文件和信</p>
-</li>
-</ol>
-<p>号等)，某进程内的线程在其他进程不可见；</p>
-<ol start="4">
-<li>调度和切换：线程上下文切换比进程上下文切换要快得多</li>
-</ol>
-<h3 id="三十四-、AMD、CMD、CommonJs、ES6的对比"><a href="#三十四-、AMD、CMD、CommonJs、ES6的对比" class="headerlink" title="三十四 、AMD、CMD、CommonJs、ES6的对比"></a>三十四 、AMD、CMD、CommonJs、ES6的对比</h3><p>CommonJS规范是诞生比较早的,适合服务端，因为在服务器读取模块都是在本地磁盘，加载速度很快.</p>
-<h4 id="CommonJS的特点"><a href="#CommonJS的特点" class="headerlink" title="CommonJS的特点:"></a>CommonJS的特点:</h4><ul>
-<li><p>1.所有代码都运行在模块作用域，不会污染全局作用域。</p>
-</li>
-<li><p>2.模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。</p>
-</li>
-<li><p>3模块加载的顺序，按照其在代码中出现的顺序。</p>
-<p>AMD的特点<br>AMD，即 (Asynchronous Module Definition)，这种规范是异步的加载模块，requireJs应用了这一规范。先定义所有依赖，然后在加载完成后的回调函数中执行,<strong>依赖前置</strong> ,代表作有 require.js库</p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">require([&#x27;clock&#x27;],function(clock)&#123;</span><br><span class="line">  clock.start();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<h4 id="CMD的特点"><a href="#CMD的特点" class="headerlink" title="CMD的特点"></a>CMD的特点</h4><p>CMD (Common Module Definition), 是seajs推崇的规范，CMD则是依赖就近，用的时候再require, <strong>就近依赖</strong> 代代表有SeaJS 库</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">define(function(require, exports, module) &#123;</span><br><span class="line">   var clock = require(&#x27;clock&#x27;);</span><br><span class="line">   clock.start();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<table>
-<thead>
-<tr>
-<th>方案</th>
-<th>优势</th>
-<th>劣势</th>
-<th>特点</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AMD</td>
-<td>速度快</td>
-<td>会浪费资源</td>
-<td>预先加载所有的依赖，直到使用的时候才执行</td>
-</tr>
-<tr>
-<td>CMD</td>
-<td>只有真正需要才加载依赖</td>
-<td>性能较差</td>
-<td>直到使用的时候才定义依赖</td>
-</tr>
-</tbody></table>
-<p>能够提出CMD和AMD互相补充是一个很赞的想法。现在，它们除了希望放在浏览器作为loader也能够放在服务端，提供加载功能。在我看来，AMD擅长在浏览器端、CMD擅长在服务器端。这是因为浏览器加载一个功能不像服务器那么快，有大量的网络消耗。所以一个异步loader是更接地气的。</p>
-<p>后期使用webpack之后 AMD和CMD 没有啥意义.加上ES6也出了自己的模块化机制</p>
-<h4 id="ES6的模块化"><a href="#ES6的模块化" class="headerlink" title="ES6的模块化"></a>ES6的模块化</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import config from &#x27;./config&#x27; //导入</span><br><span class="line">export default function () &#123; //导出</span><br><span class="line">  console.log(&#x27;fff&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>注意:</p>
-<p>script标签中写js代码，或者使用src引入js文件时，默认不能使用module形式，即不能使用import导入文件，</p>
-<p>但是我们可以再script标签上加上type=module属性来改变方式</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>前端常见面试题</title>
-    <url>/2021/12/15/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
-    <content><![CDATA[<h1 id="一-对前端界面工程师这个职位是怎么样理解的？"><a href="#一-对前端界面工程师这个职位是怎么样理解的？" class="headerlink" title="一.对前端界面工程师这个职位是怎么样理解的？"></a>一.对前端界面工程师这个职位是怎么样理解的？</h1><p>  a. 前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好</p>
-<p>  b. 参与项目，快速高质量完成实现效果图，精确到1px；</p>
-<p>  c. 与团队成员，UI设计，产品经理的沟通；</p>
-<p>  d. 做好的页面结构，页面重构和用户体验；</p>
-<p>  e. 处理hack，兼容、写出优美的代码格式；</p>
-<p>  f. 针对服务器的优化、拥抱最新前端技术。</p>
-<h1 id="二-你在现在的团队处于什么样的角色，起到了什么明显的作用？"><a href="#二-你在现在的团队处于什么样的角色，起到了什么明显的作用？" class="headerlink" title="二.你在现在的团队处于什么样的角色，起到了什么明显的作用？"></a>二.你在现在的团队处于什么样的角色，起到了什么明显的作用？</h1><p>  请自行根据自己情况做回答，这个没有统一标准答案。</p>
-<h1 id="三-你的优点是什么？缺点是什么？"><a href="#三-你的优点是什么？缺点是什么？" class="headerlink" title="三.你的优点是什么？缺点是什么？"></a>三.你的优点是什么？缺点是什么？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。  </p>
-<h1 id="四-如何管理前端团队"><a href="#四-如何管理前端团队" class="headerlink" title="四.如何管理前端团队?"></a>四.如何管理前端团队?</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
-<h1 id="五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？"><a href="#五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？" class="headerlink" title="五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？"></a>五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
-<h1 id="六-平时如何管理你的项目？"><a href="#六-平时如何管理你的项目？" class="headerlink" title="六.平时如何管理你的项目？"></a>六.平时如何管理你的项目？</h1><p>  a. 先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；</p>
-<p>  b. 编写习惯必须一致（例如都是采用继承式的写法，单样式都写成一行）；</p>
-<p>  c. 标注样式编写人，各模块都及时标注（标注关键样式调用的地方）；</p>
-<p>  d. 页面进行标注（例如 页面 模块 开始和结束）；</p>
-<p>  e. CSS跟HTML 分文件夹并行存放，命名都得统一（例如style.css）；</p>
-<p>  f. JS 分文件夹存放 命名以该JS功能为准的英文翻译。</p>
-<p>  g. 图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理</p>
-<h1 id="七-说说最近最流行的一些东西吧？常去哪些网站？"><a href="#七-说说最近最流行的一些东西吧？常去哪些网站？" class="headerlink" title="七.说说最近最流行的一些东西吧？常去哪些网站？"></a>七.说说最近最流行的一些东西吧？常去哪些网站？</h1><p>  CSDN、SegmentFault、php.net、MDN、css参考手册、iconfont、</p>
-<p>  underscore、github、Bootstrap、W3Shool、W3Cplus、caniuse</p>
-<h1 id="八-你都使用哪些工具来测试代码的性能？"><a href="#八-你都使用哪些工具来测试代码的性能？" class="headerlink" title="八. 你都使用哪些工具来测试代码的性能？"></a>八. 你都使用哪些工具来测试代码的性能？</h1><p>  JSPerf, Dromaeo</p>
-<h1 id="九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"><a href="#九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？" class="headerlink" title="九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"></a>九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</h1><h1 id="十-AMD和CMD-规范的区别？"><a href="#十-AMD和CMD-规范的区别？" class="headerlink" title="十. AMD和CMD 规范的区别？"></a>十. AMD和CMD 规范的区别？</h1><p>  AMD 提前执行依赖 - 尽早执行，requireJS 是它的实现</p>
-<p>  CMD 按需执行依赖 - 懒执行，seaJS 是它的实现</p>
-<h1 id="十一-网站重构的理解"><a href="#十一-网站重构的理解" class="headerlink" title="十一. 网站重构的理解"></a>十一. 网站重构的理解</h1><p>  重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。</p>
-<p>  a. 使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)</p>
-<p>  b. 对于移动平台的优化，针对于SEO进行优化</p>
-<p>  c. 减少代码间的耦合，让代码保持弹性</p>
-<p>  d. 压缩或合并JS、CSS、image等前端资源</p>
-<h1 id="十二-一次js请求一般情况下有哪些地方会有缓存处理？"><a href="#十二-一次js请求一般情况下有哪些地方会有缓存处理？" class="headerlink" title="十二. 一次js请求一般情况下有哪些地方会有缓存处理？"></a>十二. 一次js请求一般情况下有哪些地方会有缓存处理？</h1><p>  a. 浏览器端存储</p>
-<p>  b. 浏览器端文件缓存</p>
-<p>  c. HTTP缓存304</p>
-<p>  d. 服务器端文件类型缓存</p>
-<p>  e. 表现层&amp;DOM缓存</p>
-<h1 id="十三-谈谈以前端角度出发做好SEO需要考虑什么？"><a href="#十三-谈谈以前端角度出发做好SEO需要考虑什么？" class="headerlink" title="十三. 谈谈以前端角度出发做好SEO需要考虑什么？"></a>十三. 谈谈以前端角度出发做好SEO需要考虑什么？</h1><p>  a. 了解搜索引擎如何抓取网页和如何索引网页</p>
-<p>  b. meta标签优化</p>
-<p>  c. 关键词分析</p>
-<p>  d. 付费给搜索引擎</p>
-<p>  e. 链接交换和链接广泛度（Link Popularity）</p>
-<p>  f. 合理的标签使用</p>
-<h1 id="十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。"><a href="#十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。" class="headerlink" title="十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。"></a>十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。</h1><p>  a. 图片懒加载，滚动到相应位置才加载图片。</p>
-<p>  b. 图片预加载，如果为幻灯片、相册等，将当前展示图片的前一张和后一张优先下载。</p>
-<p>  c. 使用CSSsprite，SVGsprite，Iconfont、Base64等技术，如果图片为css图片的话。</p>
-<p>  d. 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。</p>
-<h1 id="十五-谈谈你对前端性能优化的理解"><a href="#十五-谈谈你对前端性能优化的理解" class="headerlink" title="十五. 谈谈你对前端性能优化的理解"></a>十五. 谈谈你对前端性能优化的理解</h1><p>  a. 请求数量：合并脚本和样式表，CSS Sprites，拆分初始化负载，划分主域</p>
-<p>  b. 请求带宽：开启GZip，精简JavaScript，移除重复脚本，图像优化，将icon做成字体</p>
-<p>  c. 缓存利用：使用CDN，使用外部JavaScript和CSS，添加Expires头，减少DNS查找，配置ETag，使AjaX可缓存</p>
-<p>  d. 页面结构：将样式表放在顶部，将脚本放在底部，尽早刷新文档的输出</p>
-<p>  e. 代码校验：避免CSS表达式，避免重定向</p>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1622,6 +1054,524 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
+    <title>Node.js</title>
+    <url>/2021/12/11/nodejs/</url>
+    <content><![CDATA[<h1 id="NODEJS"><a href="#NODEJS" class="headerlink" title="NODEJS"></a>NODEJS</h1><h2 id="1-fs模块"><a href="#1-fs模块" class="headerlink" title="1. fs模块"></a>1. fs模块</h2><h3 id="1-1-文件读取"><a href="#1-1-文件读取" class="headerlink" title="1.1 文件读取"></a>1.1 文件读取</h3><p>fs.readFile(path[, options], callback)</p>
+<ul>
+<li><p>path 读取的文件路径</p>
+</li>
+<li><p>options 可选的参数 默认为 null 其实得到是buff二进制</p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li><p>err 错误对象</p>
+</li>
+<li><p>data 读取的数据 </p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// if (err) throw</span></span><br><span class="line">  <span class="comment">// 设置参数2 utf8</span></span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  <span class="comment">// 显示转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">  <span class="comment">// 隐式转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data + <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="1-2-文件写入、文件追加"><a href="#1-2-文件写入、文件追加" class="headerlink" title="1.2 文件写入、文件追加"></a>1.2 文件写入、文件追加</h3><p>fs.writeFile(file, data[, options], callback)<br>fs.appendFile(path, data[, options], callback)</p>
+<ul>
+<li><p>file 写入的文件路径</p>
+</li>
+<li><p>data 写入的数据</p>
+</li>
+<li><p>options 可选的参数 默认为 utf8</p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li>err 错误对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;复方草珊瑚1111&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-3-文件拷贝"><a href="#1-3-文件拷贝" class="headerlink" title="1.3 文件拷贝"></a>1.3 文件拷贝</h3><p>fs.copyFile(src, dest[, mode], callback)</p>
+<ul>
+<li><p>src 拷贝的文件地址</p>
+</li>
+<li><p>dest 写入的文件地址</p>
+</li>
+<li><p>mode 可选的参数 </p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li>err 错误对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="comment">//  把文件1.txt 的数据复制一份到 1-copy.txt 中   </span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./files/1-copy.txt&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步： 同一个时间段内，只能执行一件事情   如：手机通话</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步：同一个时间段内，可以执行多件事情    如：qq聊天</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2 v8.5.0+</span></span><br><span class="line">fs.copyFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;./files/1-copy.txt&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>Rem适配方案</title>
+    <url>/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h2 id="1-直接引入-rem-js-文件"><a href="#1-直接引入-rem-js-文件" class="headerlink" title="1. 直接引入 rem.js 文件"></a>1. 直接引入 rem.js 文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var devicePixelRatio = 1;</span></span><br><span class="line">  <span class="comment">// var scale = 1 / devicePixelRatio;</span></span><br><span class="line">  <span class="comment">// document.querySelector(&#x27;meta[name=&quot;viewport&quot;]&#x27;).setAttribute(&#x27;content&#x27;,&#x27;initial-scale=&#x27; + scale + &#x27;, maximum-scale=&#x27; + scale + &#x27;, minimum-scale=&#x27; + scale + &#x27;, user-scalable=no&#x27;);</span></span><br><span class="line">  <span class="comment">// 7.5根据设计稿的横向分辨率/100得来</span></span><br><span class="line">  <span class="comment">// alert(document.documentElement.clientWidth)</span></span><br><span class="line">  <span class="keyword">var</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// var deviceWidth = window.screen.availWidth</span></span><br><span class="line">  <span class="comment">// alert(navigator.userAgent)</span></span><br><span class="line">  <span class="comment">// alert(deviceWidth)</span></span><br><span class="line">  <span class="comment">// console.log(navigator.userAgent)</span></span><br><span class="line">  <span class="keyword">if</span> (deviceWidth &gt; <span class="number">750</span>) &#123;</span><br><span class="line">    <span class="comment">// deviceWidth = 750;</span></span><br><span class="line">    deviceWidth = <span class="number">7.5</span> * <span class="number">50</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = deviceWidth / <span class="number">7.5</span> + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 禁止双击放大</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">var</span> lastTouchEnd = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchend&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTouchEnd &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">    lastTouchEnd = now;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-淘宝的适配方案"><a href="#2-淘宝的适配方案" class="headerlink" title="2. 淘宝的适配方案"></a>2. 淘宝的适配方案</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">yarn add lib-flexible -S   </span><br><span class="line"></span><br><span class="line">yarn add  postcss-px2rem -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在main.js 文件中引入  </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在vue.config.js 文件中配置 css 属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">css</span>: &#123;</span><br><span class="line">        <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">            <span class="attr">css</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">postcss</span>: &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [</span><br><span class="line">                    <span class="built_in">require</span>(<span class="string">&#x27;postcss-px2rem&#x27;</span>)(&#123;</span><br><span class="line">                        <span class="attr">remUnit</span>: <span class="number">37.5</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>storage二次封装</title>
+    <url>/2021/12/31/storage%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85/</url>
+    <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Storage二次封装</span></span><br><span class="line"><span class="keyword">const</span> namespace = <span class="string">&#x27;mall&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 存</span></span><br><span class="line">  <span class="function"><span class="title">setItem</span>(<span class="params">key, val</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    storage[key] = val</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取</span></span><br><span class="line">  <span class="function"><span class="title">getItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getStorage()[key]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取所有</span></span><br><span class="line">  <span class="function"><span class="title">getStorage</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">window</span>.localStorage.getItem(namespace) || <span class="string">&quot;&#123;&#125;&quot;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 删</span></span><br><span class="line">  <span class="function"><span class="title">clearItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    <span class="keyword">delete</span> storage[key]</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 清空所有</span></span><br><span class="line">  <span class="function"><span class="title">clearAll</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.localStorage.clear(namespace, <span class="string">&#x27;&#123;&#125;&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+  </entry>
+  <entry>
+    <title>JavaScript</title>
+    <url>/2021/12/15/javascript/</url>
+    <content><![CDATA[<h1 id="一、js的数据类型"><a href="#一、js的数据类型" class="headerlink" title="一、js的数据类型"></a>一、js的数据类型</h1><p>值类型(基本类型)：字符串（String）、数字(Number)、布尔(Boolean)、对空（Null）、未定义（Undefined）、Symbol,大数值类型(BigInt)</p>
+<p>引用数据类型：对象(Object)、数组(Array)、函数(Function)、日期(Date)。</p>
+<p>注：Symbol 是 ES6 引入了一种新的原始数据类型，表示独一无二的值(标识符)。</p>
+<h1 id="二、什么是函数"><a href="#二、什么是函数" class="headerlink" title="二、什么是函数"></a>二、什么是函数</h1><p>JS函数的概念</p>
+<blockquote>
+<p>函数就是把特定功能的代码抽取出来，使之成为程序中的一个独立实体。</p>
+</blockquote>
+<ol start="2">
+<li>函数的作用</li>
+</ol>
+<blockquote>
+<p>正如函数的概念, 我们可以根据需要, 将特定的功能用函数来包裹(封装)</p>
+</blockquote>
+<ol start="3">
+<li>使用函数的好处</li>
+</ol>
+<blockquote>
+<p>1, 函数可以在同一个程序或其他程序中多次重复使用（通过函数名调用）<br>2, 使程序变得更简短而清晰 ， 提高可读性<br>3, 有利于程序维护</p>
+</blockquote>
+<h1 id="三、本地对象、内置对象和宿主对象"><a href="#三、本地对象、内置对象和宿主对象" class="headerlink" title="三、本地对象、内置对象和宿主对象"></a>三、本地对象、内置对象和宿主对象</h1><h4 id="1-内置对象"><a href="#1-内置对象" class="headerlink" title="1.内置对象"></a>1.内置对象</h4><blockquote>
+<p>js中的内部对象包括Array、Boolean、Date、Function、Global、Math、Number、Object、&gt;RegExp、String以及各种错误类对象，包括Error、EvalError、RangeError、ReferenceError、&gt;SyntaxError和TypeError。</p>
+</blockquote>
+<p>其中Global和Math这两个对象又被称为“内置对象”，这两个对象在脚本程序初始化时被创建，不必实例化这两个对象。</p>
+<h4 id="2-宿主对象"><a href="#2-宿主对象" class="headerlink" title="2.宿主对象"></a>2.宿主对象</h4><blockquote>
+<p>宿主对象就是执行JS脚本的环境提供的对象。对于嵌入到网页中的JS来说，其宿主对象就是浏览器<br>提供的对象，所以又称为浏览器对象，如IE、Firefox等浏览器提供的对象。不同的浏览器提供的<br>宿主对象可能不同，即使提供的对象相同，其实现方式也大相径庭！这会带来浏览器兼容问题，<br>增加开发难度。浏览器对象有很多，如Window和Document等等。</p>
+</blockquote>
+<h4 id="3-自定义对象"><a href="#3-自定义对象" class="headerlink" title="3.自定义对象"></a>3.自定义对象</h4><blockquote>
+<p>顾名思义，就是开发人员自己定义的对象。JS允许使用自定义对象，使JS应用及功能得到扩充</p>
+</blockquote>
+<h1 id="四、数组-Array"><a href="#四、数组-Array" class="headerlink" title="四、数组(Array)"></a>四、数组(Array)</h1><h4 id="1-基本方法"><a href="#1-基本方法" class="headerlink" title="1.基本方法"></a>1.基本方法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">push() 从后面添加元素，返回值为添加完后的数组的长度</span><br><span class="line">pop() 从后面删除元素，只能是一个，返回值是删除的元素</span><br><span class="line">shift() 从前面删除元素，只能删除一个 返回值是删除的元素</span><br><span class="line">unshift() 从前面添加元素, 返回值是添加完后的数组的长度</span><br><span class="line">splice(i,n) 删除从i(索引值)开始之后的那个元素。返回值是删除的元素</span><br><span class="line">concat() 连接两个数组 返回值为连接后的新数组</span><br><span class="line">split() 将字符串转化为数组</span><br><span class="line">sort() 将数组进行排序,默认根据ASCII码比较,返回值是排好的数组</span><br><span class="line">reverse() 将数组反转,返回值是反转后的数组</span><br><span class="line">slice(start,end) 切去索引值start到索引值end的数组，不包含end索引的值，返回值是切出来的数组</span><br><span class="line">indexOf() 查找某个元素的索引值，若有重复的，则返回第一个查到的索引值若不存在，则返回 -<span class="number">1</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-高阶函数-1"><a href="#2-高阶函数-1" class="headerlink" title="2.高阶函数(1)"></a>2.高阶函数(1)</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line">forEach(callback) 遍历数组,无return  即使有return，也不会返回任何值，并且会影响原来的数组</span><br><span class="line">map(callback) 映射数组(遍历数组),有return 返回一个新数组 。</span><br></pre></td></tr></table></figure>
+<p>注意:<code>forEach()和map()的区别</code></p>
+<blockquote>
+<ol>
+<li>arr.forEach()是和for循环一样，是代替for。arr.map()是修改数组其中的数据，并返回新的数据。</li>
+<li>arr.forEach() 没有return  arr.map() 有return</li>
+</ol>
+</blockquote>
+<h4 id="3-高阶函数-2"><a href="#3-高阶函数-2" class="headerlink" title="3.高阶函数(2)"></a>3.高阶函数(2)</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">filter(callback) 过滤数组，返回一个满足要求的数组 </span><br><span class="line">every(callback) 依据判断条件，数组的元素是否全满足，若满足则返回ture</span><br><span class="line">some() 依据判断条件，数组的元素是否有一个满足，若有一个满足则返回ture</span><br><span class="line">reduce(callback, initialValue) 迭代数组的所有项，累加器，数组中的每个值（从左到右）合并，最终计算为一个值</span><br></pre></td></tr></table></figure>
+
+<p>lastIndexOf()   和arr.indexOf()的功能一样，不同的是从后往前查找<br>Array.from() 将伪数组变成数组，就是只要有length的就可以转成数组。 —es6<br>Array.of() 将一组值转换成数组，类似于声明数组    —es6<br>find(callback) 找到第一个符合条件的数组成员<br>findIndex(callback) 找到第一个符合条件的数组成员的索引值<br>fill(target, start, end) 使用给定的值，填充一个数组<br>includes() 判断数中是否包含给定的值<br>keys() 遍历数组的键名<br>values() 遍历数组键值<br>entries() 遍历数组的键名和键值</p>
+<h1 id="五、字符串-String"><a href="#五、字符串-String" class="headerlink" title="五、字符串(String)"></a>五、字符串(String)</h1><h4 id="字符串的恒定性"><a href="#字符串的恒定性" class="headerlink" title="字符串的恒定性"></a>字符串的恒定性</h4><p>字符串的方法修改字符,不会改变原来的字符串,叫做恒定性</p>
+<h4 id="字符串的方法"><a href="#字符串的方法" class="headerlink" title="字符串的方法"></a>字符串的方法</h4><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">charAt(): 返回指定下标位置的字符。如果index不在<span class="number">0</span>-str.length(不包含str.length)之间，返回空字符串。</span><br><span class="line">charCodeAt(): 返回指定下标位置的字符的unicode编码,这个返回值是 <span class="number">0</span> - <span class="number">65535</span> 之间的整数。</span><br><span class="line">indexOf(): 返回某个指定的子字符串在字符串中第一次出现的位置</span><br><span class="line">toLowerCase()把字符串转为小写，返回新的字符串。</span><br><span class="line">toUpperCase(): 把字符串转为大写，返回新的字符串。</span><br><span class="line">lastIndexOf(): 返回某个指定的子字符串在字符串中最后出现的位置。</span><br><span class="line">slice(): 返回字符串中提取的子字符串。</span><br><span class="line">substring(): 提取字符串中介于两个指定下标之间的字符。</span><br><span class="line">split(): 把字符串分割成字符串数组。</span><br><span class="line">substr(): 返回从指定下标开始指定长度的的子字符串</span><br><span class="line">replace(): 在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。</span><br><span class="line">match(): 返回所有查找的关键字内容的数组。</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、浏览器渲染页面的原理及流程"><a href="#六、浏览器渲染页面的原理及流程" class="headerlink" title="六、浏览器渲染页面的原理及流程"></a>六、浏览器渲染页面的原理及流程</h1><p>浏览器将域名通过网络通信从服务器拿到html文件后，如何渲染页面呢？</p>
+<blockquote>
+<p>1.根据html文件构建DOM树和CSSOM树。构建DOM树期间，如果遇到JS，阻塞DOM树及CSSOM树的构建，优先加载JS文件，加载完毕，再继续构建DOM树及CSSOM树。<br>2.构建渲染树（Render Tree）。<br>3.页面的重绘（repaint）与重排（reflow，也有称回流）。页面渲染完成后，若JS操作了DOM节点，根据JS对DOM操作动作的大小，浏览器对页面进行重绘或是回流</p>
+</blockquote>
+<p><img src="https://upload-images.jianshu.io/upload_images/3534846-00ef9f3d405462ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/624/format/webp"></p>
+<h1 id="七、重绘和回流（repaint-amp-reflow"><a href="#七、重绘和回流（repaint-amp-reflow" class="headerlink" title="七、重绘和回流（repaint&amp;reflow)"></a>七、重绘和回流（repaint&amp;reflow)</h1><p>当Render Tree中部分或全部元素的尺寸、结构、或某些属性发生改变时，浏览器重新渲染部分或全部文档的过程称为<strong>回流</strong>。</p>
+<p>导致回流的操作：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、页面首次渲染</span><br><span class="line"><span class="number">2</span>、浏览器窗口大小发生改变</span><br><span class="line"><span class="number">3</span>、元素尺寸或位置发生改变</span><br><span class="line"><span class="number">4</span>、元素内容变化（文字数量或图片大小改变而引起的计算值宽度和高度改变）</span><br><span class="line"><span class="number">5</span>、元素字体大小变化</span><br><span class="line"><span class="number">6</span>、添加或者删除可见的DOM元素</span><br><span class="line"><span class="number">7</span>、激活CSS伪类（例如：:hover）</span><br><span class="line"><span class="number">8</span>、查询某些属性或调用某些方法</span><br><span class="line"><span class="number">9</span>、offsetWidth,width,clientWidth,scrollTop/scrollHeight的计算,会使浏览器将渐进回流队列Flush,立即执行回流。</span><br></pre></td></tr></table></figure>
+
+<p>当页面中元素样式的改变并不影响它在文档流中的位置时（例如：color、background-color、visibility等），浏览器会将新样式赋予给元素并重新绘制它，这个过程称为<strong>重绘</strong>。</p>
+<p><strong>回流必定会发生重绘，重绘不一定会引发回流。</strong></p>
+<h1 id="八、如何避免重绘和回流？"><a href="#八、如何避免重绘和回流？" class="headerlink" title="八、如何避免重绘和回流？"></a>八、如何避免重绘和回流？</h1><p><strong>css：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>避免使用table布局，可能很小的一个小改动会造成整个table的重新布局</span><br><span class="line"><span class="number">2.</span>尽可能在DOM树的最末端改变<span class="class"><span class="keyword">class</span>。</span></span><br><span class="line"><span class="class">3.避免设置多层内联样式。</span></span><br><span class="line"><span class="class">4.将动画效果应用到<span class="title">position</span>属性为<span class="title">absolute</span>或<span class="title">fixed</span>的元素上。</span></span><br><span class="line"><span class="class">5.动画实现的速度的选择，动画速度越快，回流次数越多，也可以选择使用<span class="title">requestAnimationFrame</span></span></span><br><span class="line"><span class="class">6.避免使用<span class="title">CSS</span>表达式（例如：<span class="title">calc</span>()）</span></span><br><span class="line"><span class="class">7.使用<span class="title">transform</span>替代<span class="title">top</span></span></span><br><span class="line"><span class="class">8.使用<span class="title">visibility</span>替换<span class="title">display</span>: <span class="title">none</span>，因为前者只会引起重绘，后者会引发回流（改变了布局）</span></span><br><span class="line"><span class="class">将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>js：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="number">1.</span>避免频繁操作样式，最好一次性重写style属性,cssText，或者将样式列表定义为<span class="class"><span class="keyword">class</span>并一次性更改<span class="title">class</span>属性。</span></span><br><span class="line"><span class="class">2.避免频繁操作<span class="title">DOM</span>，创建一个<span class="title">documentFragment</span>，在它上面应用所有<span class="title">DOM</span>操作，最后再把它添加到文档中。</span></span><br><span class="line"><span class="class">3.也可以先为元素设置<span class="title">display</span>: <span class="title">none</span>，操作结束后再把它显示出来。因为在<span class="title">display</span>属性为<span class="title">none</span>的元素上进行的<span class="title">DOM</span>操作不会引发回流和重绘。</span></span><br><span class="line"><span class="class">4.避免频繁读取会引发回流/重绘的属性，如果确实需要多次使用，就用一个变量缓存起来。</span></span><br><span class="line"><span class="class">5.对具有复杂动画的元素使用绝对定位，使它脱离文档流，否则会引起父元素及后续元素频繁回流。</span></span><br></pre></td></tr></table></figure>
+<h1 id="九、什么是闭包-Closure"><a href="#九、什么是闭包-Closure" class="headerlink" title="九、什么是闭包(Closure)"></a>九、什么是闭包(Closure)</h1><p>闭包是这样一种机制: </p>
+<p>**函数嵌套函数,内部函数可以引用外部函数的参数和变量,参数和变量不会被垃圾回收机制所收回. **</p>
+<p>闭包的好处：</p>
+<blockquote>
+<ol>
+<li>可以让一个变量长期驻扎在内存当中不被释放</li>
+<li>避免全局变量的污染, 和全局变量不同, 闭包中的变量无法被外部使用</li>
+</ol>
+</blockquote>
+<p><strong>闭包的用途</strong></p>
+<p>1.实现缓存</p>
+<p>2.存储值与避免变量全局污染</p>
+<p><strong>使用闭包的注意点</strong></p>
+<blockquote>
+<p>（1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。<br>（2）闭包会在父函数外部，改变父函数内部变量的值。</p>
+</blockquote>
+<h3 id="十、垃圾回收机制-GC"><a href="#十、垃圾回收机制-GC" class="headerlink" title="十、垃圾回收机制(GC)"></a>十、垃圾回收机制(GC)</h3><p>​      JS引擎会在一定的时间间隔来自动对内存进行回收(把内存释放)</p>
+<p>JS垃圾回收机制有两种:  1, 标记清除,  2, 引用计数</p>
+<p>​    1, <strong>标记清除</strong>:  js会对变量做一个标记Yes or No的标签以供js引擎来处理,  当变量在某个环境下被使用则标记为yes, 当超出该环境(可以理解为超出作用域)则标记为no, js引擎会在一定时间间隔来进行扫描, 会对有no标签的变量进行释放(将该变量所占的内存释放掉)</p>
+<p>​    2, <strong>引用计数</strong>:  对于js中引用类型的变量, 采用引用计数的内存回收机制, 当一个引用类型的变量赋值给另一个变量时, 引用计数会+1, 而当其中有一个变量不再等于值时, 引用计数会-1, 如果引用计数为0, 则js引擎会将其释放掉</p>
+<h1 id="十一、什么是回调函数-callback"><a href="#十一、什么是回调函数-callback" class="headerlink" title="十一、什么是回调函数(callback)"></a>十一、什么是回调函数(callback)</h1><p>回调函数也是一种高阶函数,把一个函数当做另外一个函数的参数,在另外一个函数内部被执行和传递参数</p>
+<p>好处:</p>
+<blockquote>
+<p>1.解决异步<br>2.对函数进行功能扩展</p>
+</blockquote>
+<p>缺点:</p>
+<blockquote>
+<p>1.容易造成回调地狱,回调地狱不方便维护与理解,<br>2.解决方案使用 promise + async + await</p>
+</blockquote>
+<h1 id="十二、什么是ajax"><a href="#十二、什么是ajax" class="headerlink" title="十二、什么是ajax"></a>十二、什么是ajax</h1><p>AJAX (阿贾克斯 Asynchronous Javascript And Xml ) 异步JavaScript和XML，是指一种创建交互式网页应用的网页开发技术, 可以<strong>访问服务器数据的局部刷新的技术</strong></p>
+<p>核心对象: <strong>XMLHttpRequest</strong></p>
+<p>ajax的异步如何获取到数据?</p>
+<blockquote>
+<p>使用<code>onreadystatechange</code>事件(事件队列event loop的宏任务),并结合<code>callback</code>回调函数</p>
+</blockquote>
+<p><code>ajax的同步,发送请求时会占据 (thread main)主线程,造成阻塞,不推荐使用</code></p>
+<h1 id="十三、get请求与post请求的区别"><a href="#十三、get请求与post请求的区别" class="headerlink" title="十三、get请求与post请求的区别?"></a>十三、get请求与post请求的区别?</h1><blockquote>
+<p>GET在浏览器回退时是无害的，而POST会再次提交请求。<br>GET请求会被浏览器主动cache，而POST不会，除非手动设置。<br>GET请求只能进行url编码，而POST支持多种编码(文字,图片,电影..)方式。<br>GET请求参数会被完整保留在浏览器历史记录里，而POST中的参数不会被保留。<br>GET请求在URL中传送的参数是有长度限制的，而POST么有。<br>对参数的数据类型，GET只接受ASCII字符，而POST没有限制。<br>GET比POST更不安全，因为参数直接暴露在URL上，所以不能用来传递敏感信息。<br>GET参数通过URL传递，POST放在Request body中。<br>GET产生的URL地址可以被Bookmark，而POST不可以。</p>
+</blockquote>
+<p><strong>注意:GET产生一个TCP数据包；POST产生两个TCP数据包。Firefox就只发送一次</strong></p>
+<h1 id="十四、HTTP协议"><a href="#十四、HTTP协议" class="headerlink" title="十四、HTTP协议"></a>十四、HTTP协议</h1><h4 id="1-什么是http协议"><a href="#1-什么是http协议" class="headerlink" title="1.什么是http协议"></a>1.什么是http协议</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">超文本传输协议HyperText Transfer Protocol</span><br><span class="line">它是基于TCP协议的应用层传输协议，</span><br><span class="line">简单来说就是客户端和服务端进行数据传输的一种规则</span><br></pre></td></tr></table></figure>
+<h4 id="2-http-协议一共有五大特点："><a href="#2-http-协议一共有五大特点：" class="headerlink" title="2.http 协议一共有五大特点："></a>2.http 协议一共有五大特点：</h4><p>HTTP 是一个属于应用层的面向对象的协议有五大特点</p>
+<p>1.<strong>支持客户/服务器模式</strong>。<br>2.<strong>简单快速</strong>：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种    方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。<br>3.<strong>灵活</strong>：HTTP允许传输任意类型的数据对象。正在传输的类型由<strong>Content-Type</strong>（Content-Type是HTTP包中用来表示内容类型的标识）加以标记。<br>4.<strong>无连接</strong>：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即<strong>断开式连接</strong>。采用这种方式可以节省传输时间。<br>5.<strong>无状态</strong>：HTTP协议是无状态协议。无状态是指协议对于<strong>事务处理没有记忆能力</strong>。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</p>
+<h4 id="3-请求报文-request"><a href="#3-请求报文-request" class="headerlink" title="3.请求报文(request)"></a>3.请求报文(request)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.请求行    [请求方式  url地址  协议(1.0/1.1/2.0) ]</span><br><span class="line">2.请求头部  [content-type,cookie]</span><br><span class="line">3.请求体    [数据]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180322001733298-201433635.jpg" alt="请求报文格式"></p>
+<p><img src="https://images2018.cnblogs.com/blog/877318/201804/877318-20180418160914403-902015370.png" alt="请求报文"></p>
+<h4 id="4-响应报文-response"><a href="#4-响应报文-response" class="headerlink" title="4.响应报文 (response)"></a>4.响应报文 (response)</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.状态行  [协议, 状态码,短语]</span><br><span class="line">2.响应头  [content-Type,...]</span><br><span class="line">3.响应体  [数据]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://images2018.cnblogs.com/blog/867021/201803/867021-20180322001744323-654009411.jpg" alt="响应报文"></p>
+<p><img src="https://images2018.cnblogs.com/blog/877318/201804/877318-20180418161014087-738990087.png" alt="响应报文"></p>
+<h1 id="十五、Promise"><a href="#十五、Promise" class="headerlink" title="十五、Promise"></a>十五、Promise</h1><p>  回调函数是用来解决异步或对函数进行功能扩展,如果滥用回调函数的嵌套,就会形参<strong>回调地狱</strong><br>  <strong>回调地狱</strong>,不方便维护与代码的理解,就可以采用Promise.<br>  promsie是一个类,需要被实例化<br>  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">promsie 有三种状态</span><br><span class="line">1.pending 等待 默认是 等待</span><br><span class="line">2.fulfilled 完成</span><br><span class="line">3.rejected  拒绝</span><br><span class="line">它们是不可以逆</span><br></pre></td></tr></table></figure></p>
+<h4 id="promsie的原型方法"><a href="#promsie的原型方法" class="headerlink" title="promsie的原型方法"></a>promsie的原型方法</h4><p>  then() 里面有2个函数,第1个函数取resolve的结果,第2个参数取reject的结果<br>  catch() 捕获 reject的结果<br>  finally() 只要执行resolve或reject后,都会执行finally</p>
+<h4 id="promise的静态方法"><a href="#promise的静态方法" class="headerlink" title="promise的静态方法"></a>promise的静态方法</h4><p>Promise.all() ,all方法里需要填入一个数组,数组里必须都是支持promise的方法,所有的结果</p>
+<p>Promise.race(),race方法里需要填入一个数组,谁先执行,就只取谁的结果</p>
+<p>Promise.resolve() 只执成功,并返回一个新的promise对象</p>
+<p>Promise.reject()  只执失败,并返回一个新的promise对象</p>
+<h4 id="ES7-async-await"><a href="#ES7-async-await" class="headerlink" title="ES7 async await"></a>ES7 async await</h4><p>await关键字后面必须接promise对象,有await关键字的地方,必须是一个async 异步函数</p>
+<p>它能解决,<strong>把异步像同步一样的被调用</strong></p>
+<h3 id="十六、同源策略"><a href="#十六、同源策略" class="headerlink" title="十六、同源策略"></a>十六、同源策略</h3><p>同源策略是一种ajax的安全机制,</p>
+<p>如果出现 <strong>协议,域名,端口</strong>,三者不统一,就会产生跨域</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">https:<span class="comment">//www.baidu.com</span></span><br><span class="line">http:<span class="comment">//www.baidu.com   //协议不同,跨域</span></span><br><span class="line"></span><br><span class="line">http:<span class="comment">//www.baidu.com</span></span><br><span class="line">http:<span class="comment">//mail.baidu.com    二级域名</span></span><br><span class="line">http:<span class="comment">//aaa.bbb.baidu.com 三级域名    域名不同,跨域</span></span><br><span class="line"></span><br><span class="line">http:<span class="comment">//www.baidu.com:8080</span></span><br><span class="line">http:<span class="comment">//www.baidu.com:5500  端口不一致,跨域</span></span><br></pre></td></tr></table></figure>
+
+<p>如何解决跨域(<strong>CORS</strong>)呢?</p>
+<p>目前常见的方案</p>
+<ol>
+<li><p>在后端的<strong>响应头</strong>加上一句 <code>Access-Control-Allow-Origin:*</code>,这里的*表示所有请求,都可以访问该服务</p>
+</li>
+<li><p>采用非官方的跨域方案 ,JSONP, 它算不上真正ajax请求,它只能算get请求,因为它是利用了带<code>src</code>属性的</p>
+<p><code>script</code>,不受限制的访问外部资源,再又结合<code>callback</code>回调函数获取数据.</p>
+<p>还要和后端配合使用</p>
+</li>
+<li><p>前端使用webpack模块中的server proxy ,实现服务器端代理,来解决跨域</p>
+</li>
+</ol>
+<h3 id="十七、什么是xss攻击"><a href="#十七、什么是xss攻击" class="headerlink" title="十七、什么是xss攻击?"></a>十七、什么是xss攻击?</h3><p><strong>跨站脚本攻击。</strong>XSS的重点不在于跨站点，而在于脚本的执行</p>
+<p>恶意攻击者在web页面中会插入一些恶意的script代码。当用户浏览该页面的时候，那么嵌入到web页面中script代码会执行，因此会达到恶意攻击用户的目的</p>
+<p><strong>如何防范？</strong></p>
+<ol>
+<li>后端需要对提交的数据进行过滤(<script>、<img>、<a>等标签进行过滤)。</li>
+<li>前端也可以做一下处理方式，比如对script标签，将特殊字符替换成HTML编码这些等。</li>
+<li>避免SQL注入</li>
+<li>不使用eval()函数</li>
+</ol>
+<h3 id="十八、JSONP和JSON的区别"><a href="#十八、JSONP和JSON的区别" class="headerlink" title="十八、JSONP和JSON的区别 ?"></a>十八、JSONP和JSON的区别 ?</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">jsonp 是一种非官方的跨域解决方案,它是利用script的src,不受限制的访问外部资源,并结合callback拿到数据</span><br><span class="line">它并不是真正的ajax,它是一个get请求,更加适合做查询.</span><br><span class="line">json  是一种轻量级的数据结构,能跨平台进行网络传输,能做配置文件.</span><br><span class="line">xml   可扩展性标记语言,是一种重量级的数据格式,也能做跨平台进行网络传输和做配置文件.</span><br></pre></td></tr></table></figure>
+
+<h3 id="十九、什么是oop-面向对象"><a href="#十九、什么是oop-面向对象" class="headerlink" title="十九、什么是oop(面向对象)"></a>十九、什么是oop(面向对象)</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">oop是一种编程思想,又叫做面向对象编程</span><br><span class="line">它有三大特性</span><br><span class="line">封装 将相同的属性和方法提取成一个类</span><br><span class="line">继承 子类拥有父类的属性和方法</span><br><span class="line">多态  </span><br><span class="line">     重写 子类重写父类的属性和方法</span><br><span class="line">     重载 在同一个类中,同名不同参数 js没有重载</span><br><span class="line">补充: css3大特性</span><br><span class="line">    层叠性,继承性,优先级(特殊性)</span><br></pre></td></tr></table></figure>
+
+<h3 id="二十、继承"><a href="#二十、继承" class="headerlink" title="二十、继承"></a>二十、继承</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 对象冒充继承  使用 bind,call,apply</span><br><span class="line">		缺点:不能继承原型上的属性和方法</span><br><span class="line">2. 原型链继承   </span><br><span class="line">		缺点:不能让构造函数的属性,初始化</span><br><span class="line">3. 组合继承 (对象冒充+原型继承)</span><br><span class="line">	    缺点:原型中会有多余的属性,并且是undefined</span><br><span class="line">4. ES6的class和extends继承</span><br><span class="line">5. 寄生组合继承  Object.create(base.prototype);</span><br></pre></td></tr></table></figure>
+
+<h3 id="二十一、递归"><a href="#二十一、递归" class="headerlink" title="二十一、递归"></a>二十一、递归</h3><h4 id="1-什么是递归"><a href="#1-什么是递归" class="headerlink" title="1.什么是递归?"></a>1.什么是递归?</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">函数自己调用自己,要有零界点(结束条件)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-递归能做什么"><a href="#2-递归能做什么" class="headerlink" title="2.递归能做什么?"></a>2.递归能做什么?</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">循环的能做的事,递归都能实现</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-递归的使用场景"><a href="#3-递归的使用场景" class="headerlink" title="3.递归的使用场景"></a>3.递归的使用场景</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1. 快速排序使用递归</span><br><span class="line">2. nodejs磁盘文件的遍历,使用递归</span><br><span class="line">3. 管理系统的权限菜单栏(n级菜单栏)</span><br><span class="line">4. 对象的深拷贝</span><br></pre></td></tr></table></figure>
+
+<h3 id="二十二、节流-throttle-与防抖-debounce"><a href="#二十二、节流-throttle-与防抖-debounce" class="headerlink" title="二十二、节流(throttle)与防抖(debounce)"></a>二十二、节流(throttle)与防抖(debounce)</h3><h4 id="防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行"><a href="#防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行" class="headerlink" title="防抖：任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行"></a><strong>防抖</strong>：<strong>任务频繁触发的情况下，只有任务触发的间隔超过指定间隔的时候，任务才会执行</strong></h4><blockquote>
+<p>触发高频事件后n秒内函数只会执行一次，如果n秒内高频事件再次被触发，则重新计算时间</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"> <span class="comment">// 1、防抖功能函数，接受传参</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn,delay==<span class="number">600</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 2、创建一个标记用来存放定时器的返回值</span></span><br><span class="line">  <span class="keyword">let</span> timeout = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 3、每次当用户点击/输入的时候，把前一个定时器清除</span></span><br><span class="line">    <span class="built_in">clearTimeout</span>(timeout);</span><br><span class="line">    <span class="comment">// 4、然后创建一个新的 setTimeout，</span></span><br><span class="line">    <span class="comment">// 这样就能保证点击按钮后的 interval 间隔内</span></span><br><span class="line">    <span class="comment">// 如果用户还点击了的话，就不会执行 fn 函数</span></span><br><span class="line">    timeout = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">    &#125;, delay);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="节流：指定时间间隔内只会执行一次任务。"><a href="#节流：指定时间间隔内只会执行一次任务。" class="headerlink" title="节流：指定时间间隔内只会执行一次任务。"></a><strong>节流</strong>：<strong>指定时间间隔内只会执行一次任务。</strong></h4><blockquote>
+<p>高频事件触发，但在n秒内只会执行一次，所以节流会稀释函数的执行频率</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn,delay=<span class="number">600</span></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 1、通过闭包保存一个标记</span></span><br><span class="line">      <span class="keyword">let</span> canRun = <span class="literal">true</span>;</span><br><span class="line">      <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 2、在函数开头判断标志是否为 true，不为 true 则中断函数</span></span><br><span class="line">        <span class="keyword">if</span>(!canRun) &#123;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 3、将 canRun 设置为 false，防止执行之前再被执行</span></span><br><span class="line">        canRun = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 4、定时器</span></span><br><span class="line">        <span class="built_in">setTimeout</span>( <span class="function">() =&gt;</span> &#123;</span><br><span class="line">          fn.call(<span class="built_in">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line">          <span class="comment">// 5、执行完事件（比如调用完接口）之后，重新将这个标志设置为 true</span></span><br><span class="line">          canRun = <span class="literal">true</span>;</span><br><span class="line">        &#125;, delay);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>节流和防抖的共同点,都是减少执行频率.</p>
+<p> 函数节流不管事件触发有多频繁，都会保证在规定时间内一定会执行一次真正的事件处理函数，</p>
+<p>而函数防抖只是在最后一次事件后才触发一次函数</p>
+<h3 id="二十三-、defer和async的区别"><a href="#二十三-、defer和async的区别" class="headerlink" title="二十三 、defer和async的区别"></a>二十三 、defer和async的区别</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">&quot;./async1.js&quot;</span> <span class="keyword">async</span> defer&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>defer：在HTML解析完之后才会执行。如果是多个，则按照加载的顺序依次执行。</li>
+<li>async：在加载完之后立即执行。如果是多个，执行顺序和加载顺序无关</li>
+</ul>
+<h3 id="二十四、前端性能优化"><a href="#二十四、前端性能优化" class="headerlink" title="二十四、前端性能优化"></a>二十四、前端性能优化</h3><ol>
+<li><p><strong>减少 HTTP 请求数量</strong></p>
+<ul>
+<li>基本原理：在浏览器与服务器进行通信时，主要是通过 HTTP 进行通信。浏览器与服务器需要经过三次握手，每次握手需要花费大量时间。而且不同浏览器对资源文件并发请求数量有限（<a href="http://www.stevesouders.com/blog/2008/03/20/roundup-on-parallel-connections/">不同浏览器允许并发数</a>），一旦 HTTP 请求数量达到一定数量，资源请求就存在等待状态，这是很致命的，因此减少 HTTP 的请求数量可以很大程度上对网站性能进行优化。<ol>
+<li><strong>CSS Sprites：国内俗称 CSS 精灵</strong>，这是将多张图片合并成一张图片达到减少 HTTP 请求的一种解决方案，可以通过 CSS background 属性来访问图片内容。这种方案同时还可以减少图片总字节数，节省命名词汇量（由命名多张图片文件变成一张，哈哈哈）。</li>
+<li><strong>合并 CSS 和 JS 文件</strong>：现在前端有很多工程化打包工具，如：grunt、gulp、webpack等。为了减少 HTTP 请求数量，可以通过这些工具再发布前将多个 CSS 或者 多个 JS 合并成一个文件。</li>
+<li><strong>采用 lazyLoad：俗称懒加载</strong>，可以控制网页上的内容在一开始无需加载，不需要发请求，等到用户操作真正需要的时候立即加载出内容。这样就控制了网页资源一次性请求数量。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>控制资源文件加载优先级</strong></p>
+<ul>
+<li>基本原理：说到这里就需要知道浏览器加载 HTML 内容的原理，浏览器在加载 HTML 内容时，是将 HTML 内容从上至下依次解析，解析到 link 或者 script 标签就会加载 href 或者 src 对应链接内容，为了第一时间展示页面给用户，就需要将 CSS 提前加载，不要受 JS 加载影响。<ol>
+<li>遵循原则：主要文件放在 head 内部，次要文件放在 body 底部。一般情况下都是 CSS 在头部，JS 在底部。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>利用浏览器缓存</strong></p>
+<ul>
+<li>基本原理：浏览器缓存分强缓存和协商缓存，他们是将网络资源存储在本地，等待下次请求该资源时，如果命中就不需要到服务器重新请求该资源，直接在本地读取该资源。<ol>
+<li>强缓存：在 web 服务器返回的响应中添加 Expires 和 Cache-Control Header。</li>
+<li>协商缓存：通过【Last-Modified，If-Modified-Since】和【ETag、If-None-Match】这两对 Header 分别管理。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>使用 CDN</strong></p>
+<ul>
+<li>基本原理：CDN的全称是Content Delivery Network，即<a href="http://zsvalue.com/201405/foundation-of-cdn-%E3%80%8Acdn%E6%8A%80%E6%9C%AF%E8%AF%A6%E8%A7%A3%E3%80%8Bnote/">内容分发网络</a>。</li>
+</ul>
+</li>
+<li><p><strong>减少重排（Reflow）</strong></p>
+<ul>
+<li>基本原理：重排是 DOM 的变化影响到了元素的几何属性（宽和高），浏览器会重新计算元素的几何属性，会使渲染树中受到影响的部分失效，浏览器会验证 DOM 树上的所有其它结点的 visibility 属性，这也是 Reflow 低效的原因。如果 Reflow 的过于频繁，CPU 使用率就会急剧上升。<ol>
+<li>减少 Reflow，如果需要在 DOM 操作时添加样式，尽量使用 增加 class 属性，而不是通过 style 操作样式。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>减少 DOM 操作</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">使用createDocumentFragment</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>图标使用 IconFont 替换</strong></p>
+</li>
+</ol>
+<p><a href="https://www.jianshu.com/p/d9c20eafa67e">https://www.jianshu.com/p/d9c20eafa67e</a> 网页性能优化</p>
+<p><a href="https://segmentfault.com/a/1190000017329980">https://segmentfault.com/a/1190000017329980</a> 你真的了解回流和重绘吗</p>
+<h3 id="二十五-、值类型和引用类型的区别"><a href="#二十五-、值类型和引用类型的区别" class="headerlink" title="二十五 、值类型和引用类型的区别"></a>二十五 、值类型和引用类型的区别</h3><p>【值类型】</p>
+<blockquote>
+<p>1.占用空间固定，保存在栈中，在当前环境执行结束时销毁<br>2.保存和赋值是值的本身<br>3.可以使用typeof检测数据类型<br>4.基本类型数据是值类型</p>
+</blockquote>
+<p>【引用类型】</p>
+<blockquote>
+<p>1.占用空间不固定，保存在堆中，只有在引用的它的变量不在时，会被垃圾回收机制回收。 (引用变量存储在栈中的是指向堆中的数组或者对象的地址 )<br>2.保存与复制的是指向对象的一个指针<br>3.使用instanceof检测数据类型<br>4.使用new()方法构造出的对象是引用型  </p>
+</blockquote>
+<h3 id="二十六-、什么是cookie"><a href="#二十六-、什么是cookie" class="headerlink" title="二十六 、什么是cookie?"></a>二十六 、什么是cookie?</h3><p>  基于http协议的一种本地’存储’技术     (它就相当于钱包)  </p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie=<span class="string">&quot;username=itzan; expires=有效时间 GMT; path=/&quot;</span>;domain=;secure;</span><br></pre></td></tr></table></figure>
+
+<p>  它的特点: </p>
+<blockquote>
+<p>1.基于http协议<br>2.它会随着请求携带到服务器<br>3.只能存储4k左右<br>4.能跨域(设置domain),默认不可以<br>5.容易被伪造,不安全,会造成 xss攻击 (站点伪造)   </p>
+</blockquote>
+<p> 它的使用场景:                                          </p>
+<blockquote>
+<p>1.免登录<br>2.购物车<br>3.简单的存储,非铭感数据                         </p>
+</blockquote>
+<p> http协议                                                  </p>
+<p>常见于 浏览器与服务器的通信,它是属于 应用层 (应用程序)<br>http 默认的端口是80<br> http协议的特点<br>短连接(断开式)  浏览器向服务器发送请求,服务器接受,并响应<br>无状态  不知道是谁访问了服务器,                           </p>
+<blockquote>
+<ol>
+<li> (cookie+session)                                      </li>
+<li>token 凭证    </li>
+</ol>
+</blockquote>
+<h3 id="二十七、cookie-、sessionStorage与localStorage的区别"><a href="#二十七、cookie-、sessionStorage与localStorage的区别" class="headerlink" title="二十七、cookie 、sessionStorage与localStorage的区别"></a>二十七、cookie 、sessionStorage与localStorage的区别</h3><table>
+<thead>
+<tr>
+<th>特性</th>
+<th></th>
+<th>sessionStorage</th>
+<th>localStorage</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据的生命期</td>
+<td>一般由服务器生成，可设置失效时间。如果在浏览器端生成Cookie，默认是关闭浏览器后失效</td>
+<td>仅在当前会话下有效，关闭页面或浏览器后被清除</td>
+<td>除非被清除，否则永久保存</td>
+</tr>
+<tr>
+<td>存放数据大小</td>
+<td>4K左右</td>
+<td>一般为5MB</td>
+<td>一般为5MB</td>
+</tr>
+<tr>
+<td>与服务器端通信</td>
+<td>每次都会携带在HTTP头中，如果使用cookie保存过多数据会带来性能问题</td>
+<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
+<td>仅在客户端（即浏览器）中保存，不参与和服务器的通信</td>
+</tr>
+<tr>
+<td>易用性</td>
+<td>需要程序员自己封装，源生的Cookie接口不友好</td>
+<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
+<td>源生接口可以接受，亦可再次封装来对Object和Array有更好的支持</td>
+</tr>
+</tbody></table>
+<p>WebStorage(<strong>sessionStorage与localStorage</strong>)提供了一些方法，数据操作比cookie方便；</p>
+<blockquote>
+<p>1).setItem (key, value) ——  保存数据，以键值对的方式储存信息。<br>2).getItem (key) ——  获取数据，将键值传入，即可获取到对应的value值。<br>3).removeItem (key) ——  删除单个数据，根据键值移除对应的信息。<br>4).clear () ——  删除所有的数据<br>5).key (index) —— 获取某个索引的key</p>
+</blockquote>
+<h3 id="二十八、for-in-和-for-of的区别"><a href="#二十八、for-in-和-for-of的区别" class="headerlink" title="二十八、for..in 和 for..of的区别?"></a>二十八、for..in 和 for..of的区别?</h3><blockquote>
+<p>推荐在循环对象属性的时候, 使用for…in.<br>​在遍历数组的时候的时候使用for…of。<br>​for…in循环出的是key，for…of循环出的是value<br>​注意，for…of是ES6新引入的特性。修复了ES5引入的for…in的不足<br>​for…of不能循环普通的对象，需要通过和Object.keys()搭配使用<br>​for..of更加强大, 能遍历Array, Map, Set, String,<br> TypedArray，arguments, 而for in 不能遍历map</p>
+</blockquote>
+<h3 id="二十九、new操作符做了什么"><a href="#二十九、new操作符做了什么" class="headerlink" title="二十九、new操作符做了什么?"></a>二十九、new操作符做了什么?</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Perosn</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.在构造函数内部创建一个空对象</span></span><br><span class="line">    <span class="comment">// var obj = new Object();</span></span><br><span class="line">    <span class="comment">//2. obj.__proto__= Perosn.prototype;</span></span><br><span class="line">    <span class="comment">//3.1 Perosn.bind(obj) this指向obj</span></span><br><span class="line">    <span class="comment">//3.2 让空对象拥有 属性和方法 (让this有属性和方法)</span></span><br><span class="line">    <span class="built_in">this</span>.name = name; <span class="comment">//属性</span></span><br><span class="line">    <span class="built_in">this</span>.age = age;   <span class="comment">//属性</span></span><br><span class="line">    <span class="built_in">this</span>.run = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; &#125;<span class="comment">//方法</span></span><br><span class="line">    <span class="comment">//4.  return this; 是隐式 (看不见的,默认)</span></span><br><span class="line">    <span class="comment">// return this;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Perosn(<span class="string">&quot;旺旺&quot;</span>, <span class="number">6</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>1.在构造函数内部(隐式)创建一个空对象<br>2.空对象的指针(  __ proto __  )指向构造函数的原型(prototye)<br>3.把空构造函数的this指向空对象,并且让空对象拥有(自定义的)属性和方法<br>4.隐式的返回 return this<br><strong>所以new 能改变构造函数内部的this指向,函数内部的this默认是window</strong></p>
+</blockquote>
+<h3 id="三十-、什么是面向对象"><a href="#三十-、什么是面向对象" class="headerlink" title="三十 、什么是面向对象?"></a>三十 、什么是面向对象?</h3><p> 面向对象是<strong>利用对象进行编程</strong>的一种思想. 面向对象又被成为 <strong>OOP</strong> (Object Oriented Programming面向对象编程)</p>
+<h5 id="1-为什么要使用面向对象编程"><a href="#1-为什么要使用面向对象编程" class="headerlink" title="1).为什么要使用面向对象编程?"></a>1).为什么要使用面向对象编程?</h5><p> 这种编程方式,更加贴近现实;</p>
+<h5 id="2-哪些语言是面向对象"><a href="#2-哪些语言是面向对象" class="headerlink" title="2).哪些语言是面向对象?"></a>2).哪些语言是面向对象?</h5><p>  java,c#, c++ , js .. 面向对象编程,是主流;</p>
+<h5 id="3-面向对象的特点有哪些"><a href="#3-面向对象的特点有哪些" class="headerlink" title="3).面向对象的特点有哪些?"></a>3).面向对象的特点有哪些?</h5><pre><code>1)封装
+   把相同的属性和方法 提取成为一个类
+   类是抽象的,类是模板
+2)继承
+   子类拥有父类的属性和方法  (偷懒神器)
+3)多态
+   1).重写 (override)  (基于继承)
+        子类重写父类的属性和方法
+   2).重载 (overload)
+     同一个类中,同名不同参数 (在同一个类中,函数名称相同,参数的个数和类型不相同)
+     注意: js没有重载
+</code></pre>
+<h5 id="4-css也有三大特性"><a href="#4-css也有三大特性" class="headerlink" title="4).css也有三大特性?"></a>4).css也有三大特性?</h5><pre><code>1).继承性
+2).层叠性
+3).优先级
+c/s   client  -- server  客户端--服务器    功能强大,不方便维护 (需安装)
+b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (无须安装)
+</code></pre>
+<h5 id="5-什么是面向过程-与面向对象有什么区别"><a href="#5-什么是面向过程-与面向对象有什么区别" class="headerlink" title="5).什么是面向过程?与面向对象有什么区别?"></a>5).什么是面向过程?与面向对象有什么区别?</h5><h5 id="面向过程"><a href="#面向过程" class="headerlink" title="面向过程:"></a>面向过程:</h5><blockquote>
+<p>就是分析出解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，<br>使用的时候一个一个依次调用就可以了。</p>
+</blockquote>
+<h5 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象:"></a>面向对象:</h5><blockquote>
+<p>是把构成问题的事务分解成各个对象，每个对象都有自己独立的属性和行为,<br>对象可以将整个问题事务进行分工, 不同的对象做不同的事情,<br>这种面向对象的编程思想由于更加贴近实际生活, 所以被计算机语言广泛应用。</p>
+</blockquote>
+<h5 id="js有2种编程模式"><a href="#js有2种编程模式" class="headerlink" title="js有2种编程模式"></a>js有2种编程模式</h5><p>1.面对过程<br>2.面向对象</p>
+<h3 id="三十一、类和对象的关系"><a href="#三十一、类和对象的关系" class="headerlink" title="三十一、类和对象的关系"></a>三十一、类和对象的关系</h3><p><strong>类是对象的抽象，而对象是类的具体实例</strong>。</p>
+<p>类是抽象的，不占用内存，而对象是具体的，占用存储空间。</p>
+<p>类是用于创建对象的蓝图，它是一个定义包括在特定类型的对象中的方法和变量的软件模板。</p>
+<p>类与对象的关系就如模具和铸件的关系 </p>
+<p>类的实例化结果就是对象，而对一类对象的抽象就是类，</p>
+<p><strong>类描述了一组有相同属性和相同方法的对象</strong></p>
+<p>​     </p>
+<h3 id="三十二、原型"><a href="#三十二、原型" class="headerlink" title="三十二、原型"></a>三十二、原型</h3><h5 id="1-什么是原型"><a href="#1-什么是原型" class="headerlink" title="1.什么是原型?"></a>1.什么是原型?</h5><blockquote>
+<p>原型, 英文名prototype是函数中一个自带的属性,我们创建的每个函数都有一个<br>prototype(原型)属性,这个属性是一个对象. </p>
+</blockquote>
+<h5 id="2-原型的作用"><a href="#2-原型的作用" class="headerlink" title="2.原型的作用?"></a>2.原型的作用?</h5><blockquote>
+<p>原型的作用是: 可以让同一个构造函数创建的所有对象共享属性和方法. 也就是说, 你可以不在<br> 构造函数中定义对象的属性和方法,<br>而是可以直接将这些信息添加到原型对象中。</p>
+</blockquote>
+<h5 id="3-原型的好处"><a href="#3-原型的好处" class="headerlink" title="3.原型的好处?"></a>3.原型的好处?</h5><p>优点:<br>1, 实例对象都有自己的独有属性<br>2, 同时共享了原型中的方法,最大限度的节省了内存<br>3, 支持向构造函数传递参数 (初始值)</p>
+<h5 id="4-什么是原型链"><a href="#4-什么是原型链" class="headerlink" title="4.什么是原型链?"></a>4.什么是原型链?</h5><p>当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构，我们称为原型链<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC93ZWJwLzExOTY2NDUvMTU5MTE3MTk5OTc2My1lN2RlNTlmZi05MWYyLTRhZDktOGZmZi03NjE2M2Y1YzAxOTEud2VicA?x-oss-process=image/format,png"></p>
+<h3 id="三十三-、进程与线程的区别"><a href="#三十三-、进程与线程的区别" class="headerlink" title="三十三 、进程与线程的区别?"></a>三十三 、进程与线程的区别?</h3><ol>
+<li><p>线程是<strong>程序执行的最小单位</strong>，而进程是操作<strong>系统分配资源的最小单位</strong>；</p>
+</li>
+<li><p>一个进程由一个或多个线程组成，线程是一个进程中代码的不同执行路线</p>
+</li>
+<li><p>进程之间相互独立，但同一进程下的各个线程之间共享程序的内存空间(包括代码段，数据集，堆等)及一些进程级的资源(如打开文件和信</p>
+</li>
+</ol>
+<p>号等)，某进程内的线程在其他进程不可见；</p>
+<ol start="4">
+<li>调度和切换：线程上下文切换比进程上下文切换要快得多</li>
+</ol>
+<h3 id="三十四-、AMD、CMD、CommonJs、ES6的对比"><a href="#三十四-、AMD、CMD、CommonJs、ES6的对比" class="headerlink" title="三十四 、AMD、CMD、CommonJs、ES6的对比"></a>三十四 、AMD、CMD、CommonJs、ES6的对比</h3><p>CommonJS规范是诞生比较早的,适合服务端，因为在服务器读取模块都是在本地磁盘，加载速度很快.</p>
+<h4 id="CommonJS的特点"><a href="#CommonJS的特点" class="headerlink" title="CommonJS的特点:"></a>CommonJS的特点:</h4><ul>
+<li><p>1.所有代码都运行在模块作用域，不会污染全局作用域。</p>
+</li>
+<li><p>2.模块可以多次加载，但是只会在第一次加载时运行一次，然后运行结果就被缓存了，以后再加载，就直接读取缓存结果。要想让模块再次运行，必须清除缓存。</p>
+</li>
+<li><p>3模块加载的顺序，按照其在代码中出现的顺序。</p>
+<p>AMD的特点<br>AMD，即 (Asynchronous Module Definition)，这种规范是异步的加载模块，requireJs应用了这一规范。先定义所有依赖，然后在加载完成后的回调函数中执行,<strong>依赖前置</strong> ,代表作有 require.js库</p>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">require([&#x27;clock&#x27;],function(clock)&#123;</span><br><span class="line">  clock.start();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="CMD的特点"><a href="#CMD的特点" class="headerlink" title="CMD的特点"></a>CMD的特点</h4><p>CMD (Common Module Definition), 是seajs推崇的规范，CMD则是依赖就近，用的时候再require, <strong>就近依赖</strong> 代代表有SeaJS 库</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">define(function(require, exports, module) &#123;</span><br><span class="line">   var clock = require(&#x27;clock&#x27;);</span><br><span class="line">   clock.start();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>优势</th>
+<th>劣势</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AMD</td>
+<td>速度快</td>
+<td>会浪费资源</td>
+<td>预先加载所有的依赖，直到使用的时候才执行</td>
+</tr>
+<tr>
+<td>CMD</td>
+<td>只有真正需要才加载依赖</td>
+<td>性能较差</td>
+<td>直到使用的时候才定义依赖</td>
+</tr>
+</tbody></table>
+<p>能够提出CMD和AMD互相补充是一个很赞的想法。现在，它们除了希望放在浏览器作为loader也能够放在服务端，提供加载功能。在我看来，AMD擅长在浏览器端、CMD擅长在服务器端。这是因为浏览器加载一个功能不像服务器那么快，有大量的网络消耗。所以一个异步loader是更接地气的。</p>
+<p>后期使用webpack之后 AMD和CMD 没有啥意义.加上ES6也出了自己的模块化机制</p>
+<h4 id="ES6的模块化"><a href="#ES6的模块化" class="headerlink" title="ES6的模块化"></a>ES6的模块化</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import config from &#x27;./config&#x27; //导入</span><br><span class="line">export default function () &#123; //导出</span><br><span class="line">  console.log(&#x27;fff&#x27;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意:</p>
+<p>script标签中写js代码，或者使用src引入js文件时，默认不能使用module形式，即不能使用import导入文件，</p>
+<p>但是我们可以再script标签上加上type=module属性来改变方式</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>vue中配置生成环境和开发环境</title>
+    <url>/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
+<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
+</ol>
+<ul>
+<li>.env.development<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>.env.production<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
+<li>.env.staging </li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在封装的axios网络请求中配置baseURL  </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>配置package.json文件  </p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
+<h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a href="http://www.hahah.com/">www.hahah.com</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>TypeScript</title>
     <url>/2021/12/27/typescript/</url>
     <content><![CDATA[<h1 id="typescript"><a href="#typescript" class="headerlink" title="typescript"></a>typescript</h1><h2 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1. 环境配置"></a>1. 环境配置</h2><h3 id="1-1-安装typescript"><a href="#1-1-安装typescript" class="headerlink" title="1.1 安装typescript"></a>1.1 安装typescript</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm i typescript -g </span><br><span class="line">tsc -v  </span><br></pre></td></tr></table></figure>
@@ -1850,80 +1800,55 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>小程序技术栈整合</title>
-    <url>/2022/01/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E6%A0%88%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<h1 id="小程序技术栈整合"><a href="#小程序技术栈整合" class="headerlink" title="小程序技术栈整合"></a>小程序技术栈整合</h1><h2 id="一、-mpvue配置"><a href="#一、-mpvue配置" class="headerlink" title="一、 mpvue配置"></a>一、 mpvue配置</h2><ol>
-<li>全局安装 vue-cli  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --global vue-cli@2.9.6</span><br><span class="line"></span><br><span class="line">如果已经装了这个 2.9.6 可以不装了</span><br><span class="line"></span><br><span class="line">npm install @vue/cli-init -g </span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>创建一个基于 mpvue-quickstart 模板的新项目</p>
-<p>新手一路回车选择默认就可以了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue init mpvue/mpvue-quickstart my-project</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="二、-mpvue中配置-vant-weapp"><a href="#二、-mpvue中配置-vant-weapp" class="headerlink" title="二、 mpvue中配置 vant-weapp"></a>二、 mpvue中配置 vant-weapp</h2><ol>
-<li>下载 vant-weapp 资源  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/youzan/vant-weapp.git</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>将dist目录下的所有文件复制到你项目的/static/vant/目录下 </li>
-</ol>
-<p>  注意打开 微信开发者工具中的ES6转ES5功能 </p>
-<ol start="3">
-<li>在需要引入的页面目录下的main.json文件中</li>
-</ol>
-  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;van-button&quot;</span>: <span class="string">&quot;/static/vant/button/index&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>使用</li>
-</ol>
-  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="三、-mpvue中配置-flyio"><a href="#三、-mpvue中配置-flyio" class="headerlink" title="三、 mpvue中配置 flyio"></a>三、 mpvue中配置 flyio</h2><ol>
-<li>安装 flyio  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add flyio -S  </span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>新建文件 src/api/fly.js    </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Fly <span class="keyword">from</span> <span class="string">&#x27;flyio/dist/npm/wx&#x27;</span></span><br><span class="line"><span class="keyword">const</span> fly = <span class="keyword">new</span> Fly()</span><br><span class="line"><span class="keyword">const</span> host = <span class="string">&#x27;http://127.0.0.1:5000/&#x27;</span></span><br><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">fly.interceptors.request.use(</span><br><span class="line">  <span class="function">(<span class="params">request</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.showLoading(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;加载中&#x27;</span>,</span><br><span class="line">      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(request)</span><br><span class="line">    <span class="comment">// request.headers[&quot;X-Tag&quot;] = &quot;flyio&quot;;</span></span><br><span class="line">    <span class="comment">// request.headers[&#x27;content-type&#x27;]= &#x27;application/json&#x27;;</span></span><br><span class="line">    request.headers = &#123;</span><br><span class="line">      <span class="string">&#x27;X-Tag&#x27;</span>: <span class="string">&#x27;flyio&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> authParams = &#123;</span><br><span class="line">      <span class="comment">// 公共参数</span></span><br><span class="line">      <span class="string">&#x27;categoryType&#x27;</span>: <span class="string">&#x27;SaleGoodsType@sim&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;streamNo&#x27;</span>: <span class="string">&#x27;wxapp153570682909641893&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;reqSource&#x27;</span>: <span class="string">&#x27;MALL_H5&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;appid&#x27;</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;timestamp&#x27;</span>: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">      <span class="string">&#x27;sign&#x27;</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request.body &amp;&amp; <span class="built_in">Object</span>.keys(request.body).forEach(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (request.body[val] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> request.body[val]</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    request.body = &#123;</span><br><span class="line">      ...request.body,</span><br><span class="line">      ...authParams</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> request</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">fly.interceptors.response.use(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">return</span> response.data<span class="comment">// 请求成功之后将返回值返回</span></span><br><span class="line">&#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 请求出错，根据返回状态码判断出错原因</span></span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;请求失败&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">fly.config.baseURL = host</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> fly</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>将fly.js引入main.js然后直接挂载到vue原型上</li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> fly <span class="keyword">from</span> <span class="string">&#x27;./api/fly&#x27;</span></span><br><span class="line">Vue.prototype.$fly = fly</span><br></pre></td></tr></table></figure>
-
-<h2 id="四、使用Promise封装小程序网络请求"><a href="#四、使用Promise封装小程序网络请求" class="headerlink" title="四、使用Promise封装小程序网络请求"></a>四、使用Promise封装小程序网络请求</h2><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 基于Promise的网络请求库, 包含GET POST请求</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.先引入： import &#123; get, post,... &#125; from 本文件;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.get请求: get(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. post请求: post(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 服务器请求地址 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> domain = <span class="string">&#x27;http://203.195.181.208:8888/&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起get请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数 get请求的参数会自动拼到地址后面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> get = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;GET&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起post请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> post = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;POST&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 接口请求基类方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>method 请求方法 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>header 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">method, url, data, header = &#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    url = domain + url;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url,</span><br><span class="line"></span><br><span class="line">      method,</span><br><span class="line"></span><br><span class="line">      data,</span><br><span class="line"></span><br><span class="line">      header,</span><br><span class="line"></span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> response.success = res,</span><br><span class="line"></span><br><span class="line">      <span class="attr">fail</span>: <span class="function">(<span class="params">error</span>) =&gt;</span> response.fail = error,</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        wx.hideLoading();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response.success) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (response.success.statusCode != <span class="number">200</span>) &#123;</span><br><span class="line"></span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;网络出错，稍后再试&quot;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          resolve(response.success.data);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;数据请求失败，请稍后重试&quot;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;数据请求失败&#x27;</span>, response.fail)</span><br><span class="line"></span><br><span class="line">          reject(response.fail);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"><span class="comment">// const host = &#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;<span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;app.globalData.baseURL&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      <span class="comment">// url: host + url,</span></span><br><span class="line">      <span class="attr">method</span>: options.method,</span><br><span class="line">      <span class="attr">data</span>: options.method === <span class="string">&#x27;GET&#x27;</span> ? options.data : <span class="built_in">JSON</span>.stringify(options.data),</span><br><span class="line">      <span class="attr">header</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;x-token&#x27;</span>: <span class="string">&#x27;x-token&#x27;</span>  <span class="comment">// 看自己是否需要</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: resolve,</span><br><span class="line">      <span class="attr">fail</span>: reject,</span><br><span class="line">      <span class="comment">// success(request) &#123;</span></span><br><span class="line">      <span class="comment">//   // console.log(request)</span></span><br><span class="line">      <span class="comment">//   if (request.statusCode === 200) &#123;</span></span><br><span class="line">      <span class="comment">//     resolve(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125; else &#123;</span></span><br><span class="line">      <span class="comment">//     reject(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125;</span></span><br><span class="line">      <span class="comment">// &#125;,</span></span><br><span class="line">      <span class="comment">// fail(error) &#123;</span></span><br><span class="line">      <span class="comment">//   reject(error.data)</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      	wx.hideLoading()</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> get = <span class="function">(<span class="params">url, options = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> post = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> put = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能声明DELETE（关键字）</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  get,</span><br><span class="line">  post,</span><br><span class="line">  put,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-  </entry>
-  <entry>
-    <title>storage二次封装</title>
-    <url>/2021/12/31/storage%E4%BA%8C%E6%AC%A1%E5%B0%81%E8%A3%85/</url>
-    <content><![CDATA[<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Storage二次封装</span></span><br><span class="line"><span class="keyword">const</span> namespace = <span class="string">&#x27;mall&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="comment">// 存</span></span><br><span class="line">  <span class="function"><span class="title">setItem</span>(<span class="params">key, val</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    storage[key] = val</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取</span></span><br><span class="line">  <span class="function"><span class="title">getItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.getStorage()[key]</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 取所有</span></span><br><span class="line">  <span class="function"><span class="title">getStorage</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">JSON</span>.parse(<span class="built_in">window</span>.localStorage.getItem(namespace) || <span class="string">&quot;&#123;&#125;&quot;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 删</span></span><br><span class="line">  <span class="function"><span class="title">clearItem</span>(<span class="params">key</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> storage = <span class="built_in">this</span>.getStorage()</span><br><span class="line">    <span class="keyword">delete</span> storage[key]</span><br><span class="line">    <span class="built_in">window</span>.localStorage.setItem(namespace, <span class="built_in">JSON</span>.stringify(storage))</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 清空所有</span></span><br><span class="line">  <span class="function"><span class="title">clearAll</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="built_in">window</span>.localStorage.clear(namespace, <span class="string">&#x27;&#123;&#125;&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-  </entry>
-  <entry>
-    <title>Rem适配方案</title>
-    <url>/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h2 id="1-直接引入-rem-js-文件"><a href="#1-直接引入-rem-js-文件" class="headerlink" title="1. 直接引入 rem.js 文件"></a>1. 直接引入 rem.js 文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var devicePixelRatio = 1;</span></span><br><span class="line">  <span class="comment">// var scale = 1 / devicePixelRatio;</span></span><br><span class="line">  <span class="comment">// document.querySelector(&#x27;meta[name=&quot;viewport&quot;]&#x27;).setAttribute(&#x27;content&#x27;,&#x27;initial-scale=&#x27; + scale + &#x27;, maximum-scale=&#x27; + scale + &#x27;, minimum-scale=&#x27; + scale + &#x27;, user-scalable=no&#x27;);</span></span><br><span class="line">  <span class="comment">// 7.5根据设计稿的横向分辨率/100得来</span></span><br><span class="line">  <span class="comment">// alert(document.documentElement.clientWidth)</span></span><br><span class="line">  <span class="keyword">var</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// var deviceWidth = window.screen.availWidth</span></span><br><span class="line">  <span class="comment">// alert(navigator.userAgent)</span></span><br><span class="line">  <span class="comment">// alert(deviceWidth)</span></span><br><span class="line">  <span class="comment">// console.log(navigator.userAgent)</span></span><br><span class="line">  <span class="keyword">if</span> (deviceWidth &gt; <span class="number">750</span>) &#123;</span><br><span class="line">    <span class="comment">// deviceWidth = 750;</span></span><br><span class="line">    deviceWidth = <span class="number">7.5</span> * <span class="number">50</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = deviceWidth / <span class="number">7.5</span> + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 禁止双击放大</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">var</span> lastTouchEnd = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchend&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTouchEnd &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">    lastTouchEnd = now;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-淘宝的适配方案"><a href="#2-淘宝的适配方案" class="headerlink" title="2. 淘宝的适配方案"></a>2. 淘宝的适配方案</h2><ol>
-<li>安装依赖包  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">yarn add lib-flexible -S   </span><br><span class="line"></span><br><span class="line">yarn add  postcss-px2rem -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在main.js 文件中引入  </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在vue.config.js 文件中配置 css 属性</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">css</span>: &#123;</span><br><span class="line">        <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">            <span class="attr">css</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">postcss</span>: &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [</span><br><span class="line">                    <span class="built_in">require</span>(<span class="string">&#x27;postcss-px2rem&#x27;</span>)(&#123;</span><br><span class="line">                        <span class="attr">remUnit</span>: <span class="number">37.5</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
+    <title>前端常见面试题</title>
+    <url>/2021/12/15/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <content><![CDATA[<h1 id="一-对前端界面工程师这个职位是怎么样理解的？"><a href="#一-对前端界面工程师这个职位是怎么样理解的？" class="headerlink" title="一.对前端界面工程师这个职位是怎么样理解的？"></a>一.对前端界面工程师这个职位是怎么样理解的？</h1><p>  a. 前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好</p>
+<p>  b. 参与项目，快速高质量完成实现效果图，精确到1px；</p>
+<p>  c. 与团队成员，UI设计，产品经理的沟通；</p>
+<p>  d. 做好的页面结构，页面重构和用户体验；</p>
+<p>  e. 处理hack，兼容、写出优美的代码格式；</p>
+<p>  f. 针对服务器的优化、拥抱最新前端技术。</p>
+<h1 id="二-你在现在的团队处于什么样的角色，起到了什么明显的作用？"><a href="#二-你在现在的团队处于什么样的角色，起到了什么明显的作用？" class="headerlink" title="二.你在现在的团队处于什么样的角色，起到了什么明显的作用？"></a>二.你在现在的团队处于什么样的角色，起到了什么明显的作用？</h1><p>  请自行根据自己情况做回答，这个没有统一标准答案。</p>
+<h1 id="三-你的优点是什么？缺点是什么？"><a href="#三-你的优点是什么？缺点是什么？" class="headerlink" title="三.你的优点是什么？缺点是什么？"></a>三.你的优点是什么？缺点是什么？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。  </p>
+<h1 id="四-如何管理前端团队"><a href="#四-如何管理前端团队" class="headerlink" title="四.如何管理前端团队?"></a>四.如何管理前端团队?</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
+<h1 id="五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？"><a href="#五-最近在学什么？能谈谈你未来3，5年给自己的规划吗？" class="headerlink" title="五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？"></a>五.最近在学什么？能谈谈你未来3，5年给自己的规划吗？</h1><p>  请自行根据自己情况做回答，这个没有标准答案。</p>
+<h1 id="六-平时如何管理你的项目？"><a href="#六-平时如何管理你的项目？" class="headerlink" title="六.平时如何管理你的项目？"></a>六.平时如何管理你的项目？</h1><p>  a. 先期团队必须确定好全局样式（globe.css），编码模式(utf-8) 等；</p>
+<p>  b. 编写习惯必须一致（例如都是采用继承式的写法，单样式都写成一行）；</p>
+<p>  c. 标注样式编写人，各模块都及时标注（标注关键样式调用的地方）；</p>
+<p>  d. 页面进行标注（例如 页面 模块 开始和结束）；</p>
+<p>  e. CSS跟HTML 分文件夹并行存放，命名都得统一（例如style.css）；</p>
+<p>  f. JS 分文件夹存放 命名以该JS功能为准的英文翻译。</p>
+<p>  g. 图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理</p>
+<h1 id="七-说说最近最流行的一些东西吧？常去哪些网站？"><a href="#七-说说最近最流行的一些东西吧？常去哪些网站？" class="headerlink" title="七.说说最近最流行的一些东西吧？常去哪些网站？"></a>七.说说最近最流行的一些东西吧？常去哪些网站？</h1><p>  CSDN、SegmentFault、php.net、MDN、css参考手册、iconfont、</p>
+<p>  underscore、github、Bootstrap、W3Shool、W3Cplus、caniuse</p>
+<h1 id="八-你都使用哪些工具来测试代码的性能？"><a href="#八-你都使用哪些工具来测试代码的性能？" class="headerlink" title="八. 你都使用哪些工具来测试代码的性能？"></a>八. 你都使用哪些工具来测试代码的性能？</h1><p>  JSPerf, Dromaeo</p>
+<h1 id="九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"><a href="#九-你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？" class="headerlink" title="九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？"></a>九. 你常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？</h1><h1 id="十-AMD和CMD-规范的区别？"><a href="#十-AMD和CMD-规范的区别？" class="headerlink" title="十. AMD和CMD 规范的区别？"></a>十. AMD和CMD 规范的区别？</h1><p>  AMD 提前执行依赖 - 尽早执行，requireJS 是它的实现</p>
+<p>  CMD 按需执行依赖 - 懒执行，seaJS 是它的实现</p>
+<h1 id="十一-网站重构的理解"><a href="#十一-网站重构的理解" class="headerlink" title="十一. 网站重构的理解"></a>十一. 网站重构的理解</h1><p>  重构：在不改变外部行为的前提下，简化结构、添加可读性，而在网站前端保持一致的行为。</p>
+<p>  a. 使网站前端兼容于现代浏览器(针对于不合规范的CSS、如对IE6有效的)</p>
+<p>  b. 对于移动平台的优化，针对于SEO进行优化</p>
+<p>  c. 减少代码间的耦合，让代码保持弹性</p>
+<p>  d. 压缩或合并JS、CSS、image等前端资源</p>
+<h1 id="十二-一次js请求一般情况下有哪些地方会有缓存处理？"><a href="#十二-一次js请求一般情况下有哪些地方会有缓存处理？" class="headerlink" title="十二. 一次js请求一般情况下有哪些地方会有缓存处理？"></a>十二. 一次js请求一般情况下有哪些地方会有缓存处理？</h1><p>  a. 浏览器端存储</p>
+<p>  b. 浏览器端文件缓存</p>
+<p>  c. HTTP缓存304</p>
+<p>  d. 服务器端文件类型缓存</p>
+<p>  e. 表现层&amp;DOM缓存</p>
+<h1 id="十三-谈谈以前端角度出发做好SEO需要考虑什么？"><a href="#十三-谈谈以前端角度出发做好SEO需要考虑什么？" class="headerlink" title="十三. 谈谈以前端角度出发做好SEO需要考虑什么？"></a>十三. 谈谈以前端角度出发做好SEO需要考虑什么？</h1><p>  a. 了解搜索引擎如何抓取网页和如何索引网页</p>
+<p>  b. meta标签优化</p>
+<p>  c. 关键词分析</p>
+<p>  d. 付费给搜索引擎</p>
+<p>  e. 链接交换和链接广泛度（Link Popularity）</p>
+<p>  f. 合理的标签使用</p>
+<h1 id="十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。"><a href="#十四-一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验-性能优化-。" class="headerlink" title="十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。"></a>十四. 一个页面上有大量的图片（大型电商网站），加载很慢，你有哪些方法优化这些图片的加载，给用户更好的体验[性能优化]。</h1><p>  a. 图片懒加载，滚动到相应位置才加载图片。</p>
+<p>  b. 图片预加载，如果为幻灯片、相册等，将当前展示图片的前一张和后一张优先下载。</p>
+<p>  c. 使用CSSsprite，SVGsprite，Iconfont、Base64等技术，如果图片为css图片的话。</p>
+<p>  d. 如果图片过大，可以使用特殊编码的图片，加载时会先加载一张压缩的特别厉害的缩略图，以提高用户体验。</p>
+<h1 id="十五-谈谈你对前端性能优化的理解"><a href="#十五-谈谈你对前端性能优化的理解" class="headerlink" title="十五. 谈谈你对前端性能优化的理解"></a>十五. 谈谈你对前端性能优化的理解</h1><p>  a. 请求数量：合并脚本和样式表，CSS Sprites，拆分初始化负载，划分主域</p>
+<p>  b. 请求带宽：开启GZip，精简JavaScript，移除重复脚本，图像优化，将icon做成字体</p>
+<p>  c. 缓存利用：使用CDN，使用外部JavaScript和CSS，添加Expires头，减少DNS查找，配置ETag，使AjaX可缓存</p>
+<p>  d. 页面结构：将样式表放在顶部，将脚本放在底部，尽早刷新文档的输出</p>
+<p>  e. 代码校验：避免CSS表达式，避免重定向</p>
 ]]></content>
   </entry>
   <entry>
@@ -2026,5 +1951,80 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> About = <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="comment">/* webpackChunkName: &quot;about&quot; */</span> <span class="string">&#x27;./views/About.vue&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
+  </entry>
+  <entry>
+    <title>vueX快速上手</title>
+    <url>/2021/12/11/vueX/</url>
+    <content><![CDATA[<h2 id="一、什么是vuex？"><a href="#一、什么是vuex？" class="headerlink" title="一、什么是vuex？"></a>一、什么是vuex？</h2><ul>
+<li>官方的解释是：Vuex 是一个专为 Vue.js 应用程序开发的<strong>状态管理模式</strong>。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化。</li>
+</ul>
+<h2 id="二、为什么要用vuex？"><a href="#二、为什么要用vuex？" class="headerlink" title="二、为什么要用vuex？"></a>二、为什么要用vuex？</h2><ol>
+<li><p>对于父子组件之前的通信，父组件通过porps传递到子组件，子组件通过$emit发送事件到父组件;父组件还可以通过ref的方式拿子组件的值并共享；</p>
+</li>
+<li><p>对于组件与组件之间的通信，可以new一个新的Vue实例，专门用来做event bus进行通信。怎么用？</p>
+</li>
+<li><p>当多个组件之间共享一个状态时，event bus可能就变成乱了</p>
+<p><img src="../../public/img/1.jpg"></p>
+</li>
+</ol>
+<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="./vuex.png"></p>
+<ol>
+<li><p>Vue Components    用户  </p>
+</li>
+<li><p>State                         点餐员   </p>
+</li>
+<li><p>Actions                     用户的需求</p>
+</li>
+<li><p>Motations               厨师     把 用户的需求 和食材 做成成品，返回新的数据   </p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>小程序技术栈整合</title>
+    <url>/2022/01/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E6%A0%88%E6%95%B4%E5%90%88/</url>
+    <content><![CDATA[<h1 id="小程序技术栈整合"><a href="#小程序技术栈整合" class="headerlink" title="小程序技术栈整合"></a>小程序技术栈整合</h1><h2 id="一、-mpvue配置"><a href="#一、-mpvue配置" class="headerlink" title="一、 mpvue配置"></a>一、 mpvue配置</h2><ol>
+<li>全局安装 vue-cli  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --global vue-cli@2.9.6</span><br><span class="line"></span><br><span class="line">如果已经装了这个 2.9.6 可以不装了</span><br><span class="line"></span><br><span class="line">npm install @vue/cli-init -g </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>创建一个基于 mpvue-quickstart 模板的新项目</p>
+<p>新手一路回车选择默认就可以了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue init mpvue/mpvue-quickstart my-project</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、-mpvue中配置-vant-weapp"><a href="#二、-mpvue中配置-vant-weapp" class="headerlink" title="二、 mpvue中配置 vant-weapp"></a>二、 mpvue中配置 vant-weapp</h2><ol>
+<li>下载 vant-weapp 资源  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/youzan/vant-weapp.git</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将dist目录下的所有文件复制到你项目的/static/vant/目录下 </li>
+</ol>
+<p>  注意打开 微信开发者工具中的ES6转ES5功能 </p>
+<ol start="3">
+<li>在需要引入的页面目录下的main.json文件中</li>
+</ol>
+  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;van-button&quot;</span>: <span class="string">&quot;/static/vant/button/index&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>使用</li>
+</ol>
+  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-mpvue中配置-flyio"><a href="#三、-mpvue中配置-flyio" class="headerlink" title="三、 mpvue中配置 flyio"></a>三、 mpvue中配置 flyio</h2><ol>
+<li>安装 flyio  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add flyio -S  </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>新建文件 src/api/fly.js    </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Fly <span class="keyword">from</span> <span class="string">&#x27;flyio/dist/npm/wx&#x27;</span></span><br><span class="line"><span class="keyword">const</span> fly = <span class="keyword">new</span> Fly()</span><br><span class="line"><span class="keyword">const</span> host = <span class="string">&#x27;http://127.0.0.1:5000/&#x27;</span></span><br><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">fly.interceptors.request.use(</span><br><span class="line">  <span class="function">(<span class="params">request</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.showLoading(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;加载中&#x27;</span>,</span><br><span class="line">      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(request)</span><br><span class="line">    <span class="comment">// request.headers[&quot;X-Tag&quot;] = &quot;flyio&quot;;</span></span><br><span class="line">    <span class="comment">// request.headers[&#x27;content-type&#x27;]= &#x27;application/json&#x27;;</span></span><br><span class="line">    request.headers = &#123;</span><br><span class="line">      <span class="string">&#x27;X-Tag&#x27;</span>: <span class="string">&#x27;flyio&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> authParams = &#123;</span><br><span class="line">      <span class="comment">// 公共参数</span></span><br><span class="line">      <span class="string">&#x27;categoryType&#x27;</span>: <span class="string">&#x27;SaleGoodsType@sim&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;streamNo&#x27;</span>: <span class="string">&#x27;wxapp153570682909641893&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;reqSource&#x27;</span>: <span class="string">&#x27;MALL_H5&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;appid&#x27;</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;timestamp&#x27;</span>: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">      <span class="string">&#x27;sign&#x27;</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request.body &amp;&amp; <span class="built_in">Object</span>.keys(request.body).forEach(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (request.body[val] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> request.body[val]</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    request.body = &#123;</span><br><span class="line">      ...request.body,</span><br><span class="line">      ...authParams</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> request</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">fly.interceptors.response.use(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">return</span> response.data<span class="comment">// 请求成功之后将返回值返回</span></span><br><span class="line">&#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 请求出错，根据返回状态码判断出错原因</span></span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;请求失败&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">fly.config.baseURL = host</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> fly</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>将fly.js引入main.js然后直接挂载到vue原型上</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> fly <span class="keyword">from</span> <span class="string">&#x27;./api/fly&#x27;</span></span><br><span class="line">Vue.prototype.$fly = fly</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、使用Promise封装小程序网络请求"><a href="#四、使用Promise封装小程序网络请求" class="headerlink" title="四、使用Promise封装小程序网络请求"></a>四、使用Promise封装小程序网络请求</h2><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 基于Promise的网络请求库, 包含GET POST请求</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.先引入： import &#123; get, post,... &#125; from 本文件;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.get请求: get(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. post请求: post(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 服务器请求地址 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> domain = <span class="string">&#x27;http://203.195.181.208:8888/&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起get请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数 get请求的参数会自动拼到地址后面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> get = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;GET&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起post请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> post = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;POST&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 接口请求基类方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>method 请求方法 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>header 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">method, url, data, header = &#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    url = domain + url;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url,</span><br><span class="line"></span><br><span class="line">      method,</span><br><span class="line"></span><br><span class="line">      data,</span><br><span class="line"></span><br><span class="line">      header,</span><br><span class="line"></span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> response.success = res,</span><br><span class="line"></span><br><span class="line">      <span class="attr">fail</span>: <span class="function">(<span class="params">error</span>) =&gt;</span> response.fail = error,</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        wx.hideLoading();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response.success) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (response.success.statusCode != <span class="number">200</span>) &#123;</span><br><span class="line"></span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;网络出错，稍后再试&quot;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          resolve(response.success.data);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;数据请求失败，请稍后重试&quot;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;数据请求失败&#x27;</span>, response.fail)</span><br><span class="line"></span><br><span class="line">          reject(response.fail);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"><span class="comment">// const host = &#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;<span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;app.globalData.baseURL&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      <span class="comment">// url: host + url,</span></span><br><span class="line">      <span class="attr">method</span>: options.method,</span><br><span class="line">      <span class="attr">data</span>: options.method === <span class="string">&#x27;GET&#x27;</span> ? options.data : <span class="built_in">JSON</span>.stringify(options.data),</span><br><span class="line">      <span class="attr">header</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;x-token&#x27;</span>: <span class="string">&#x27;x-token&#x27;</span>  <span class="comment">// 看自己是否需要</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: resolve,</span><br><span class="line">      <span class="attr">fail</span>: reject,</span><br><span class="line">      <span class="comment">// success(request) &#123;</span></span><br><span class="line">      <span class="comment">//   // console.log(request)</span></span><br><span class="line">      <span class="comment">//   if (request.statusCode === 200) &#123;</span></span><br><span class="line">      <span class="comment">//     resolve(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125; else &#123;</span></span><br><span class="line">      <span class="comment">//     reject(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125;</span></span><br><span class="line">      <span class="comment">// &#125;,</span></span><br><span class="line">      <span class="comment">// fail(error) &#123;</span></span><br><span class="line">      <span class="comment">//   reject(error.data)</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      	wx.hideLoading()</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> get = <span class="function">(<span class="params">url, options = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> post = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> put = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能声明DELETE（关键字）</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  get,</span><br><span class="line">  post,</span><br><span class="line">  put,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
 </search>
