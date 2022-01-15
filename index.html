@@ -1011,8 +1011,10 @@
 <h3 id="十七、什么是xss攻击"><a href="#十七、什么是xss攻击" class="headerlink" title="十七、什么是xss攻击?"></a>十七、什么是xss攻击?</h3><p><strong>跨站脚本攻击。</strong>XSS的重点不在于跨站点，而在于脚本的执行</p>
 <p>恶意攻击者在web页面中会插入一些恶意的script代码。当用户浏览该页面的时候，那么嵌入到web页面中script代码会执行，因此会达到恶意攻击用户的目的</p>
 <p><strong>如何防范？</strong></p>
+<!-- <script>、<img>、<a>等标签进行过滤 -->
+
 <ol>
-<li>后端需要对提交的数据进行过滤(<script>、<img>、<a>等标签进行过滤)。</li>
+<li>后端需要对提交的数据进行过滤,如img,script,a等标签进行过滤。</li>
 <li>前端也可以做一下处理方式，比如对script标签，将特殊字符替换成HTML编码这些等。</li>
 <li>避免SQL注入</li>
 <li>不使用eval()函数</li>

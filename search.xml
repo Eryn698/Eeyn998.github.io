@@ -1196,8 +1196,10 @@ git push origin v1.1
 <h3 id="十七、什么是xss攻击"><a href="#十七、什么是xss攻击" class="headerlink" title="十七、什么是xss攻击?"></a>十七、什么是xss攻击?</h3><p><strong>跨站脚本攻击。</strong>XSS的重点不在于跨站点，而在于脚本的执行</p>
 <p>恶意攻击者在web页面中会插入一些恶意的script代码。当用户浏览该页面的时候，那么嵌入到web页面中script代码会执行，因此会达到恶意攻击用户的目的</p>
 <p><strong>如何防范？</strong></p>
+<!-- <script>、<img>、<a>等标签进行过滤 -->
+
 <ol>
-<li>后端需要对提交的数据进行过滤(<script>、<img>、<a>等标签进行过滤)。</li>
+<li>后端需要对提交的数据进行过滤,如img,script,a等标签进行过滤。</li>
 <li>前端也可以做一下处理方式，比如对script标签，将特殊字符替换成HTML编码这些等。</li>
 <li>避免SQL注入</li>
 <li>不使用eval()函数</li>
@@ -2057,7 +2059,7 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>CORS跨域资源共享</p>
 <p>webSocket协议跨域</p>
 <p>前端的反向代理(仅用于开发环境)</p>
-<p>讲几个自己熟悉一点的,别给自己挖坑</p>
+<p>讲几个自己熟悉一点的,别给自己挖坑q</p>
 </blockquote>
 </li>
 <li><p>讲一下浏览器的事件循环,对宏任务和微任务有了解吗?</p>
@@ -2082,8 +2084,8 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>Mounted 挂载完成</p>
 <p>beforeUpdate 组件更新之前</p>
 <p>updated 更新完成</p>
-<p>beforeDestory 销毁之前</p>
-<p>destoryed 销毁之后</p>
+<p>beforeDestroyed 销毁之前</p>
+<p>destroyed 销毁之后</p>
 </blockquote>
 </li>
 <li><p>如何让css只在一个组件内起效?(可能会问scoped的原理)</p>
@@ -2301,6 +2303,7 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>在created生命周期中操作DOM必须放在nexttick的回调函数中</p>
 </blockquote>
 </li>
+<li></li>
 </ol>
 ]]></content>
   </entry>
