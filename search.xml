@@ -1932,7 +1932,7 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
   </entry>
   <entry>
     <title>前端常见面试题</title>
-    <url>/2021/12/15/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
+    <url>/2021/10/16/%E5%89%8D%E7%AB%AF%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98/</url>
     <content><![CDATA[<h1 id="一-对前端界面工程师这个职位是怎么样理解的？"><a href="#一-对前端界面工程师这个职位是怎么样理解的？" class="headerlink" title="一.对前端界面工程师这个职位是怎么样理解的？"></a>一.对前端界面工程师这个职位是怎么样理解的？</h1><p>  a. 前端是最贴近用户的程序员，前端的能力就是能让产品从 90分进化到 100 分，甚至更好</p>
 <p>  b. 参与项目，快速高质量完成实现效果图，精确到1px；</p>
 <p>  c. 与团队成员，UI设计，产品经理的沟通；</p>
@@ -2032,28 +2032,19 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
   <entry>
     <title>面试题总结</title>
     <url>/2021/10/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<ol>
-<li><p>讲一下css盒模型</p>
-<blockquote>
-<p>标准盒模型: 标准盒模型的宽高只包含content</p>
-<p>怪异盒模型: 怪异盒模型的宽高包含容器的content padding 和 border</p>
+    <content><![CDATA[<h2 id="1-讲一下css盒模型"><a href="#1-讲一下css盒模型" class="headerlink" title="1. 讲一下css盒模型"></a>1. 讲一下css盒模型</h2><blockquote>
+<p>盒模型的组成:margin,border,padding,content<br>两者区别:内容计算方式不同<br>标准盒模型: 标准盒模型的宽高只包含content,不包含padding和broder<br>怪异盒模型: 怪异盒模型的宽高包含容器的content padding 和 border</p>
 </blockquote>
-</li>
-<li><p>移动端响应式方案</p>
-<blockquote>
+<h2 id="2-移动端响应式方案"><a href="#2-移动端响应式方案" class="headerlink" title="2. 移动端响应式方案"></a>2. 移动端响应式方案</h2><blockquote>
 <p>flex布局</p>
 <p>媒体查询</p>
 <p>淘宝rem适配方案</p>
 </blockquote>
-</li>
-<li><p>rem和em的区别</p>
-<blockquote>
+<h2 id="3-rem和em的区别"><a href="#3-rem和em的区别" class="headerlink" title="3. rem和em的区别"></a>3. rem和em的区别</h2><blockquote>
 <p>rem相对于根元素(html)的字体大小,会随根元素<code>font-size</code>的变化而变化</p>
 <p>em相对于父级的字体大小</p>
 </blockquote>
-</li>
-<li><p>你知道什么是跨域吗?有哪些解决方案?</p>
-<blockquote>
+<h2 id="4-你知道什么是跨域吗-有哪些解决方案"><a href="#4-你知道什么是跨域吗-有哪些解决方案" class="headerlink" title="4. 你知道什么是跨域吗?有哪些解决方案?"></a>4. 你知道什么是跨域吗?有哪些解决方案?</h2><blockquote>
 <p>跨域是由浏览器的同源策略引起的,当协议,域名,端口三者有一个不一样时,就会引发跨域问题</p>
 <p>通过jsonp跨域</p>
 <p>CORS跨域资源共享</p>
@@ -2061,23 +2052,17 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>前端的反向代理(仅用于开发环境)</p>
 <p>讲几个自己熟悉一点的,别给自己挖坑q</p>
 </blockquote>
-</li>
-<li><p>讲一下浏览器的事件循环,对宏任务和微任务有了解吗?</p>
-<blockquote>
+<h2 id="5-讲一下浏览器的事件循环-对宏任务和微任务有了解吗"><a href="#5-讲一下浏览器的事件循环-对宏任务和微任务有了解吗" class="headerlink" title="5. 讲一下浏览器的事件循环,对宏任务和微任务有了解吗?"></a>5. 讲一下浏览器的事件循环,对宏任务和微任务有了解吗?</h2><blockquote>
 <p>常见的宏任务: script同步代码的执行 setInterval  setTimeout I/O  UI交互事件</p>
 <p>常见的微任务: Promise的then回调</p>
 <p>先执行宏任务,再执行这个宏任务下的微任务,清空微任务队列之后,再执行下一个宏任务,整个循环往复的过程,就叫做事件循环</p>
 </blockquote>
-</li>
-<li><p>讲一下排序算法.</p>
-<blockquote>
+<h2 id="6-讲一下排序算法"><a href="#6-讲一下排序算法" class="headerlink" title="6. 讲一下排序算法."></a>6. 讲一下排序算法.</h2><blockquote>
 <p>冒泡排序</p>
 <p>选择排序</p>
 <p>快速排序</p>
 </blockquote>
-</li>
-<li><p>讲一下vue的生命周期 必问题</p>
-<blockquote>
+<h2 id="7-讲一下vue的生命周期及methods、watch、computed的区别"><a href="#7-讲一下vue的生命周期及methods、watch、computed的区别" class="headerlink" title="7. 讲一下vue的生命周期及methods、watch、computed的区别"></a>7. 讲一下vue的生命周期及methods、watch、computed的区别</h2><blockquote>
 <p>beforeCreate 创建之前  </p>
 <p>created 创建完成</p>
 <p>beforeMount 挂载之前</p>
@@ -2087,224 +2072,195 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>beforeDestroyed 销毁之前</p>
 <p>destroyed 销毁之后</p>
 </blockquote>
-</li>
-<li><p>如何让css只在一个组件内起效?(可能会问scoped的原理)</p>
 <blockquote>
+<p>methods、watch、computed的区别:<br>methods: 适合用于业务逻辑处理, 数据不能缓存, 每次使用都会重新调用</p>
+</blockquote>
+<blockquote>
+<p>watch: 当想要执行异步或者昂贵的操作以响应不断的变化时使用watch, 支持异步监听, 也可以监听路由变化, 不支持缓存, 数据变化时, 就会触发相应的操作</p>
+</blockquote>
+<blockquote>
+<p>computed: 适合计算属性, 不支持异步, 可以缓存数据, 只有在相关依赖发生变化时才会重新求值</p>
+</blockquote>
+<h2 id="8-如何让css只在一个组件内起效-可能会问scoped的原理"><a href="#8-如何让css只在一个组件内起效-可能会问scoped的原理" class="headerlink" title="8. 如何让css只在一个组件内起效?(可能会问scoped的原理)"></a>8. 如何让css只在一个组件内起效?(可能会问scoped的原理)</h2><blockquote>
 <p>在style标签上添加scoped属性</p>
 <p>vue中scoped的作用是通过PostCSS(css后处理器)实现的.PostCSS 会给一个组件中的每一个dom元素添加一个独一无二的动态属性,然后给css选择器额外添加一个对应的属性选择器来选择该组件中的dom</p>
 </blockquote>
-</li>
-<li><p>知道项目优化的方案吗?</p>
-<blockquote>
+<h2 id="9-知道项目优化的方案吗"><a href="#9-知道项目优化的方案吗" class="headerlink" title="9. 知道项目优化的方案吗?"></a>9. 知道项目优化的方案吗?</h2><blockquote>
 <p>路由懒加载  图片懒加载  精灵图(减少请求次数)</p>
 <p>其他外部资源的按需加载</p>
 <p>第三方库启用 CDN</p>
 </blockquote>
-</li>
-<li><p>js数组的常用方法</p>
-<ul>
-<li><p>forEach() 遍历数组 没有返回值</p>
-</li>
-<li><p>map() 遍历数组有返回值,返回一个新数组</p>
-</li>
-<li><p>some() 只要一个条件满足就返回true</p>
-</li>
-<li><p>every() 所有条件都满足才返回true</p>
-</li>
-<li><p>filter() 过滤 返回一个新数组</p>
-</li>
-<li><p>reduce 累加器</p>
-</li>
-<li><p>indexOf()  通过元素返回下标,找到返回下标,没有返回-1</p>
-</li>
-<li><p>lastIndexOf() 查找元素在数组中最后出现的位置,找到返回下标,没有返回-1</p>
-</li>
-<li><p>push() 在数组后面添加一个或多个元素,并返回修改后的长度</p>
-</li>
-<li><p>pop() 删除数组的最后一个元素,返回移除的元素</p>
-</li>
-<li><p>unshift() 从数组前端添加一个或多个元素,返回修改后的长度</p>
-</li>
-<li><p>shift() 删除数组的第一个元素,返回移除的元素</p>
-</li>
-<li><p>sort() 排序(比较ASCII)</p>
-</li>
-<li><p>reverse() 倒序</p>
-</li>
-<li><p>concat() 合并数组,返回一个新数组,不改变原数组(可以实现数组的浅拷贝)</p>
-</li>
-<li><p>join() 把指定的数组转换为字符串,默认以逗号隔开,也可以指定分隔符</p>
-</li>
-<li><p>slice() 截取数组中指定区域,返回一个新数组</p>
-<blockquote>
-<p>只要一个参数时,表示从开始位置截取到数组结束</p>
-<p>有第二个参数的时候,第2个参数表示结束位置(不包含结束位置)</p>
-</blockquote>
-</li>
-<li><p>splice() 截取数组中的指定区域,会改变原数组,返回截取的数组长度</p>
-<blockquote>
-<p>如果有三个参数第二个参数为0,表示向数组中指定位置插入元素</p>
-<p>如果有三个参数第二个参数不为0表示替换指定位置的元素</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>map方法的应用场景</p>
-<blockquote>
-<p>Map中的集合，元素是成对存在的(理解为夫妻)。每个元素由键与值两部分组成，通过键可以找对所对应的值<br>Map中的集合不能包含重复的键，值可以重复；每个键只能对应一个值。<br>特点:<br>键不重复，值可以重复<br>每个键只能对应一个值</p>
-</blockquote>
-</li>
-</ol>
-<ol start="12">
-<li><p>some和every的区别</p>
-<blockquote>
-<p>some() 当有一个满足条件时,就返回true</p>
-<p>every() 所有数组项都满足条件返回true</p>
-</blockquote>
-</li>
-<li><p>讲一下js模块化编程</p>
-<blockquote>
-<p>commonjs规范 AMD规范 CMD规范</p>
-</blockquote>
-</li>
-<li><p>import和require有什么区别</p>
-<blockquote>
-<p>遵循规范<br>require 是 AMD规范引入方式<br>import是es6的一个语法标准，如果要兼容浏览器的话必须转化成es5的语法<br>调用时间<br>require是运行时调用，所以require理论上可以运用在代码的任何地方<br>import是编译时调用，所以必须放在文件开头<br>本质<br>require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量<br>import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语法会被转码为require</p>
-</blockquote>
-</li>
-<li><p>nodejs中能使用import吗?</p>
-<blockquote>
-<p>不能 nodejs支持的是commonjs规范</p>
-</blockquote>
-</li>
-<li><p>vue2能检测数组内部的变化吗?</p>
-<blockquote>
-<p>不能</p>
-<p>vue2使用Object.definePrototype给data里面的数据添加getter/setter,实现响应式数据,Object.definePrototype不能监测数组内部的变化</p>
-</blockquote>
-</li>
-<li><p>为什么vue2中操作数组的方法能够被检测到?</p>
-<blockquote>
-<p>vue重写了操作数组的这些方法  </p>
-<p>push()  pop()  shift()  unshift()  sort()  reverse()  splice()</p>
-</blockquote>
-</li>
-<li><p>vue3能检测到数组内部的变化吗?vue有重写操作数组的方法吗?</p>
-<blockquote>
-<p>vue3使用的proxy(代理)来实现响应式,(对对象进行代理,从而实现数据劫持),可以完美的监测到任何方式的数据改变,所以vue3不需要重写的操作数组的方法</p>
-</blockquote>
-</li>
-<li><p>cookie能够跨域吗?</p>
-<blockquote>
-<p>不能直接跨域,需要设置domain(域名)</p>
-<p>cookie会随着请求自动携带cookie的值传到服务器</p>
-</blockquote>
-</li>
-<li><p> 讲一下事件委托</p>
-</li>
-<li><p>讲一下闭包.有哪些应用场景</p>
-<blockquote>
-<p>函数嵌套一个函数,内部的函数可以访问外部函数的变量和参数,并且这些变量和参数不会被垃圾回收机制回收(可能会追问垃圾回收)</p>
-<p>应用场景: 节流和防抖</p>
-</blockquote>
-</li>
-<li><p>讲一下节流和防抖的区别(可能会需要手写防抖节流)</p>
-<blockquote>
-<p>节流:在指定的时间内只能执行一次</p>
-<p>防抖: 在指定的时间内再次触发事件,会重新开始计时</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 防抖函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay, immediate=<span class="literal">true</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">        <span class="comment">// 首次立即执行</span></span><br><span class="line">        <span class="keyword">if</span> (immediate &amp;&amp; !timer) &#123;</span><br><span class="line">            fn.bind(<span class="built_in">this</span>)(...arguments)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fn.call(that, ...arguments)</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 节流函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">if</span> (!timer) &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">                fn.bind(that)(...arguments)</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, delay)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></blockquote>
-</li>
-<li><p>滥用闭包会造成什么问题?有什么解决方案吗?</p>
-<blockquote>
-<p>闭包会把变量一直缓存在内存中间,滥用闭包容易导致内存泄漏</p>
-<p>解决方案在退出函数之前将不使用的变量手动释放(删除变量)</p>
-</blockquote>
-</li>
-<li><p>箭头函数与普通函数的区别</p>
-<blockquote>
-<p>箭头函数比普通函数更加简洁</p>
-<p>箭头函数没有自己的this</p>
-<p>箭头函数没有prototype  arguments</p>
-<p>箭头函数继承来的this永远不会改变</p>
-<p>bind call  apply 不能改变箭头函数内部的this指向</p>
-<p>箭头函数不能作为构造函数使用, 不能作为生成器函数使用</p>
-<p>箭头函数不能使用yeild关键字</p>
-</blockquote>
-</li>
-<li><p>js中改变this指向的方法</p>
-<blockquote>
-<p>可以通过bind() apply()  call()改变this指向</p>
-</blockquote>
-</li>
-<li><p>讲一下bind,call,apply的区别</p>
-<blockquote>
-<p>传参不同</p>
-<p>bind() 接收一个参数指定函数体内的this指向</p>
-<p>call() 接收多个参数 第一个参数指定函数体内的this指向,其他参数依次传入函数</p>
-<p>apply() 接收两个参数 第一个参数指定函数体内的this指向 第二个参数是一个数组</p>
-<p>返回值不同</p>
-<p>bind返回一个函数</p>
-<p>call apply返回函数的执行结果</p>
-</blockquote>
-</li>
-<li><p>讲一下promise,如何处理并发?all()方法返回的是什么?</p>
-<blockquote>
-<p>promise的提出主要是为了解决回调地狱的问题,本身是一个同步的立即执行函数,执行resolve或reject的时候是异步操作</p>
-<p>all方法可以完成并发任务,接收一个数组,每一项都是一个promise对象,返回一个数组,保存每个promise执行resolve的结果</p>
-</blockquote>
-</li>
-<li><p>怎样减少动画的卡顿?</p>
-<blockquote>
-<p>使用<code>requestAnimationFrame</code>实现动画,他的循环间隔由屏幕刷新率决定</p>
-</blockquote>
-</li>
-<li><p>使用定时器实现动画有什么问题?</p>
-<blockquote>
-<p>setTimeout和setInterval的执行时机无法保证,可能会在一帧之内执行多次</p>
-</blockquote>
-</li>
-<li><p>如何实现元素的水平垂直居中</p>
-<blockquote>
-<p>文本</p>
-<p>text-align:center;  行高和高度一致</p>
-<p>div</p>
-<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 未知宽高 */</span></span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>:auto;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>:<span class="built_in">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* flex */</span></span><br><span class="line"><span class="selector-class">.out</span>&#123;<span class="comment">/* box的父容器 */</span></span><br><span class="line">    <span class="attribute">display</span>:flex;</span><br><span class="line">    justift-<span class="attribute">content</span>:center;</span><br><span class="line">    <span class="attribute">align-items</span>:center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 已知宽高 */</span></span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">50px</span>; <span class="comment">/* 自身宽度的一半 */</span></span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">50px</span>; <span class="comment">/* 自身高度的一半 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></blockquote>
-</li>
-<li><p>定位(position)与位移(transform:translate())的区别?</p>
-<blockquote>
-<p>translate() 改变位置时,元素依旧会占据其原始空间(可以理解为视觉上的位移)</p>
-<p>position不会占据原始空间</p>
-</blockquote>
-</li>
-<li><p>vue路由有几种模式?有什么区别?</p>
-<blockquote>
-<p>Hash和history</p>
-<p>hash模式是开发中的默认模式,他的url中有一个#</p>
-<p>hash的值会出现在url里面,但是不会出现在http请求中,对后端完全没有影响</p>
-<p>history使用的是传统的路由分发模式,需要后台配置支持</p>
-</blockquote>
-</li>
-<li><p>浏览器的缓存机制?能讲一下原理吗?</p>
-</li>
-<li><p>BOM的location对象的跳转方法和vue的编程式导航有什么区别?</p>
-<blockquote>
-<p>location对象的跳转方法会导致页面刷新或跳转</p>
-<p>编程式导航并不会让页面刷新</p>
-</blockquote>
-</li>
-<li><p>讲一下keep-alive的作用</p>
-<blockquote>
-<p>在组件切换的时候,保存 一些组件的状态防止多次渲染  (组件缓存)</p>
-</blockquote>
-</li>
-<li><p>知道nextTick吗?</p>
-<blockquote>
-<p>在数据变化之后执行某个操作,</p>
-<p>在created生命周期中操作DOM必须放在nexttick的回调函数中</p>
-</blockquote>
-</li>
-<li></li>
-</ol>
+<h2 id="10-js数组的常用方法"><a href="#10-js数组的常用方法" class="headerlink" title="10. js数组的常用方法"></a>10. js数组的常用方法</h2><pre><code>- forEach() 遍历数组 没有返回值
+
+- map() 遍历数组有返回值,返回一个新数组
+
+- some() 只要一个条件满足就返回true
+
+- every() 所有条件都满足才返回true
+
+- filter() 过滤 返回一个新数组
+
+- reduce 累加器
+
+- indexOf()  通过元素返回下标,找到返回下标,没有返回-1
+
+- lastIndexOf() 查找元素在数组中最后出现的位置,找到返回下标,没有返回-1
+
+- push() 在数组后面添加一个或多个元素,并返回修改后的长度
+
+- pop() 删除数组的最后一个元素,返回移除的元素
+
+- unshift() 从数组前端添加一个或多个元素,返回修改后的长度
+
+- shift() 删除数组的第一个元素,返回移除的元素
+
+- sort() 排序(比较ASCII)
+
+- reverse() 倒序
+
+- concat() 合并数组,返回一个新数组,不改变原数组(可以实现数组的浅拷贝)
+
+- join() 把指定的数组转换为字符串,默认以逗号隔开,也可以指定分隔符
+
+- slice() 截取数组中指定区域,返回一个新数组
+
+  &gt; 只要一个参数时,表示从开始位置截取到数组结束
+  &gt;
+  &gt; 有第二个参数的时候,第2个参数表示结束位置(不包含结束位置)
+
+- splice() 截取数组中的指定区域,会改变原数组,返回截取的数组长度
+
+  &gt; 如果有三个参数第二个参数为0,表示向数组中指定位置插入元素
+  &gt;
+  &gt; 如果有三个参数第二个参数不为0表示替换指定位置的元素
+</code></pre>
+<h2 id="11-map方法的应用场景"><a href="#11-map方法的应用场景" class="headerlink" title="11. map方法的应用场景"></a>11. map方法的应用场景</h2><pre><code> &gt; Map中的集合，元素是成对存在的(理解为夫妻)。每个元素由键与值两部分组成，通过键可以找对所对应的值
+ &gt; Map中的集合不能包含重复的键，值可以重复；每个键只能对应一个值。
+ &gt; 特点:
+    &gt; 键不重复，值可以重复
+    &gt; 每个键只能对应一个值
+</code></pre>
+<h2 id="12-some和every的区别"><a href="#12-some和every的区别" class="headerlink" title="12. some和every的区别"></a>12. some和every的区别</h2><pre><code>&gt; some() 当有一个满足条件时,就返回true
+&gt;
+&gt; every() 所有数组项都满足条件返回true
+</code></pre>
+<h2 id="13-讲一下js模块化编程"><a href="#13-讲一下js模块化编程" class="headerlink" title="13. 讲一下js模块化编程"></a>13. 讲一下js模块化编程</h2><pre><code>&gt; commonjs规范 AMD规范 CMD规范
+</code></pre>
+<h2 id="14-import和require有什么区别"><a href="#14-import和require有什么区别" class="headerlink" title="14. import和require有什么区别"></a>14. import和require有什么区别</h2><pre><code>&gt; 遵循规范
+    &gt; require 是 AMD规范引入方式
+    &gt; import是es6的一个语法标准，如果要兼容浏览器的话必须转化成es5的语法
+&gt; 调用时间
+    &gt; require是运行时调用，所以require理论上可以运用在代码的任何地方
+    &gt; import是编译时调用，所以必须放在文件开头
+&gt;本质
+    &gt; require是赋值过程，其实require的结果就是对象、数字、字符串、函数等，再把require的结果赋值给某个变量
+    &gt; import是解构过程，但是目前所有的引擎都还没有实现import，我们在node中使用babel支持ES6，也仅仅是将ES6转码为ES5再执行，import语法会被转码为require
+</code></pre>
+<h2 id="1-nodejs中能使用import吗"><a href="#1-nodejs中能使用import吗" class="headerlink" title="1.  nodejs中能使用import吗?"></a>1.  nodejs中能使用import吗?</h2><pre><code>&gt; 不能 nodejs支持的是commonjs规范
+</code></pre>
+<h2 id="2-vue2能检测数组内部的变化吗"><a href="#2-vue2能检测数组内部的变化吗" class="headerlink" title="2.  vue2能检测数组内部的变化吗?"></a>2.  vue2能检测数组内部的变化吗?</h2><pre><code>&gt; 不能
+&gt;
+&gt; vue2使用Object.definePrototype给data里面的数据添加getter/setter,实现响应式数据,Object.definePrototype不能监测数组内部的变化
+</code></pre>
+<h2 id="3-为什么vue2中操作数组的方法能够被检测到"><a href="#3-为什么vue2中操作数组的方法能够被检测到" class="headerlink" title="3.  为什么vue2中操作数组的方法能够被检测到?"></a>3.  为什么vue2中操作数组的方法能够被检测到?</h2><pre><code>&gt; vue重写了操作数组的这些方法  
+&gt;
+&gt; push()  pop()  shift()  unshift()  sort()  reverse()  splice()
+</code></pre>
+<h2 id="4-vue3能检测到数组内部的变化吗-vue有重写操作数组的方法吗"><a href="#4-vue3能检测到数组内部的变化吗-vue有重写操作数组的方法吗" class="headerlink" title="4.  vue3能检测到数组内部的变化吗?vue有重写操作数组的方法吗?"></a>4.  vue3能检测到数组内部的变化吗?vue有重写操作数组的方法吗?</h2><pre><code>&gt; vue3使用的proxy(代理)来实现响应式,(对对象进行代理,从而实现数据劫持),可以完美的监测到任何方式的数据改变,所以vue3不需要重写的操作数组的方法
+</code></pre>
+<h2 id="5-cookie能够跨域吗"><a href="#5-cookie能够跨域吗" class="headerlink" title="5.  cookie能够跨域吗?"></a>5.  cookie能够跨域吗?</h2><pre><code>&gt; 不能直接跨域,需要设置domain(域名)
+&gt;
+&gt; cookie会随着请求自动携带cookie的值传到服务器
+</code></pre>
+<h2 id="6-讲一下事件委托"><a href="#6-讲一下事件委托" class="headerlink" title="6.  讲一下事件委托"></a>6.  讲一下事件委托</h2><h2 id="7-讲一下闭包-有哪些应用场景"><a href="#7-讲一下闭包-有哪些应用场景" class="headerlink" title="7.  讲一下闭包.有哪些应用场景"></a>7.  讲一下闭包.有哪些应用场景</h2><pre><code>&gt; 函数嵌套一个函数,内部的函数可以访问外部函数的变量和参数,并且这些变量和参数不会被垃圾回收机制回收(可能会追问垃圾回收)
+&gt;
+&gt; 应用场景: 节流和防抖
+</code></pre>
+<h2 id="8-讲一下节流和防抖的区别-可能会需要手写防抖节流"><a href="#8-讲一下节流和防抖的区别-可能会需要手写防抖节流" class="headerlink" title="8.  讲一下节流和防抖的区别(可能会需要手写防抖节流)"></a>8.  讲一下节流和防抖的区别(可能会需要手写防抖节流)</h2><pre><code>&gt; 节流:在指定的时间内只能执行一次
+&gt;
+&gt; 防抖: 在指定的时间内再次触发事件,会重新开始计时
+&gt;
+&gt; <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 防抖函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">debounce</span>(<span class="params">fn, delay, immediate=<span class="literal">true</span></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">        <span class="comment">// 首次立即执行</span></span><br><span class="line">        <span class="keyword">if</span> (immediate &amp;&amp; !timer) &#123;</span><br><span class="line">            fn.bind(<span class="built_in">this</span>)(...arguments)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">            <span class="built_in">clearTimeout</span>(timer)</span><br><span class="line">            timer = <span class="literal">null</span></span><br><span class="line">        &#125;</span><br><span class="line">        timer = <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            fn.call(that, ...arguments)</span><br><span class="line">        &#125;, delay)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 节流函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">throttle</span>(<span class="params">fn, delay</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> timer = <span class="literal">null</span></span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span></span><br><span class="line">        <span class="keyword">if</span> (!timer) &#123;</span><br><span class="line">            timer = <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">                fn.bind(that)(...arguments)</span><br><span class="line">                timer = <span class="literal">null</span></span><br><span class="line">            &#125;, delay)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="9-滥用闭包会造成什么问题-有什么解决方案吗"><a href="#9-滥用闭包会造成什么问题-有什么解决方案吗" class="headerlink" title="9.  滥用闭包会造成什么问题?有什么解决方案吗?"></a>9.  滥用闭包会造成什么问题?有什么解决方案吗?</h2><pre><code>&gt; 闭包会把变量一直缓存在内存中间,滥用闭包容易导致内存泄漏
+&gt;
+&gt; 解决方案在退出函数之前将不使用的变量手动释放(删除变量)
+</code></pre>
+<h2 id="10-箭头函数与普通函数的区别"><a href="#10-箭头函数与普通函数的区别" class="headerlink" title="10. 箭头函数与普通函数的区别"></a>10. 箭头函数与普通函数的区别</h2><pre><code>&gt; 箭头函数比普通函数更加简洁
+&gt;
+&gt; 箭头函数没有自己的this
+&gt;
+&gt; 箭头函数没有prototype  arguments
+&gt;
+&gt; 箭头函数继承来的this永远不会改变
+&gt;
+&gt; bind call  apply 不能改变箭头函数内部的this指向
+&gt;
+&gt; 箭头函数不能作为构造函数使用, 不能作为生成器函数使用
+&gt;
+&gt; 箭头函数不能使用yeild关键字
+</code></pre>
+<h2 id="11-js中改变this指向的方法"><a href="#11-js中改变this指向的方法" class="headerlink" title="11. js中改变this指向的方法"></a>11. js中改变this指向的方法</h2><pre><code>&gt; 可以通过bind() apply()  call()改变this指向
+</code></pre>
+<h2 id="12-讲一下bind-call-apply的区别"><a href="#12-讲一下bind-call-apply的区别" class="headerlink" title="12. 讲一下bind,call,apply的区别"></a>12. 讲一下bind,call,apply的区别</h2><pre><code>&gt; 传参不同
+&gt;
+&gt; bind() 接收一个参数指定函数体内的this指向
+&gt;
+&gt; call() 接收多个参数 第一个参数指定函数体内的this指向,其他参数依次传入函数
+&gt;
+&gt; apply() 接收两个参数 第一个参数指定函数体内的this指向 第二个参数是一个数组
+&gt;
+&gt; 返回值不同
+&gt;
+&gt; bind返回一个函数
+&gt;
+&gt; call apply返回函数的执行结果
+</code></pre>
+<h2 id="13-讲一下promise-如何处理并发-all-方法返回的是什么"><a href="#13-讲一下promise-如何处理并发-all-方法返回的是什么" class="headerlink" title="13. 讲一下promise,如何处理并发?all()方法返回的是什么?"></a>13. 讲一下promise,如何处理并发?all()方法返回的是什么?</h2><pre><code>&gt; promise的提出主要是为了解决回调地狱的问题,本身是一个同步的立即执行函数,执行resolve或reject的时候是异步操作
+&gt;
+&gt; all方法可以完成并发任务,接收一个数组,每一项都是一个promise对象,返回一个数组,保存每个promise执行resolve的结果
+</code></pre>
+<h2 id="14-怎样减少动画的卡顿"><a href="#14-怎样减少动画的卡顿" class="headerlink" title="14. 怎样减少动画的卡顿?"></a>14. 怎样减少动画的卡顿?</h2><pre><code>&gt; 使用`requestAnimationFrame`实现动画,他的循环间隔由屏幕刷新率决定
+</code></pre>
+<h2 id="15-使用定时器实现动画有什么问题"><a href="#15-使用定时器实现动画有什么问题" class="headerlink" title="15. 使用定时器实现动画有什么问题?"></a>15. 使用定时器实现动画有什么问题?</h2><pre><code>&gt; setTimeout和setInterval的执行时机无法保证,可能会在一帧之内执行多次
+</code></pre>
+<h2 id="16-如何实现元素的水平垂直居中"><a href="#16-如何实现元素的水平垂直居中" class="headerlink" title="16. 如何实现元素的水平垂直居中"></a>16. 如何实现元素的水平垂直居中</h2><pre><code>&gt; 文本
+&gt;
+&gt; text-align:center;  行高和高度一致
+&gt;
+&gt; div
+&gt;
+&gt; <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="comment">/* 未知宽高 */</span></span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">right</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">bottom</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>:auto;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform</span>:<span class="built_in">translate</span>(-<span class="number">50%</span>,-<span class="number">50%</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* flex */</span></span><br><span class="line"><span class="selector-class">.out</span>&#123;<span class="comment">/* box的父容器 */</span></span><br><span class="line">    <span class="attribute">display</span>:flex;</span><br><span class="line">    justift-<span class="attribute">content</span>:center;</span><br><span class="line">    <span class="attribute">align-items</span>:center;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 已知宽高 */</span></span><br><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">position</span>:absolute;</span><br><span class="line">    <span class="attribute">top</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>:<span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin-left</span>: -<span class="number">50px</span>; <span class="comment">/* 自身宽度的一半 */</span></span><br><span class="line">    <span class="attribute">margin-top</span>: -<span class="number">50px</span>; <span class="comment">/* 自身高度的一半 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</code></pre>
+<h2 id="17-定位-position-与位移-transform-translate-的区别"><a href="#17-定位-position-与位移-transform-translate-的区别" class="headerlink" title="17. 定位(position)与位移(transform:translate())的区别?"></a>17. 定位(position)与位移(transform:translate())的区别?</h2><pre><code>&gt; translate() 改变位置时,元素依旧会占据其原始空间(可以理解为视觉上的位移)
+&gt;
+&gt; position不会占据原始空间
+</code></pre>
+<h2 id="18-vue路由有几种模式-有什么区别"><a href="#18-vue路由有几种模式-有什么区别" class="headerlink" title="18. vue路由有几种模式?有什么区别?"></a>18. vue路由有几种模式?有什么区别?</h2><pre><code>&gt; Hash和history
+&gt;
+&gt; hash模式是开发中的默认模式,他的url中有一个#
+&gt;
+&gt; hash的值会出现在url里面,但是不会出现在http请求中,对后端完全没有影响
+&gt;
+&gt; history使用的是传统的路由分发模式,需要后台配置支持
+</code></pre>
+<h2 id="19-浏览器的缓存机制-能讲一下原理吗"><a href="#19-浏览器的缓存机制-能讲一下原理吗" class="headerlink" title="19. 浏览器的缓存机制?能讲一下原理吗?"></a>19. 浏览器的缓存机制?能讲一下原理吗?</h2><h2 id="20-BOM的location对象的跳转方法和vue的编程式导航有什么区别"><a href="#20-BOM的location对象的跳转方法和vue的编程式导航有什么区别" class="headerlink" title="20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?"></a>20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?</h2><pre><code>&gt; location对象的跳转方法会导致页面刷新或跳转
+&gt;
+&gt; 编程式导航并不会让页面刷新
+</code></pre>
+<h2 id="21-讲一下keep-alive的作用"><a href="#21-讲一下keep-alive的作用" class="headerlink" title="21. 讲一下keep-alive的作用"></a>21. 讲一下keep-alive的作用</h2><pre><code> 在组件切换的时候,保存 一些组件的状态防止多次渲染  (组件缓存)
+</code></pre>
+<h2 id="22-知道nextTick吗"><a href="#22-知道nextTick吗" class="headerlink" title="22. 知道nextTick吗?"></a>22. 知道nextTick吗?</h2><pre><code> 在数据变化之后执行某个操作,
+
+ 在created生命周期中操作DOM必须放在nexttick的回调函数中
+</code></pre>
+<h2 id="23-css实现元素居中的方式"><a href="#23-css实现元素居中的方式" class="headerlink" title="23. css实现元素居中的方式"></a>23. css实现元素居中的方式</h2><pre><code>&gt; 1. 行内元素用  text-align:center 这种方式可以水平居中块级元素中的行内元素
+&gt; 2. 块级元素用  margin:0 auto 这种对齐方式要求内部元素是块级元素，并且不能脱离文档流（如设置position:absolute）,否则无效。
+&gt; 3. display:table-cell  display:table-cell配合width，text-align:center,vertical-align:middle让大小不固定元素垂直居中,这个方式将要对其的元素设置成为一个td，float、absolute等属性都会影响它的实现，不响应margin属性;
+&gt; 4. 垂直居中  行内元素的垂直居中把height和line-height的值设置成一样的即可。
+&gt; 5. 使用css3的translate水平垂直居中元素 这种方式将脱离文档流的元素，设置top：50%，left：50%，然后使用transform来向左向上偏移半个内元素的宽和高。
+&gt; 6. 使用css3计算的方式居中元素calc 这种方式同样是将脱离文档流的元素，然后使用计算的方式来设置top和left；
+</code></pre>
 ]]></content>
   </entry>
 </search>
