@@ -134,6 +134,108 @@
     
     
     <article
+  id="post-react基础Day05-redux"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2022/01/17/react%E5%9F%BA%E7%A1%80Day05-redux/"
+    >Day5 Redux</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/01/17/react%E5%9F%BA%E7%A1%80Day05-redux/" class="article-date">
+  <time datetime="2022-01-17T13:27:31.000Z" itemprop="datePublished">2022-01-17</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="redux、react-redux"><a href="#redux、react-redux" class="headerlink" title="redux、react-redux"></a>redux、react-redux</h1><h2 id="一、为什么需要使用redux"><a href="#一、为什么需要使用redux" class="headerlink" title="一、为什么需要使用redux"></a>一、为什么需要使用redux</h2><p>两个组件(非父子关系)之间需要通信的话，可能需要多个中间组件为他们进行消息传递，这样既浪费了资源，代码也会比较复杂。</p>
+<p>​    <img src="./images/1.jpg"></p>
+<h2 id="二、redux数据流"><a href="#二、redux数据流" class="headerlink" title="二、redux数据流"></a>二、redux数据流</h2><p>  ​    <img src="./images/redux1.jpg"></p>
+<h2 id="三、redux-基本使用"><a href="#三、redux-基本使用" class="headerlink" title="三、redux 基本使用"></a>三、redux 基本使用</h2><ol>
+<li>安装redux依赖包 </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yarn add redux -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>新建文件 src/store/index.js </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(</span><br><span class="line">  reducer, </span><br><span class="line">  <span class="comment">// 设置调试工具</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>新建文件 src/store/reducer.js  </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> defaultState = &#123;</span><br><span class="line">  <span class="attr">count</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> state</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>在App.js中关联state和store的数据，并监听数据的变化同步数据</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">super</span>()</span><br><span class="line">  <span class="comment">// 通过store.getState 调用store的数据 </span></span><br><span class="line">  <span class="built_in">this</span>.state = store.getState()</span><br><span class="line">  store.subscribe(<span class="built_in">this</span>.handleStoreChange)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handleStoreChange = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.setState(store.getState())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="四、react-redux-的基本使用"><a href="#四、react-redux-的基本使用" class="headerlink" title="四、react-redux 的基本使用"></a>四、react-redux 的基本使用</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yarn add react-redux -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在index.js 文件中进行修饰</li>
+</ol>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></span></span><br><span class="line">,</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在需要使用store的组件中通过高阶组件获取state 和 dispatch</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const mapStateToProps = (state) =&gt; &#123;</span></span><br><span class="line"><span class="string">  return &#123;</span></span><br><span class="line"><span class="string">    count: state.count</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const mapDispatchToProps = (dispatch) =&gt; &#123;</span></span><br><span class="line"><span class="string">  return &#123;</span></span><br><span class="line"><span class="string">    handleAddCount() &#123;</span></span><br><span class="line"><span class="string">      dispatch(addCount())</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    handleSubCount() &#123;</span></span><br><span class="line"><span class="string">      dispatch(subCount())</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">mapStates  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapMutations </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapGetters  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapActions  </span></span><br><span class="line"><span class="string">export default connect(mapStateToProps, mapDispatchToProps)(App)</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="五、redux异步请求"><a href="#五、redux异步请求" class="headerlink" title="五、redux异步请求"></a>五、redux异步请求</h2><ol>
+<li>安装redux-thunk</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add redux-thunk -S </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>修改主入口配置</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&#x27;redux-thunk&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// export default createStore(</span></span><br><span class="line"><span class="comment">//   reducer,</span></span><br><span class="line"><span class="comment">//   applyMiddleware(thunk),</span></span><br><span class="line"><span class="comment">//   window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__()</span></span><br><span class="line"><span class="comment">// )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> composeEnhancers =</span><br><span class="line">  <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">&#x27;object&#x27;</span> &amp;&amp;</span><br><span class="line">    <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?</span><br><span class="line">    <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;&#125;) : compose;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enhancer = composeEnhancers(</span><br><span class="line">  applyMiddleware(thunk),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(</span><br><span class="line">  reducer,<span class="comment">//构建初始的数据</span></span><br><span class="line">  enhancer</span><br><span class="line">)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在actions.js中发送异步请求</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ADD_COUNT &#125; <span class="keyword">from</span> <span class="string">&#x27;./types&#x27;</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> addCountAction = <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: ADD_COUNT,</span><br><span class="line">    value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodos = <span class="function">(<span class="params">number</span>) =&gt;</span> <span class="function"><span class="params">dispatch</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(number)</span><br><span class="line">  axios</span><br><span class="line">    .get(<span class="string">&#x27;http://jsonplaceholder.typicode.com/todos&#x27;</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把actions 发送给 reducer   </span></span><br><span class="line">      dispatch(addCountAction(todos))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-react基础Day04-React原理揭秘&amp;React路由基础"
   class="article article-type-post"
   itemscope
@@ -352,108 +454,6 @@
 <li>默认是模糊匹配，添加exact编程精确匹配</li>
 <li>React路由的一切都是组件，可以像思考组件一样思考路由</li>
 </ul>
- 
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-react基础Day05-redux"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2022/01/17/react%E5%9F%BA%E7%A1%80Day05-redux/"
-    >Day5 Redux</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2022/01/17/react%E5%9F%BA%E7%A1%80Day05-redux/" class="article-date">
-  <time datetime="2022-01-17T13:26:31.000Z" itemprop="datePublished">2022-01-17</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <h1 id="redux、react-redux"><a href="#redux、react-redux" class="headerlink" title="redux、react-redux"></a>redux、react-redux</h1><h2 id="一、为什么需要使用redux"><a href="#一、为什么需要使用redux" class="headerlink" title="一、为什么需要使用redux"></a>一、为什么需要使用redux</h2><p>两个组件(非父子关系)之间需要通信的话，可能需要多个中间组件为他们进行消息传递，这样既浪费了资源，代码也会比较复杂。</p>
-<p>​    <img src="./images/1.jpg"></p>
-<h2 id="二、redux数据流"><a href="#二、redux数据流" class="headerlink" title="二、redux数据流"></a>二、redux数据流</h2><p>  ​    <img src="./images/redux1.jpg"></p>
-<h2 id="三、redux-基本使用"><a href="#三、redux-基本使用" class="headerlink" title="三、redux 基本使用"></a>三、redux 基本使用</h2><ol>
-<li>安装redux依赖包 </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yarn add redux -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>新建文件 src/store/index.js </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> createStore(</span><br><span class="line">  reducer, </span><br><span class="line">  <span class="comment">// 设置调试工具</span></span><br><span class="line">  <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION__()</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>新建文件 src/store/reducer.js  </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> defaultState = &#123;</span><br><span class="line">  <span class="attr">count</span>: <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> (state = defaultState, action) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> state</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>在App.js中关联state和store的数据，并监听数据的变化同步数据</li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="built_in">super</span>()</span><br><span class="line">  <span class="comment">// 通过store.getState 调用store的数据 </span></span><br><span class="line">  <span class="built_in">this</span>.state = store.getState()</span><br><span class="line">  store.subscribe(<span class="built_in">this</span>.handleStoreChange)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">handleStoreChange = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">this</span>.setState(store.getState())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<h2 id="四、react-redux-的基本使用"><a href="#四、react-redux-的基本使用" class="headerlink" title="四、react-redux 的基本使用"></a>四、react-redux 的基本使用</h2><ol>
-<li>安装依赖包  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">yarn add react-redux -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在index.js 文件中进行修饰</li>
-</ol>
- <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">App</span> /&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">Provider</span>&gt;</span></span></span><br><span class="line">,</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">&#x27;root&#x27;</span>))</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在需要使用store的组件中通过高阶组件获取state 和 dispatch</li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; connect &#125; <span class="keyword">from</span> <span class="string">&#x27;react-redux</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const mapStateToProps = (state) =&gt; &#123;</span></span><br><span class="line"><span class="string">  return &#123;</span></span><br><span class="line"><span class="string">    count: state.count</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">const mapDispatchToProps = (dispatch) =&gt; &#123;</span></span><br><span class="line"><span class="string">  return &#123;</span></span><br><span class="line"><span class="string">    handleAddCount() &#123;</span></span><br><span class="line"><span class="string">      dispatch(addCount())</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    handleSubCount() &#123;</span></span><br><span class="line"><span class="string">      dispatch(subCount())</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">mapStates  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapMutations </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapGetters  </span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">mapActions  </span></span><br><span class="line"><span class="string">export default connect(mapStateToProps, mapDispatchToProps)(App)</span></span><br></pre></td></tr></table></figure>
-
-
-<h2 id="五、redux异步请求"><a href="#五、redux异步请求" class="headerlink" title="五、redux异步请求"></a>五、redux异步请求</h2><ol>
-<li>安装redux-thunk</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yarn add redux-thunk -S </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>修改主入口配置</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; createStore, applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">&#x27;redux&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> reducer <span class="keyword">from</span> <span class="string">&#x27;./reducer&#x27;</span></span><br><span class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">&#x27;redux-thunk&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// export default createStore(</span></span><br><span class="line"><span class="comment">//   reducer,</span></span><br><span class="line"><span class="comment">//   applyMiddleware(thunk),</span></span><br><span class="line"><span class="comment">//   window.__REDUX_DEVTOOLS_EXTENSION__ &amp;&amp; window.__REDUX_DEVTOOLS_EXTENSION__()</span></span><br><span class="line"><span class="comment">// )</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> composeEnhancers =</span><br><span class="line">  <span class="keyword">typeof</span> <span class="built_in">window</span> === <span class="string">&#x27;object&#x27;</span> &amp;&amp;</span><br><span class="line">    <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?</span><br><span class="line">    <span class="built_in">window</span>.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__(&#123;&#125;) : compose;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> enhancer = composeEnhancers(</span><br><span class="line">  applyMiddleware(thunk),</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> store = createStore(</span><br><span class="line">  reducer,<span class="comment">//构建初始的数据</span></span><br><span class="line">  enhancer</span><br><span class="line">)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> store</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在actions.js中发送异步请求</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ADD_COUNT &#125; <span class="keyword">from</span> <span class="string">&#x27;./types&#x27;</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> addCountAction = <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: ADD_COUNT,</span><br><span class="line">    value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodos = <span class="function">(<span class="params">number</span>) =&gt;</span> <span class="function"><span class="params">dispatch</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(number)</span><br><span class="line">  axios</span><br><span class="line">    .get(<span class="string">&#x27;http://jsonplaceholder.typicode.com/todos&#x27;</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把actions 发送给 reducer   </span></span><br><span class="line">      dispatch(addCountAction(todos))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
  
       <!-- reward -->
       
@@ -1427,7 +1427,7 @@
        
 <h2 itemprop="name">
   <a class="article-title" href="/2022/01/10/vue-cli3.0%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/"
-    >ue-cli3.0 项目优化</a> 
+    >Vue-cli3.0 项目优化</a> 
 </h2>
  
 
