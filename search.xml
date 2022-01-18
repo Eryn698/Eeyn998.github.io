@@ -3332,6 +3332,8 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 &gt; 5. 使用css3的translate水平垂直居中元素 这种方式将脱离文档流的元素，设置top：50%，left：50%，然后使用transform来向左向上偏移半个内元素的宽和高。
 &gt; 6. 使用css3计算的方式居中元素calc 这种方式同样是将脱离文档流的元素，然后使用计算的方式来设置top和left；
 </code></pre>
+<h2 id="24-width：auto和width：100-的区别"><a href="#24-width：auto和width：100-的区别" class="headerlink" title="24.width：auto和width：100%的区别"></a>24.width：auto和width：100%的区别</h2><pre><code>&gt; width：100%是相对你上层的标签而言，基本上跟你上层便签一样的宽度，但是width：auto是根据你这个标签里面的元素的宽度来自动调节本身的宽度
+</code></pre>
 ]]></content>
   </entry>
 </search>
