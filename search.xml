@@ -1,6 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Git命令</title>
+    <url>/2021/12/11/git/</url>
+    <content><![CDATA[<h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>$ git init 初始化git本地仓库</p>
+<p>$ git status 查看监听的状态  (可选)</p>
+<p>git add .  全部添加到可操作的状态 （当前状态应该为绿色）</p>
+<p>git commit -m ‘first’  把监听的文件添加到本地仓库       </p>
+<p>git log    查看修改日志   (可选)</p>
+<p>git remote add origin http  http是你的运程仓库地址  需要你在 github 或者 码云上创建    </p>
+<p>git push -u origin master  提交到主分支上   </p>
+<p>git branch 分支名称 创建新分支</p>
+<p>git checkout -b 分支的名称  创建并切换到新分支   </p>
+<p>git branch     查看分支  </p>
+<p>git checkout 分支名称   切换分支  </p>
+<p>git push -u origin  分支名称</p>
+<p>git reset –hard commit_id   代码回退  </p>
+<h3 id="1-2-合并"><a href="#1-2-合并" class="headerlink" title="1.2 合并"></a>1.2 合并</h3><p>git merge 分支名称      要确保你是在master 分支上操作</p>
+<h3 id="1-3-删除"><a href="#1-3-删除" class="headerlink" title="1.3 删除"></a>1.3 删除</h3><p>git branch -d 分支名称 删除本地分支</p>
+<p>git branch -D 分支名称 强制删除本地分支</p>
+<p>git push origin –delete 分支名称 删除远程分支</p>
+<h3 id="1-4-重命名"><a href="#1-4-重命名" class="headerlink" title="1.4 重命名"></a>1.4 重命名</h3><p>git branch -m 要改的本地分支名 修改后的分支名(修改本地分支)</p>
+<p>git push origin :远程修改前的分支名（删除远程分支）</p>
+<p>git push origin 修改后的分支名:修改后的分支名（push 到远程分支）</p>
+<p>git branch –set-upstream  修改后的分支名 origin/修改后的分支名（绑定远程分支）</p>
+<h3 id="1-5-代码拉取"><a href="#1-5-代码拉取" class="headerlink" title="1.5 代码拉取"></a>1.5 代码拉取</h3><p>git pull origin master </p>
+<h3 id="1-6-强制删除远程分支"><a href="#1-6-强制删除远程分支" class="headerlink" title="1.6 强制删除远程分支"></a>1.6 强制删除远程分支</h3><p>git push origin –delete 分支名称   </p>
+<p>出现这个问题是因为gitee中的文件不在本地代码目录中，可以通过如下命令进行代码合并,之后在提交<br>代码合并 </p>
+<p>git merge 分支名称     本地合并   </p>
+<p>git push              提交到远程  </p>
+<p>git pull –rebase origin master   同步远程和本地的代码 </p>
+<h3 id="2-单人使用"><a href="#2-单人使用" class="headerlink" title="2 单人使用"></a>2 单人使用</h3><p>单人流程:<br>    一、准备工作(只做一次):<br>  1.创建一个工作区<br>    2.在工作区中的打开git终端<br>    3.通过git init指令, 初始化版本库<br>    4.通过<br>            git config user.name “姓名”<br>        git config user.email “邮箱”<br>      设置用户名和邮箱(不设置要挨骂)<br>    5.通过git config -l查看设置情况<br>    二、开发阶段(反复执行)<br>    1.编写代码<br>    2.通过”git add 文件名称”/“git add .” 添加到版本库的暂缓区中<br>    3.通过git commit -m”说明” 将暂缓区的文件添加到HEAD指针指向的分支中<br>    (默认只有一个分支, master分支, 也称之为主分支)<br>    注意点:<br>    1.不是写一句代码就add commit一次, 应该是完成一个功能后再add commit<br>    2.commit时-m注释一定要认真编写, 与当前提交内容保持一致, 否则要挨骂</p>
+<p>单人使用Git管理项目好处:<br>    1.可以通过git status查看哪些文件没有被管理, 修改了哪些文件<br>      红色(没有被管理或者被修改了)、绿色(在暂缓区)<br>    2.可以通过 git diff查看具体修改了哪些代码<br>    3.可以通过git log / git reflog查看项目演变历史<br>    4.可以通过git reset –hard 版本号  在任意版本之间切换<br>    5.无需备份多个文件, 每次commit提交Git会自动备份</p>
+<h3 id="2-1-多人使用"><a href="#2-1-多人使用" class="headerlink" title="2.1 多人使用"></a>2.1 多人使用</h3><p>多人开发:<br>一、在远程服务器上创建一个共享版本库 github、gitee、gitlab<br>    1.项目负责人打开远程的服务器, 然后创建一个工作区<br>    2.在远程的服务器上打开工作区, 在工作区中打开Git终端工具<br>    3.在Git终端工具中输入 git init –bare<br>    4.经过以上几步, 就代表远程服务器上的共享版本库已经创建好了<br>二、开发人员下载远程版本库<br>    1.开发人员在自己的电脑上打开Git终端工具<br>    2.从远程的服务器上下载当前项目的共享版本库  git clone 远程服务器共享版本库地址<br>      和单人开发使用Git的区别: 单人开发是自己创建版本库, 而多人开发是从远程服务器下载版本库<br>三、进入开发阶段<br>    和单人开发一样<br>    1.设置用户名和邮箱<br>    2.编写代码<br>    3.git add .添加到暂缓区<br>    4.git commit -m 添加到HEADER指针指向的分支<br>    5.注意点:<br>    commit是将编写好的代码提交到本地的版本库, 所以其它的开发人员是拿不到我们提交的代码的<br>    如果想让其它开发人员也能拿到我们提交的代码, 还必须将编写好的代码提交到远程的服务器</p>
+<pre><code>多人开发特有
+6.将代码提交到远程的服务器 git push
+7.其它的开发人员只需要通过 git pull 就可以拿到更新的代码了
+</code></pre>
+<p>多人开发使用Git注意点:<br>    1.不能将不能运行的代码提交到本地和远程服务器(切记一定不能)<br>    2.如果服务器上有其它开发人员的更新内容, 那么我们不能直接通过push将我们的代码提交到服务器<br>      如果服务器上有其它开发人员更新的内容, 我们必须先将其它开发人员更新的内容更新到本地之后才能通过push提交我们的内容<br>    3.如何我们更新的内容和其它同事更新的内容有冲突(修改了同一个文件的同一行代码), 这个时候需要我们自己手动修改冲突, 修改完冲突之后才能将代码提交到远程服务器</p>
+<pre><code>开发技巧:
+只要开发完了一个功能就要立即提交代码, 因为在企业开发中谁后提交谁就负责解决冲突, 谁的工作量就会变大
+</code></pre>
+<h3 id="2-2-分支使用"><a href="#2-2-分支使用" class="headerlink" title="2.2 分支使用"></a>2.2 分支使用</h3><p>一、如何查看有多少个分支?<br>    1.通过git branch指令就可以查看当前版本库中有多少个分支<br>    注意点:<br>    1.如果当前的版本库是空的, 那么无法查看<br>    2.如果通过git branch指令查看当前版本库中有多少个分支, 输出的内容中哪一个分支前面有*号<br>    就代表当前的HEADER指针指向哪一个分支, 我们提交的代码就会提交到指向的分支中</p>
+<p>二、如何创建一个分支<br>    1.通过git branch 分支名称 来创建一个新的分支<br>    注意点:<br>    在哪个分支中创建了新的分支, 那么创建出来的新的分支就会继承当前分支的所有状态<br>    例如:<br>    在master分支中做了两个操作, 然后在master分支中创建了Dev分支<br>    那么创建出来的Dev分支就会继承master分支中的这两个操作<br>    注意点:<br>    一旦分支被创建出来之后, 分支就是独立的, 分支之间不会相互影响</p>
+<p>三、如何切换分支?<br>    1.通过git switch 分支名称 来修改HEADER指针的指向</p>
+<pre><code>    git checkout 分支名称   
+
+    git checkout -b 分支名称  切换并创建新的分支，指针会跳转到新分支 
+
+注意点: 只要HEADER指针的指向发生了改变, 那么commit的代码就会发生改变
+HEADER指针指向谁commit提交的代码就提交到谁里面
+</code></pre>
+<p>四、如何将分支提交到远程服务器<br>    git branch<br>    1.通过git branch -r 来查看远程服务器上有多少个分支<br>    2.首先需要在本地切换到新建的分支中, 然后通过git push指令提交新建的分支到远程的服务器<br>    git push –set-upstream origin Dev</p>
+<pre><code>    git push -u origin master 
+    git push -u origin dev 
+</code></pre>
+<p>五、如何合并分支<br>    可以通过 git merge 分支名称 来合并分支<br>    例如:<br>    在master分支中执行  git merge Dev 就代表需要将Dev分支中的代码都合并到master分支中<br>    例如:<br>    在Dev分支中执行 git merge master 就代表需要将master分支中的代码都合并到Dev分支中</p>
+<p>六、如何删除分支<br>    1.可以通过git branch -D 分支名称 来删除本地的分支<br>    2.可以通过git push origin –delete 分支名称 来删除远程服务器的分支</p>
+<h3 id="2-3-Gitflow工作流"><a href="#2-3-Gitflow工作流" class="headerlink" title="2.3 Gitflow工作流"></a>2.3 Gitflow工作流</h3><p>就像写代码需要代码规范一样，代码管理同样需要一个清晰的流程和规范<br><a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a></p>
+<p>一、准备阶段<br>    1.初始化远程工作区和共享版本库<br>    git init –bare</p>
+<pre><code>2.项目经理初始化项目, 并在master定制标记
+添加初始化文件
+git add .
+git commit -m
+git push
+git tag v0.1
+git push origin v0.1
+
+3.项目经理基于master分支创建develop分支
+git switch master
+git branch Develop
+git switch Develop
+git push
+
+4.项目经理给开发人员分配工作任务
+</code></pre>
+<p>二、开发阶段<br>    1.开发人员基于develop分支创建功能分支<br>    git branch feature/home<br>    git switch feature/login</p>
+<pre><code>2.开发人员在自己的分支上add commit push
+
+3.开发完成告诉项目经理, 由项目经理审核代码并合并代码到develop
+git pull
+git switch feature/home  检查代码
+git switch Develop
+git merge feature/home
+git switch feature/login  检查代码
+git switch Develop
+git merge feature/login
+</code></pre>
+<p>三、准备上线阶段<br>    1.项目经理基于develop分支创建release分支<br>    git switch Develop<br>    git branch Release/v1.0</p>
+<pre><code>2.测试人员获取release分支代码进行测试
+
+3.发现bug由开发人员基于release分支创建bugfix分支进行修复
+git pull
+git switch Release/v1.0
+git branch bugfix/issue32
+修复bug / add / commit
+
+4.修复完成后重新合并到release分支
+git switch Release/v1.0
+git merge bugfix/issue32
+git push
+
+5.将测试和修复完所有bug的最终代码合并到master分支和develop分支
+git switch Develop
+git merge Release/v1.0
+git switch master
+git merge Release/v1.0
+</code></pre>
+<p>四、项目上线<br>    1.项目经理在master分支定制标记<br>    git switch master<br>    git tag -a v1.0 -m”项目第一次上线”<br>    2.项目经理项目经理将标记提交到远程服务器<br>    git push origin v1.0</p>
+<p>五、上线之后<br>    1.项目上线后发现紧急bug<br>    2.基于master分支创建hotfix分支, 在该分支上修复bug<br>    git switch master<br>    git branch hotfix/issue66<br>    修复bug / add / commit</p>
+<pre><code>3.修复完成后重新合并到master分支和develop分支
+git switch Develop
+git merge hotfix/issue66
+
+4.项目经理重新在master分支定制标记
+git switch master
+git merge hotfix/issue66
+git tag v1.1
+git push origin v1.1
+</code></pre>
+<ul>
+<li>master主分支:<ul>
+<li>负责记录上线版本的迭代，该分支代码与线上代码是完全一致的。</li>
+</ul>
+</li>
+<li>develop开发分支:<ul>
+<li>该分支记录相对稳定的版本，所有的feature分支都从该分支创建</li>
+</ul>
+</li>
+<li>feature/* 特性（功能）分支:<ul>
+<li>用于开发新的功能，不同的功能创建不同的功能分支，功能分支开发完成并自测通过之后，需要合并到 develop 分支。</li>
+</ul>
+</li>
+<li>release/*发布分支：<ul>
+<li>用于代码上线准备，该分支从develop分支创建，创建之后由测试发布到测试环境进行测试，测试过程中发现bug需要开发人员在该release分支上进行bug修复，所有bug修复完后，在上线之前，需要合并该release分支到master分支和develop分支。</li>
+</ul>
+</li>
+<li>bugfix/* bug修复分支:<ul>
+<li>用于修复不紧急的bug，普通bug均需要创建bugfix分支开发，开发完成自测没问题后合并到 develop 分支后，删除该分支。</li>
+</ul>
+</li>
+<li>hotfix/*紧急bug修复分支：<ul>
+<li>该分支只有在紧急情况下使用，从master分支创建，用于紧急修复线上bug，修复完成后，需要合并该分支到master分支以便上线，同时需要再合并到develop分支。</li>
+</ul>
+</li>
+</ul>
+<pre><code>https://gitee.com/help/articles/4181
+</code></pre>
+]]></content>
+  </entry>
+  <entry>
     <title>Vue</title>
     <url>/2021/12/15/Vue/</url>
     <content><![CDATA[<h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="VUE的基本原理"><a href="#VUE的基本原理" class="headerlink" title="VUE的基本原理"></a>VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
@@ -361,8 +510,8 @@
 <p>​    解决：给el-table-column加一个key属性，:key=”Math.random()”或者其他的，确保每列的key值不同就可以了</p>
 <p>4、在使用el-table的时候有的时候需要对表格中的数据做处理，需要用到filter，虽然官方也有提供过滤的方法（filter-method），但是还是用自定义列，然后用filter复用性好一些</p>
 <p>5、在element中使用el-input实现点击显示输入框，失去焦点时生成新的tag标签，出现两行数据下的输入框会同时修改的bug，因此要为他们单独设置自己的false和输入框的值</p>
-<p><img src="C:\Users\pc\AppData\Roaming\Typora\typora-user-images\1626541015762.png" alt="1626541015762"></p>
-<p><img src="C:\Users\pc\AppData\Roaming\Typora\typora-user-images\1626540686684.png" alt="1626540686684"></p>
+<p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626541015762.png" alt="1626541015762"></p>
+<p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626540686684.png" alt="1626540686684"></p>
 <h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><h1 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h1><h4 id="登录授权"><a href="#登录授权" class="headerlink" title="登录授权"></a>登录授权</h4><ul>
 <li><p>小程序端调用wx.login()，获取登录凭证code，并wx.request提交code给己方服务器</p>
 </li>
@@ -376,7 +525,7 @@
 </li>
 <li><p>服务器SQL用户数据信息更新</p>
 </li>
-<li><p><img src="C:\Users\pc\AppData\Roaming\Typora\typora-user-images\1626656270605.png" alt="1626656270605"></p>
+<li><p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626656270605.png" alt="1626656270605"></p>
 <p> <a href="https://www.cnblogs.com/dashucoding/p/9917371.html">https://www.cnblogs.com/dashucoding/p/9917371.html</a></p>
 </li>
 </ul>
@@ -530,7 +679,7 @@
 <p>let const 不存在变量提升</p>
 <p>const声明的是一个常量,值不能被修改,const声明时必须赋值</p>
 <p>const和let不允许重复声明变量</p>
-<p><img src="C:\Users\pc\AppData\Roaming\Typora\typora-user-images\1626673442632.png" alt="1626673442632"></p>
+<p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626673442632.png" alt="1626673442632"></p>
 </li>
 </ul>
 <ul>
@@ -887,152 +1036,21 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Git命令</title>
-    <url>/2021/12/11/git/</url>
-    <content><![CDATA[<h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>$ git init 初始化git本地仓库</p>
-<p>$ git status 查看监听的状态  (可选)</p>
-<p>git add .  全部添加到可操作的状态 （当前状态应该为绿色）</p>
-<p>git commit -m ‘first’  把监听的文件添加到本地仓库       </p>
-<p>git log    查看修改日志   (可选)</p>
-<p>git remote add origin http  http是你的运程仓库地址  需要你在 github 或者 码云上创建    </p>
-<p>git push -u origin master  提交到主分支上   </p>
-<p>git branch 分支名称 创建新分支</p>
-<p>git checkout -b 分支的名称  创建并切换到新分支   </p>
-<p>git branch     查看分支  </p>
-<p>git checkout 分支名称   切换分支  </p>
-<p>git push -u origin  分支名称</p>
-<p>git reset –hard commit_id   代码回退  </p>
-<h3 id="1-2-合并"><a href="#1-2-合并" class="headerlink" title="1.2 合并"></a>1.2 合并</h3><p>git merge 分支名称      要确保你是在master 分支上操作</p>
-<h3 id="1-3-删除"><a href="#1-3-删除" class="headerlink" title="1.3 删除"></a>1.3 删除</h3><p>git branch -d 分支名称 删除本地分支</p>
-<p>git branch -D 分支名称 强制删除本地分支</p>
-<p>git push origin –delete 分支名称 删除远程分支</p>
-<h3 id="1-4-重命名"><a href="#1-4-重命名" class="headerlink" title="1.4 重命名"></a>1.4 重命名</h3><p>git branch -m 要改的本地分支名 修改后的分支名(修改本地分支)</p>
-<p>git push origin :远程修改前的分支名（删除远程分支）</p>
-<p>git push origin 修改后的分支名:修改后的分支名（push 到远程分支）</p>
-<p>git branch –set-upstream  修改后的分支名 origin/修改后的分支名（绑定远程分支）</p>
-<h3 id="1-5-代码拉取"><a href="#1-5-代码拉取" class="headerlink" title="1.5 代码拉取"></a>1.5 代码拉取</h3><p>git pull origin master </p>
-<h3 id="1-6-强制删除远程分支"><a href="#1-6-强制删除远程分支" class="headerlink" title="1.6 强制删除远程分支"></a>1.6 强制删除远程分支</h3><p>git push origin –delete 分支名称   </p>
-<p>出现这个问题是因为gitee中的文件不在本地代码目录中，可以通过如下命令进行代码合并,之后在提交<br>代码合并 </p>
-<p>git merge 分支名称     本地合并   </p>
-<p>git push              提交到远程  </p>
-<p>git pull –rebase origin master   同步远程和本地的代码 </p>
-<h3 id="2-单人使用"><a href="#2-单人使用" class="headerlink" title="2 单人使用"></a>2 单人使用</h3><p>单人流程:<br>    一、准备工作(只做一次):<br>  1.创建一个工作区<br>    2.在工作区中的打开git终端<br>    3.通过git init指令, 初始化版本库<br>    4.通过<br>            git config user.name “姓名”<br>        git config user.email “邮箱”<br>      设置用户名和邮箱(不设置要挨骂)<br>    5.通过git config -l查看设置情况<br>    二、开发阶段(反复执行)<br>    1.编写代码<br>    2.通过”git add 文件名称”/“git add .” 添加到版本库的暂缓区中<br>    3.通过git commit -m”说明” 将暂缓区的文件添加到HEAD指针指向的分支中<br>    (默认只有一个分支, master分支, 也称之为主分支)<br>    注意点:<br>    1.不是写一句代码就add commit一次, 应该是完成一个功能后再add commit<br>    2.commit时-m注释一定要认真编写, 与当前提交内容保持一致, 否则要挨骂</p>
-<p>单人使用Git管理项目好处:<br>    1.可以通过git status查看哪些文件没有被管理, 修改了哪些文件<br>      红色(没有被管理或者被修改了)、绿色(在暂缓区)<br>    2.可以通过 git diff查看具体修改了哪些代码<br>    3.可以通过git log / git reflog查看项目演变历史<br>    4.可以通过git reset –hard 版本号  在任意版本之间切换<br>    5.无需备份多个文件, 每次commit提交Git会自动备份</p>
-<h3 id="2-1-多人使用"><a href="#2-1-多人使用" class="headerlink" title="2.1 多人使用"></a>2.1 多人使用</h3><p>多人开发:<br>一、在远程服务器上创建一个共享版本库 github、gitee、gitlab<br>    1.项目负责人打开远程的服务器, 然后创建一个工作区<br>    2.在远程的服务器上打开工作区, 在工作区中打开Git终端工具<br>    3.在Git终端工具中输入 git init –bare<br>    4.经过以上几步, 就代表远程服务器上的共享版本库已经创建好了<br>二、开发人员下载远程版本库<br>    1.开发人员在自己的电脑上打开Git终端工具<br>    2.从远程的服务器上下载当前项目的共享版本库  git clone 远程服务器共享版本库地址<br>      和单人开发使用Git的区别: 单人开发是自己创建版本库, 而多人开发是从远程服务器下载版本库<br>三、进入开发阶段<br>    和单人开发一样<br>    1.设置用户名和邮箱<br>    2.编写代码<br>    3.git add .添加到暂缓区<br>    4.git commit -m 添加到HEADER指针指向的分支<br>    5.注意点:<br>    commit是将编写好的代码提交到本地的版本库, 所以其它的开发人员是拿不到我们提交的代码的<br>    如果想让其它开发人员也能拿到我们提交的代码, 还必须将编写好的代码提交到远程的服务器</p>
-<pre><code>多人开发特有
-6.将代码提交到远程的服务器 git push
-7.其它的开发人员只需要通过 git pull 就可以拿到更新的代码了
-</code></pre>
-<p>多人开发使用Git注意点:<br>    1.不能将不能运行的代码提交到本地和远程服务器(切记一定不能)<br>    2.如果服务器上有其它开发人员的更新内容, 那么我们不能直接通过push将我们的代码提交到服务器<br>      如果服务器上有其它开发人员更新的内容, 我们必须先将其它开发人员更新的内容更新到本地之后才能通过push提交我们的内容<br>    3.如何我们更新的内容和其它同事更新的内容有冲突(修改了同一个文件的同一行代码), 这个时候需要我们自己手动修改冲突, 修改完冲突之后才能将代码提交到远程服务器</p>
-<pre><code>开发技巧:
-只要开发完了一个功能就要立即提交代码, 因为在企业开发中谁后提交谁就负责解决冲突, 谁的工作量就会变大
-</code></pre>
-<h3 id="2-2-分支使用"><a href="#2-2-分支使用" class="headerlink" title="2.2 分支使用"></a>2.2 分支使用</h3><p>一、如何查看有多少个分支?<br>    1.通过git branch指令就可以查看当前版本库中有多少个分支<br>    注意点:<br>    1.如果当前的版本库是空的, 那么无法查看<br>    2.如果通过git branch指令查看当前版本库中有多少个分支, 输出的内容中哪一个分支前面有*号<br>    就代表当前的HEADER指针指向哪一个分支, 我们提交的代码就会提交到指向的分支中</p>
-<p>二、如何创建一个分支<br>    1.通过git branch 分支名称 来创建一个新的分支<br>    注意点:<br>    在哪个分支中创建了新的分支, 那么创建出来的新的分支就会继承当前分支的所有状态<br>    例如:<br>    在master分支中做了两个操作, 然后在master分支中创建了Dev分支<br>    那么创建出来的Dev分支就会继承master分支中的这两个操作<br>    注意点:<br>    一旦分支被创建出来之后, 分支就是独立的, 分支之间不会相互影响</p>
-<p>三、如何切换分支?<br>    1.通过git switch 分支名称 来修改HEADER指针的指向</p>
-<pre><code>    git checkout 分支名称   
+    <title>Hello World</title>
+    <url>/2021/12/11/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-    git checkout -b 分支名称  切换并创建新的分支，指针会跳转到新分支 
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-注意点: 只要HEADER指针的指向发生了改变, 那么commit的代码就会发生改变
-HEADER指针指向谁commit提交的代码就提交到谁里面
-</code></pre>
-<p>四、如何将分支提交到远程服务器<br>    git branch<br>    1.通过git branch -r 来查看远程服务器上有多少个分支<br>    2.首先需要在本地切换到新建的分支中, 然后通过git push指令提交新建的分支到远程的服务器<br>    git push –set-upstream origin Dev</p>
-<pre><code>    git push -u origin master 
-    git push -u origin dev 
-</code></pre>
-<p>五、如何合并分支<br>    可以通过 git merge 分支名称 来合并分支<br>    例如:<br>    在master分支中执行  git merge Dev 就代表需要将Dev分支中的代码都合并到master分支中<br>    例如:<br>    在Dev分支中执行 git merge master 就代表需要将master分支中的代码都合并到Dev分支中</p>
-<p>六、如何删除分支<br>    1.可以通过git branch -D 分支名称 来删除本地的分支<br>    2.可以通过git push origin –delete 分支名称 来删除远程服务器的分支</p>
-<h3 id="2-3-Gitflow工作流"><a href="#2-3-Gitflow工作流" class="headerlink" title="2.3 Gitflow工作流"></a>2.3 Gitflow工作流</h3><p>就像写代码需要代码规范一样，代码管理同样需要一个清晰的流程和规范<br><a href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a></p>
-<p>一、准备阶段<br>    1.初始化远程工作区和共享版本库<br>    git init –bare</p>
-<pre><code>2.项目经理初始化项目, 并在master定制标记
-添加初始化文件
-git add .
-git commit -m
-git push
-git tag v0.1
-git push origin v0.1
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-3.项目经理基于master分支创建develop分支
-git switch master
-git branch Develop
-git switch Develop
-git push
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-4.项目经理给开发人员分配工作任务
-</code></pre>
-<p>二、开发阶段<br>    1.开发人员基于develop分支创建功能分支<br>    git branch feature/home<br>    git switch feature/login</p>
-<pre><code>2.开发人员在自己的分支上add commit push
-
-3.开发完成告诉项目经理, 由项目经理审核代码并合并代码到develop
-git pull
-git switch feature/home  检查代码
-git switch Develop
-git merge feature/home
-git switch feature/login  检查代码
-git switch Develop
-git merge feature/login
-</code></pre>
-<p>三、准备上线阶段<br>    1.项目经理基于develop分支创建release分支<br>    git switch Develop<br>    git branch Release/v1.0</p>
-<pre><code>2.测试人员获取release分支代码进行测试
-
-3.发现bug由开发人员基于release分支创建bugfix分支进行修复
-git pull
-git switch Release/v1.0
-git branch bugfix/issue32
-修复bug / add / commit
-
-4.修复完成后重新合并到release分支
-git switch Release/v1.0
-git merge bugfix/issue32
-git push
-
-5.将测试和修复完所有bug的最终代码合并到master分支和develop分支
-git switch Develop
-git merge Release/v1.0
-git switch master
-git merge Release/v1.0
-</code></pre>
-<p>四、项目上线<br>    1.项目经理在master分支定制标记<br>    git switch master<br>    git tag -a v1.0 -m”项目第一次上线”<br>    2.项目经理项目经理将标记提交到远程服务器<br>    git push origin v1.0</p>
-<p>五、上线之后<br>    1.项目上线后发现紧急bug<br>    2.基于master分支创建hotfix分支, 在该分支上修复bug<br>    git switch master<br>    git branch hotfix/issue66<br>    修复bug / add / commit</p>
-<pre><code>3.修复完成后重新合并到master分支和develop分支
-git switch Develop
-git merge hotfix/issue66
-
-4.项目经理重新在master分支定制标记
-git switch master
-git merge hotfix/issue66
-git tag v1.1
-git push origin v1.1
-</code></pre>
-<ul>
-<li>master主分支:<ul>
-<li>负责记录上线版本的迭代，该分支代码与线上代码是完全一致的。</li>
-</ul>
-</li>
-<li>develop开发分支:<ul>
-<li>该分支记录相对稳定的版本，所有的feature分支都从该分支创建</li>
-</ul>
-</li>
-<li>feature/* 特性（功能）分支:<ul>
-<li>用于开发新的功能，不同的功能创建不同的功能分支，功能分支开发完成并自测通过之后，需要合并到 develop 分支。</li>
-</ul>
-</li>
-<li>release/*发布分支：<ul>
-<li>用于代码上线准备，该分支从develop分支创建，创建之后由测试发布到测试环境进行测试，测试过程中发现bug需要开发人员在该release分支上进行bug修复，所有bug修复完后，在上线之前，需要合并该release分支到master分支和develop分支。</li>
-</ul>
-</li>
-<li>bugfix/* bug修复分支:<ul>
-<li>用于修复不紧急的bug，普通bug均需要创建bugfix分支开发，开发完成自测没问题后合并到 develop 分支后，删除该分支。</li>
-</ul>
-</li>
-<li>hotfix/*紧急bug修复分支：<ul>
-<li>该分支只有在紧急情况下使用，从master分支创建，用于紧急修复线上bug，修复完成后，需要合并该分支到master分支以便上线，同时需要再合并到develop分支。</li>
-</ul>
-</li>
-</ul>
-<pre><code>https://gitee.com/help/articles/4181
-</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -1442,21 +1460,59 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/12/11/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <title>Node.js</title>
+    <url>/2021/12/11/nodejs/</url>
+    <content><![CDATA[<h1 id="NODEJS"><a href="#NODEJS" class="headerlink" title="NODEJS"></a>NODEJS</h1><h2 id="1-fs模块"><a href="#1-fs模块" class="headerlink" title="1. fs模块"></a>1. fs模块</h2><h3 id="1-1-文件读取"><a href="#1-1-文件读取" class="headerlink" title="1.1 文件读取"></a>1.1 文件读取</h3><p>fs.readFile(path[, options], callback)</p>
+<ul>
+<li><p>path 读取的文件路径</p>
+</li>
+<li><p>options 可选的参数 默认为 null 其实得到是buff二进制</p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li><p>err 错误对象</p>
+</li>
+<li><p>data 读取的数据 </p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// if (err) throw</span></span><br><span class="line">  <span class="comment">// 设置参数2 utf8</span></span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  <span class="comment">// 显示转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">  <span class="comment">// 隐式转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data + <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-文件写入、文件追加"><a href="#1-2-文件写入、文件追加" class="headerlink" title="1.2 文件写入、文件追加"></a>1.2 文件写入、文件追加</h3><p>fs.writeFile(file, data[, options], callback)<br>fs.appendFile(path, data[, options], callback)</p>
+<ul>
+<li><p>file 写入的文件路径</p>
+</li>
+<li><p>data 写入的数据</p>
+</li>
+<li><p>options 可选的参数 默认为 utf8</p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li>err 错误对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;复方草珊瑚1111&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+<h3 id="1-3-文件拷贝"><a href="#1-3-文件拷贝" class="headerlink" title="1.3 文件拷贝"></a>1.3 文件拷贝</h3><p>fs.copyFile(src, dest[, mode], callback)</p>
+<ul>
+<li><p>src 拷贝的文件地址</p>
+</li>
+<li><p>dest 写入的文件地址</p>
+</li>
+<li><p>mode 可选的参数 </p>
+</li>
+<li><p>callback 回调函数 </p>
+<ul>
+<li>err 错误对象</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="comment">//  把文件1.txt 的数据复制一份到 1-copy.txt 中   </span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./files/1-copy.txt&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步： 同一个时间段内，只能执行一件事情   如：手机通话</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步：同一个时间段内，可以执行多件事情    如：qq聊天</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2 v8.5.0+</span></span><br><span class="line">fs.copyFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;./files/1-copy.txt&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -1838,62 +1894,6 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>Node.js</title>
-    <url>/2021/12/11/nodejs/</url>
-    <content><![CDATA[<h1 id="NODEJS"><a href="#NODEJS" class="headerlink" title="NODEJS"></a>NODEJS</h1><h2 id="1-fs模块"><a href="#1-fs模块" class="headerlink" title="1. fs模块"></a>1. fs模块</h2><h3 id="1-1-文件读取"><a href="#1-1-文件读取" class="headerlink" title="1.1 文件读取"></a>1.1 文件读取</h3><p>fs.readFile(path[, options], callback)</p>
-<ul>
-<li><p>path 读取的文件路径</p>
-</li>
-<li><p>options 可选的参数 默认为 null 其实得到是buff二进制</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li><p>err 错误对象</p>
-</li>
-<li><p>data 读取的数据 </p>
-</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;utf8&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="comment">// if (err) throw</span></span><br><span class="line">  <span class="comment">// 设置参数2 utf8</span></span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  <span class="comment">// 显示转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data.toString())</span><br><span class="line">  <span class="comment">// 隐式转换</span></span><br><span class="line">  <span class="built_in">console</span>.log(data + <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="1-2-文件写入、文件追加"><a href="#1-2-文件写入、文件追加" class="headerlink" title="1.2 文件写入、文件追加"></a>1.2 文件写入、文件追加</h3><p>fs.writeFile(file, data[, options], callback)<br>fs.appendFile(path, data[, options], callback)</p>
-<ul>
-<li><p>file 写入的文件路径</p>
-</li>
-<li><p>data 写入的数据</p>
-</li>
-<li><p>options 可选的参数 默认为 utf8</p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line">fs.writeFile(<span class="string">&#x27;./files/2.txt&#x27;</span>, <span class="string">&#x27;复方草珊瑚1111&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;写入成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="1-3-文件拷贝"><a href="#1-3-文件拷贝" class="headerlink" title="1.3 文件拷贝"></a>1.3 文件拷贝</h3><p>fs.copyFile(src, dest[, mode], callback)</p>
-<ul>
-<li><p>src 拷贝的文件地址</p>
-</li>
-<li><p>dest 写入的文件地址</p>
-</li>
-<li><p>mode 可选的参数 </p>
-</li>
-<li><p>callback 回调函数 </p>
-<ul>
-<li>err 错误对象</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&#x27;fs&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式1</span></span><br><span class="line"><span class="comment">//  把文件1.txt 的数据复制一份到 1-copy.txt 中   </span></span><br><span class="line">fs.readFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  fs.writeFile(<span class="string">&#x27;./files/1-copy.txt&#x27;</span>, data, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同步： 同一个时间段内，只能执行一件事情   如：手机通话</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 异步：同一个时间段内，可以执行多件事情    如：qq聊天</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2 v8.5.0+</span></span><br><span class="line">fs.copyFile(<span class="string">&#x27;./files/1.txt&#x27;</span>, <span class="string">&#x27;./files/1-copy.txt&#x27;</span>, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">return</span> <span class="built_in">console</span>.log(err.message)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;拷贝成功&#x27;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>Day2 受控组件&amp;评论案例&amp;props&amp;context</title>
     <url>/2022/01/17/react%E5%9F%BA%E7%A1%80Day02-%E5%8F%97%E6%8E%A7%E7%BB%84%E4%BB%B6&amp;%E8%AF%84%E8%AE%BA%E6%A1%88%E4%BE%8B&amp;props&amp;context/</url>
     <content><![CDATA[<h1 id="React组件"><a href="#React组件" class="headerlink" title="React组件"></a>React组件</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
@@ -2149,188 +2149,6 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>Day3 生命周期&amp;render props模式&amp;高阶组件&amp;原理揭秘</title>
-    <url>/2022/01/17/react%E5%9F%BA%E7%A1%80Day03-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F&amp;render%20props%E6%A8%A1%E5%BC%8F&amp;%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6&amp;%E5%8E%9F%E7%90%86%E6%8F%AD%E7%A7%98/</url>
-    <content><![CDATA[<h1 id="组件生命周期（★★★）"><a href="#组件生命周期（★★★）" class="headerlink" title="组件生命周期（★★★）"></a>组件生命周期（★★★）</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
-<li>说出组件生命周期对应的钩子函数</li>
-<li>钩子函数调用的时机</li>
-</ul>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>意义：组件的生命周期有助于理解组件的运行方式，完成更复杂的组件功能、分析组件错误原因等</p>
-<p>组件的生命周期： 组件从被创建到挂载到页面中运行，再到组件不在时卸载的过程</p>
-<p>生命周期的每个阶段总是伴随着一些方法调用，这些方法就是生命周期的钩子函数</p>
-<p>构造函数的作用：为开发人员在不同阶段操作组件提供了实际</p>
-<h2 id="生命周期阶段"><a href="#生命周期阶段" class="headerlink" title="生命周期阶段"></a>生命周期阶段</h2><p><img src="images/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png"></p>
-<h3 id="创建时（挂载阶段）"><a href="#创建时（挂载阶段）" class="headerlink" title="创建时（挂载阶段）"></a>创建时（挂载阶段）</h3><ul>
-<li>执行时机：组件创建时（页面加载时）</li>
-<li>执行顺序</li>
-</ul>
-<p><img src="images/%E5%88%9B%E5%BB%BA%E6%97%B6-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.png"></p>
-<p><img src="images/%E5%88%9B%E5%BB%BA%E6%97%B6-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8.png"></p>
-<h3 id="更新时"><a href="#更新时" class="headerlink" title="更新时"></a>更新时</h3><p>执行时机：<code>setState()、 forceUpdate()、 组件接收到新的props</code></p>
-<p>说明：以上三者任意一种变化，组件就会重新渲染</p>
-<p>执行顺序：</p>
-<p><img src="images/%E6%9B%B4%E6%96%B0%E6%97%B6.png"></p>
-<p><img src="images/%E6%9B%B4%E6%96%B0%E6%97%B6-%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8.png"></p>
-<h3 id="卸载时"><a href="#卸载时" class="headerlink" title="卸载时"></a>卸载时</h3><p>执行时机：组件从页面中消失</p>
-<p>作用：用来做清理操作</p>
-<p><img src="images/%E5%8D%B8%E8%BD%BD%E6%97%B6.png"></p>
-<h3 id="不常用的钩子函数"><a href="#不常用的钩子函数" class="headerlink" title="不常用的钩子函数"></a>不常用的钩子函数</h3><h4 id="旧版的生命周期钩子函数"><a href="#旧版的生命周期钩子函数" class="headerlink" title="旧版的生命周期钩子函数"></a>旧版的生命周期钩子函数</h4><p><img src="images/%E6%97%A7%E7%89%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0.png"></p>
-<h4 id="新版完整生命会走棋钩子函数"><a href="#新版完整生命会走棋钩子函数" class="headerlink" title="新版完整生命会走棋钩子函数"></a>新版完整生命会走棋钩子函数</h4><p><img src="images/%E6%96%B0%E7%89%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0.png"></p>
-<h5 id="getDerivedStateFromProps"><a href="#getDerivedStateFromProps" class="headerlink" title="getDerivedStateFromProps()"></a><code>getDerivedStateFromProps()</code></h5><ul>
-<li><strong><code>getDerivedStateFromProps</code></strong> 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容</li>
-<li>不管原因是什么，都会在<em>每次</em>渲染前触发此方法</li>
-</ul>
-<h5 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate()"></a><code>shouldComponentUpdate()</code></h5><ul>
-<li>根据 <strong><code>shouldComponentUpdate()</code></strong> 的返回值，判断 React 组件的输出是否受当前 state 或 props 更改的影响。默认行为是 state 每次发生变化组件都会重新渲染</li>
-<li>当 props 或 state 发生变化时，**<code>shouldComponentUpdate()</code>** 会在渲染执行之前被调用。返回值默认为 true</li>
-</ul>
-<h5 id="getSnapshotBeforeUpdate"><a href="#getSnapshotBeforeUpdate" class="headerlink" title="getSnapshotBeforeUpdate()"></a><code>getSnapshotBeforeUpdate()</code></h5><ul>
-<li><strong><code>getSnapshotBeforeUpdate()</code></strong> 在最近一次渲染输出（提交到 DOM 节点）之前调用。它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。此生命周期的任何返回值将作为参数传递给 <strong><code>componentDidUpdate()</code></strong></li>
-<li>此用法并不常见，但它可能出现在 UI 处理中，如需要以特殊方式处理滚动位置的聊天线程等</li>
-</ul>
-<h1 id="render-props模式-（★★★）"><a href="#render-props模式-（★★★）" class="headerlink" title="render-props模式 （★★★）"></a>render-props模式 （★★★）</h1><h2 id="目标-1"><a href="#目标-1" class="headerlink" title="目标"></a>目标</h2><ul>
-<li>知道render-props模式有什么作用</li>
-<li>能够说出render-props的使用步骤</li>
-</ul>
-<h2 id="React组件复用概述"><a href="#React组件复用概述" class="headerlink" title="React组件复用概述"></a>React组件复用概述</h2><ul>
-<li>思考：如果两个组件中的部分功能相似或相同，该如何处理？</li>
-<li>处理方式：复用相似的功能</li>
-<li>复用什么？<ul>
-<li>state</li>
-<li>操作state的方法</li>
-</ul>
-</li>
-<li>两种方式：<ul>
-<li>render props模式</li>
-<li>高阶组件（HOC）</li>
-</ul>
-</li>
-<li>注意： 这两种方式不是新的API，而是利用React自身特点的编码技巧，演化而成的固定模式</li>
-</ul>
-<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><ul>
-<li><p>思路：将要复用的state和操作state的方法封装到一个组件中</p>
-</li>
-<li><p>如何拿到该组件中复用的state</p>
-<ul>
-<li><p>在使用组件时，添加一个值为函数的prop，通过函数参数来获取</p>
-<p><img src="images/render-props-01.png"></p>
-</li>
-</ul>
-</li>
-<li><p>如何渲染到任意的UI</p>
-<ul>
-<li><p>使用该函数的返回值作为要渲染的UI内容</p>
-<p><img src="images/render-props-02.png"></p>
-</li>
-</ul>
-</li>
-</ul>
-<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
-<li>创建Mouse组件，在组件中提供复用的逻辑代码</li>
-<li>将要复用的状态作为 props.render(state)方法的参数，暴露到组件外部</li>
-<li>使用props.render() 的返回值作为要渲染的内容</li>
-</ul>
-<p><img src="images/render-props%E6%A8%A1%E5%BC%8F-01.png"></p>
-<h4 id="示例demo"><a href="#示例demo" class="headerlink" title="示例demo"></a>示例demo</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Mouse extends React.Component &#123;</span><br><span class="line">    // 鼠标位置状态</span><br><span class="line">    state = &#123;</span><br><span class="line">        x: 0,</span><br><span class="line">        y: 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 监听鼠标移动事件</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        window.addEventListener(&#x27;mousemove&#x27;,this.handleMouseMove)</span><br><span class="line">    &#125;</span><br><span class="line">    handleMouseMove = e =&gt; &#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            x: e.clientX,</span><br><span class="line">            y: e.clientY</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        // 向外界提供当前子组件里面的数据</span><br><span class="line">        return this.props.render(this.state)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                App</span><br><span class="line">                &lt;Mouse render=&#123;mouse =&gt; &#123;</span><br><span class="line">                    return &lt;p&gt;X&#123;mouse.x&#125;Y&#123;mouse.y&#125;&lt;/p&gt;</span><br><span class="line">                &#125;&#125;/&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(&lt;App /&gt;,document.getElementById(&#x27;root&#x27;))</span><br></pre></td></tr></table></figure>
-
-<h2 id="children代替render属性"><a href="#children代替render属性" class="headerlink" title="children代替render属性"></a>children代替render属性</h2><ul>
-<li>注意：并不是该模式叫 render props就必须使用名为render的prop，实际上可以使用任意名称的prop</li>
-<li>把prop是一个函数并且告诉组件要渲染什么内容的技术叫做： render props模式</li>
-<li>推荐：使用childre代替render属性</li>
-</ul>
-<p><img src="images/render-props-children%E6%A8%A1%E5%BC%8F.png"></p>
-<h2 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h2><ul>
-<li>推荐给render props模式添加props校验</li>
-</ul>
-<p><img src="images/%E4%BC%98%E5%8C%96-%E6%B7%BB%E5%8A%A0%E6%A0%A1%E9%AA%8C.png"></p>
-<ul>
-<li></li>
-</ul>
-<p><img src="images/%E4%BC%98%E5%8C%96-%E7%A7%BB%E9%99%A4%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A.png"></p>
-<h1 id="高阶组件-（★★★）"><a href="#高阶组件-（★★★）" class="headerlink" title="高阶组件 （★★★）"></a>高阶组件 （★★★）</h1><h2 id="目标-2"><a href="#目标-2" class="headerlink" title="目标"></a>目标</h2><ul>
-<li>知道高阶组件的作用</li>
-<li>能够说出高阶的使用步骤</li>
-</ul>
-<h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><ul>
-<li>目的：实现状态逻辑复用</li>
-<li>采用 包装模式</li>
-<li>手机：获取保护功能</li>
-<li>手机壳：提供保护功能</li>
-<li>高阶组件就相当于手机壳，通过包装组件，增强组件功能</li>
-</ul>
-<p><img src="images/%E6%89%8B%E6%9C%BA%E5%A3%B3.png"></p>
-<h2 id="思路分析-1"><a href="#思路分析-1" class="headerlink" title="思路分析"></a>思路分析</h2><ul>
-<li>高阶组件(HOC、Higher-Order Component) 是一个函数，接收要包装的组件，返回增强后的组件</li>
-</ul>
-<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-%E5%87%BD%E6%95%B0.png"></p>
-<ul>
-<li>高阶组件内部创建了一个类组件，在这个类组件中提供复用的状态逻辑代码，通过prop将复用的状态传递给被包装组件<code>WrappedComponent</code></li>
-</ul>
-<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-%E7%B1%BB%E7%BB%84%E4%BB%B6%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png"></p>
-<h2 id="使用步骤-1"><a href="#使用步骤-1" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
-<li>创建一个函数，名称约定以with开头</li>
-<li>指定函数参数，参数应该以大写字母开头</li>
-<li>在函数内部创建一个类组件，提供复用的状态逻辑代码，并返回</li>
-<li>在该组件中，渲染参数组件，同时将状态通过prop传递给参数组件</li>
-<li>调用该高阶组件，传入要增强的组件，通过返回值拿到增强后的组件，并将其渲染到页面</li>
-</ul>
-<p><strong>包装函数</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 定义一个函数，在函数内部创建一个相应类组件</span><br><span class="line">function withMouse(WrappedComponent) &#123;</span><br><span class="line">    // 该组件提供复用状态逻辑</span><br><span class="line">    class Mouse extends React.Component &#123;</span><br><span class="line">        state = &#123;</span><br><span class="line">            x: 0,</span><br><span class="line">            y: 0</span><br><span class="line">        &#125;</span><br><span class="line">        // 事件的处理函数</span><br><span class="line">        handleMouseMove = (e) =&gt; &#123;</span><br><span class="line">            this.setState(&#123;</span><br><span class="line">                x: e.clientX,</span><br><span class="line">                y: e.clientY</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        // 当组件挂载的时候进行事件绑定</span><br><span class="line">        componentDidMount() &#123;</span><br><span class="line">            window.addEventListener(&#x27;mousemove&#x27;, this.handleMouseMove)</span><br><span class="line">        &#125;</span><br><span class="line">        // 当组件移除时候解绑事件</span><br><span class="line">        componentWillUnmount() &#123;</span><br><span class="line">            window.removeEventListener(&#x27;mousemove&#x27;, this.handleMouseMove)</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            // 在render函数里面返回传递过来的组件，把当前组件的状态设置进去</span><br><span class="line">            return &lt;WrappedComponent &#123;...this.state&#125; /&gt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return Mouse</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>哪个组件需要加强，通过调用<code>withMouse</code>这个函数，然后把返回的值设置到父组件中即可</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Position(props) &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            X:&#123;props.x&#125;</span><br><span class="line">            Y:&#123;props.y&#125;</span><br><span class="line">        &lt;/p&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">// 把position 组件来进行包装</span><br><span class="line">let MousePosition = withMouse(Position)</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props)</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                高阶组件</span><br><span class="line">                &lt;MousePosition&gt;&lt;/MousePosition&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="设置displayName"><a href="#设置displayName" class="headerlink" title="设置displayName"></a>设置<code>displayName</code></h2><ul>
-<li>使用高阶组件存在的问题：得到两个组件的名称相同</li>
-<li>原因：默认情况下，React使用组件名称作为<code>displayName</code></li>
-<li>解决方式：为高阶组件设置<code>displayName</code>，便于调试时区分不同的组件</li>
-<li><code>displayName的作用：用于设置调试信息(React Developer Tools信息)</code></li>
-<li>设置方式：</li>
-</ul>
-<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-displayName.png"></p>
-<h2 id="传递props"><a href="#传递props" class="headerlink" title="传递props"></a>传递props</h2><ul>
-<li>问题：如果没有传递props，会导致props丢失问题</li>
-<li>解决方式： 渲染<code>WrappedComponent</code>时，将state和props一起传递给组件</li>
-</ul>
-<p><img src="images/%E4%BC%A0%E9%80%92props.png"></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
-<li>组件通讯是构建React应用必不可少的一环</li>
-<li>props的灵活性让组件更加强大</li>
-<li>状态提升是React组件的常用模式</li>
-<li>组件生命周期有助于理解组件的运行过程</li>
-<li>钩子函数让开发者可以在特定的时机执行某些功能</li>
-<li><code>render props</code> 模式和高阶组件都可以实现组件状态逻辑的复用</li>
-<li>组件极简模型： <code>(state,props) =&gt; UI</code></li>
-</ul>
-<h1 id="React原理"><a href="#React原理" class="headerlink" title="React原理"></a>React原理</h1><h2 id="目标-3"><a href="#目标-3" class="headerlink" title="目标"></a>目标</h2><ul>
-<li>能够知道<code>setState()</code>更新数据是异步的</li>
-<li>能够知道JSX语法的转化过程</li>
-</ul>
-<h2 id="setState-说明-（★★★）"><a href="#setState-说明-（★★★）" class="headerlink" title="setState()说明 （★★★）"></a><code>setState()</code>说明 （★★★）</h2><h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><ul>
-<li><code>setState()</code>更新数据是异步的</li>
-<li>注意：使用该语法，后面的<code>setState</code>不要依赖前面<code>setState</code>的值</li>
-<li>多次调用<code>setState</code>，只会触发一次render</li>
-</ul>
-<h3 id="推荐语法"><a href="#推荐语法" class="headerlink" title="推荐语法"></a>推荐语法</h3><ul>
-<li>推荐：使用 <code>setState((state,props) =&gt; &#123;&#125;)</code> 语法</li>
-<li>参数state： 表示最新的state</li>
-<li>参数props： 表示最新的props</li>
-</ul>
-<p><img src="images/%E6%8E%A8%E8%8D%90%E8%AF%AD%E6%B3%95.png"></p>
-<h3 id="第二个参数"><a href="#第二个参数" class="headerlink" title="第二个参数"></a>第二个参数</h3><ul>
-<li>场景：在状态更新(页面完成重新渲染)后立即执行某个操作</li>
-<li>语法：<code>setState(update[,callback])</code></li>
-</ul>
-<p><img src="images/%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0.png"></p>
-<h2 id="JSX语法的转化过程-（★★★）"><a href="#JSX语法的转化过程-（★★★）" class="headerlink" title="JSX语法的转化过程 （★★★）"></a>JSX语法的转化过程 （★★★）</h2><ul>
-<li>JSX仅仅是<code>createElement()</code> 方法的语法糖(简化语法)</li>
-<li>JSX语法被 @babel/preset-react 插件编译为<code>createElement()</code> 方法</li>
-<li>React 元素： 是一个对象，用来描述你希望在屏幕上看到的内容</li>
-</ul>
-<p><img src="images/%E8%AF%AD%E6%B3%95%E7%B3%96.png"></p>
-]]></content>
-  </entry>
-  <entry>
     <title>Day4 React原理揭秘&amp;React路由基础</title>
     <url>/2022/01/17/react%E5%9F%BA%E7%A1%80Day04-React%E5%8E%9F%E7%90%86%E6%8F%AD%E7%A7%98&amp;React%E8%B7%AF%E7%94%B1%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h1 id="React原理揭秘"><a href="#React原理揭秘" class="headerlink" title="React原理揭秘"></a>React原理揭秘</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
@@ -2527,28 +2345,6 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
-    <title>Rem适配方案</title>
-    <url>/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</url>
-    <content><![CDATA[<h2 id="1-直接引入-rem-js-文件"><a href="#1-直接引入-rem-js-文件" class="headerlink" title="1. 直接引入 rem.js 文件"></a>1. 直接引入 rem.js 文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var devicePixelRatio = 1;</span></span><br><span class="line">  <span class="comment">// var scale = 1 / devicePixelRatio;</span></span><br><span class="line">  <span class="comment">// document.querySelector(&#x27;meta[name=&quot;viewport&quot;]&#x27;).setAttribute(&#x27;content&#x27;,&#x27;initial-scale=&#x27; + scale + &#x27;, maximum-scale=&#x27; + scale + &#x27;, minimum-scale=&#x27; + scale + &#x27;, user-scalable=no&#x27;);</span></span><br><span class="line">  <span class="comment">// 7.5根据设计稿的横向分辨率/100得来</span></span><br><span class="line">  <span class="comment">// alert(document.documentElement.clientWidth)</span></span><br><span class="line">  <span class="keyword">var</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// var deviceWidth = window.screen.availWidth</span></span><br><span class="line">  <span class="comment">// alert(navigator.userAgent)</span></span><br><span class="line">  <span class="comment">// alert(deviceWidth)</span></span><br><span class="line">  <span class="comment">// console.log(navigator.userAgent)</span></span><br><span class="line">  <span class="keyword">if</span> (deviceWidth &gt; <span class="number">750</span>) &#123;</span><br><span class="line">    <span class="comment">// deviceWidth = 750;</span></span><br><span class="line">    deviceWidth = <span class="number">7.5</span> * <span class="number">50</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = deviceWidth / <span class="number">7.5</span> + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 禁止双击放大</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">var</span> lastTouchEnd = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchend&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTouchEnd &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">    lastTouchEnd = now;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-淘宝的适配方案"><a href="#2-淘宝的适配方案" class="headerlink" title="2. 淘宝的适配方案"></a>2. 淘宝的适配方案</h2><ol>
-<li>安装依赖包  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">yarn add lib-flexible -S   </span><br><span class="line"></span><br><span class="line">yarn add  postcss-px2rem -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>在main.js 文件中引入  </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在vue.config.js 文件中配置 css 属性</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">css</span>: &#123;</span><br><span class="line">        <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">            <span class="attr">css</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">postcss</span>: &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [</span><br><span class="line">                    <span class="built_in">require</span>(<span class="string">&#x27;postcss-px2rem&#x27;</span>)(&#123;</span><br><span class="line">                        <span class="attr">remUnit</span>: <span class="number">37.5</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-  </entry>
-  <entry>
     <title>Day5 Redux</title>
     <url>/2022/01/17/react%E5%9F%BA%E7%A1%80Day05-redux/</url>
     <content><![CDATA[<h1 id="redux、react-redux"><a href="#redux、react-redux" class="headerlink" title="redux、react-redux"></a>redux、react-redux</h1><h2 id="一、为什么需要使用redux"><a href="#一、为什么需要使用redux" class="headerlink" title="一、为什么需要使用redux"></a>一、为什么需要使用redux</h2><p>两个组件(非父子关系)之间需要通信的话，可能需要多个中间组件为他们进行消息传递，这样既浪费了资源，代码也会比较复杂。</p>
@@ -2605,6 +2401,28 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <li>在actions.js中发送异步请求</li>
 </ol>
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ADD_COUNT &#125; <span class="keyword">from</span> <span class="string">&#x27;./types&#x27;</span></span><br><span class="line"><span class="keyword">import</span> axios <span class="keyword">from</span> <span class="string">&#x27;axios&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> addCountAction = <span class="function">(<span class="params">value</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">type</span>: ADD_COUNT,</span><br><span class="line">    value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">   </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> getTodos = <span class="function">(<span class="params">number</span>) =&gt;</span> <span class="function"><span class="params">dispatch</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(number)</span><br><span class="line">  axios</span><br><span class="line">    .get(<span class="string">&#x27;http://jsonplaceholder.typicode.com/todos&#x27;</span>)</span><br><span class="line">    .then(<span class="function"><span class="params">todos</span> =&gt;</span> &#123;</span><br><span class="line">      <span class="comment">// 把actions 发送给 reducer   </span></span><br><span class="line">      dispatch(addCountAction(todos))</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Rem适配方案</title>
+    <url>/2021/12/31/rem%E9%80%82%E9%85%8D%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<h2 id="1-直接引入-rem-js-文件"><a href="#1-直接引入-rem-js-文件" class="headerlink" title="1. 直接引入 rem.js 文件"></a>1. 直接引入 rem.js 文件</h2><figure class="highlight js"><table><tr><td class="code"><pre><span class="line">  <span class="keyword">export</span> <span class="keyword">default</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// var devicePixelRatio = 1;</span></span><br><span class="line">  <span class="comment">// var scale = 1 / devicePixelRatio;</span></span><br><span class="line">  <span class="comment">// document.querySelector(&#x27;meta[name=&quot;viewport&quot;]&#x27;).setAttribute(&#x27;content&#x27;,&#x27;initial-scale=&#x27; + scale + &#x27;, maximum-scale=&#x27; + scale + &#x27;, minimum-scale=&#x27; + scale + &#x27;, user-scalable=no&#x27;);</span></span><br><span class="line">  <span class="comment">// 7.5根据设计稿的横向分辨率/100得来</span></span><br><span class="line">  <span class="comment">// alert(document.documentElement.clientWidth)</span></span><br><span class="line">  <span class="keyword">var</span> deviceWidth = <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line">  <span class="comment">// var deviceWidth = window.screen.availWidth</span></span><br><span class="line">  <span class="comment">// alert(navigator.userAgent)</span></span><br><span class="line">  <span class="comment">// alert(deviceWidth)</span></span><br><span class="line">  <span class="comment">// console.log(navigator.userAgent)</span></span><br><span class="line">  <span class="keyword">if</span> (deviceWidth &gt; <span class="number">750</span>) &#123;</span><br><span class="line">    <span class="comment">// deviceWidth = 750;</span></span><br><span class="line">    deviceWidth = <span class="number">7.5</span> * <span class="number">50</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">document</span>.documentElement.style.fontSize = deviceWidth / <span class="number">7.5</span> + <span class="string">&#x27;px&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 禁止双击放大</span></span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchstart&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (event.touches.length &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">  <span class="keyword">var</span> lastTouchEnd = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">document</span>.documentElement.addEventListener(<span class="string">&#x27;touchend&#x27;</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> now = <span class="built_in">Date</span>.now();</span><br><span class="line">    <span class="keyword">if</span> (now - lastTouchEnd &lt;= <span class="number">300</span>) &#123;</span><br><span class="line">      event.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">    lastTouchEnd = now;</span><br><span class="line">  &#125;, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-淘宝的适配方案"><a href="#2-淘宝的适配方案" class="headerlink" title="2. 淘宝的适配方案"></a>2. 淘宝的适配方案</h2><ol>
+<li>安装依赖包  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">yarn add lib-flexible -S   </span><br><span class="line"></span><br><span class="line">yarn add  postcss-px2rem -S  </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>在main.js 文件中引入  </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>在vue.config.js 文件中配置 css 属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="attr">css</span>: &#123;</span><br><span class="line">        <span class="attr">loaderOptions</span>: &#123;</span><br><span class="line">            <span class="attr">css</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">postcss</span>: &#123;</span><br><span class="line">                <span class="attr">plugins</span>: [</span><br><span class="line">                    <span class="built_in">require</span>(<span class="string">&#x27;postcss-px2rem&#x27;</span>)(&#123;</span><br><span class="line">                        <span class="attr">remUnit</span>: <span class="number">37.5</span></span><br><span class="line">                    &#125;)</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
   </entry>
@@ -2946,6 +2764,34 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 ]]></content>
   </entry>
   <entry>
+    <title>vue中配置生成环境和开发环境</title>
+    <url>/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
+    <content><![CDATA[<h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
+<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
+</ol>
+<ul>
+<li>.env.development<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li>.env.production<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
+<li>.env.staging </li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>在封装的axios网络请求中配置baseURL  </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
+<li><p>配置package.json文件  </p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
+<h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a href="http://www.hahah.com/">www.hahah.com</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>vueX快速上手</title>
     <url>/2021/12/11/vueX/</url>
     <content><![CDATA[<h2 id="一、什么是vuex？"><a href="#一、什么是vuex？" class="headerlink" title="一、什么是vuex？"></a>一、什么是vuex？</h2><ul>
@@ -2957,10 +2803,10 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <li><p>对于组件与组件之间的通信，可以new一个新的Vue实例，专门用来做event bus进行通信。怎么用？</p>
 </li>
 <li><p>当多个组件之间共享一个状态时，event bus可能就变成乱了</p>
-<p><img src="../../public/img/1.jpg"></p>
+<p><img src="/2021/12/11/vueX/../public/img/1.jpg"></p>
 </li>
 </ol>
-<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="./vuex.png"></p>
+<h2 id="三、-vuex数据流"><a href="#三、-vuex数据流" class="headerlink" title="三、 vuex数据流"></a>三、 vuex数据流</h2><p><img src="/2021/12/11/vueX/vuex.png"></p>
 <ol>
 <li><p>Vue Components    用户  </p>
 </li>
@@ -3024,81 +2870,6 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>  d. 页面结构：将样式表放在顶部，将脚本放在底部，尽早刷新文档的输出</p>
 <p>  e. 代码校验：避免CSS表达式，避免重定向</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>vue中配置生成环境和开发环境</title>
-    <url>/2021/12/11/vue-cli3%E4%B8%AD%E9%85%8D%E7%BD%AE%E7%94%9F%E6%88%90%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</url>
-    <content><![CDATA[<h1 id="vue-cli3-配置"><a href="#vue-cli3-配置" class="headerlink" title="vue-cli3 配置"></a>vue-cli3 配置</h1><h2 id="一、-vue-cli3中配置生成环境和开发环境"><a href="#一、-vue-cli3中配置生成环境和开发环境" class="headerlink" title="一、 vue-cli3中配置生成环境和开发环境"></a>一、 vue-cli3中配置生成环境和开发环境</h2><ol>
-<li>在项目的根目录创建 .env.development 和 .env.production 环境   </li>
-</ol>
-<ul>
-<li>.env.development<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;development&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/dev-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li>.env.production<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;production&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/prod-api&#x27;</span><br></pre></td></tr></table></figure></li>
-<li>.env.staging </li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">NODE_ENV = production</span><br><span class="line"></span><br><span class="line"># just a flag</span><br><span class="line">ENV = &#x27;staging&#x27;</span><br><span class="line"></span><br><span class="line"># base api</span><br><span class="line">VUE_APP_BASE_API = &#x27;/stage-api&#x27;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li><p>在封装的axios网络请求中配置baseURL  </p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> http = axios.create(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: process.env.VUE_APP_BASE_API</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></li>
-<li><p>配置package.json文件  </p>
-<figure class="highlight json"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;scripts&quot;</span>: &#123;</span><br><span class="line">  <span class="attr">&quot;dev&quot;</span>: <span class="string">&quot;vue-cli-service serve&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:prod&quot;</span>: <span class="string">&quot;vue-cli-service build&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;build:stage&quot;</span>: <span class="string">&quot;vue-cli-service build --mode staging&quot;</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="二、vue-cli3中配置反向代理和node服务"><a href="#二、vue-cli3中配置反向代理和node服务" class="headerlink" title="二、vue-cli3中配置反向代理和node服务"></a>二、vue-cli3中配置反向代理和node服务</h2><h3 id="2-1-proxy"><a href="#2-1-proxy" class="headerlink" title="2.1 proxy"></a>2.1 proxy</h3><p>  在vue.config.js中配置devServer的proxy属性</p>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="attr">proxy</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">        <span class="attr">target</span>: <span class="string">&#x27;https://yys.res.netease.com&#x27;</span>,<span class="comment">//目标地址</span></span><br><span class="line">        <span class="attr">ws</span>: <span class="literal">true</span>, <span class="comment">//// 是否启用websockets</span></span><br><span class="line">        <span class="attr">changeOrigin</span>: <span class="literal">true</span>, <span class="comment">//开启代理：在本地会创建一个虚拟服务端，然后发送请求的数据，并同时接收请求的数据，这样服务端和服务端进行数据的交互就不会有跨域问题</span></span><br><span class="line">        <span class="attr">pathRewrite</span>: &#123; <span class="string">&#x27;^/api&#x27;</span>: <span class="string">&#x27;/&#x27;</span> &#125;    <span class="comment">//这里重写路径</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="2-2-before"><a href="#2-2-before" class="headerlink" title="2.2 before"></a>2.2 before</h3><p> 在vue.config.js中配置devServer的before属性<br>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="attr">devServer</span>: &#123;</span><br><span class="line">    <span class="function"><span class="title">before</span>(<span class="params">app</span>)</span> &#123;</span><br><span class="line">      app.get(<span class="string">&#x27;/api/data&#x27;</span>, <span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">        res.send(&#123;</span><br><span class="line">          <span class="attr">code</span>: <span class="number">1</span>,</span><br><span class="line">          <span class="attr">msg</span>: [</span><br><span class="line">            &#123;</span><br><span class="line">              <span class="attr">id</span>: <span class="number">0</span>,</span><br><span class="line">              <span class="attr">name</span>: <span class="string">&#x27;fly&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">          ]</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
-<h2 id="参看文献"><a href="#参看文献" class="headerlink" title="参看文献"></a>参看文献</h2><p><a href="http://www.hahah.com/">www.hahah.com</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>小程序技术栈整合</title>
-    <url>/2022/01/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E6%A0%88%E6%95%B4%E5%90%88/</url>
-    <content><![CDATA[<h1 id="小程序技术栈整合"><a href="#小程序技术栈整合" class="headerlink" title="小程序技术栈整合"></a>小程序技术栈整合</h1><h2 id="一、-mpvue配置"><a href="#一、-mpvue配置" class="headerlink" title="一、 mpvue配置"></a>一、 mpvue配置</h2><ol>
-<li>全局安装 vue-cli  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --global vue-cli@2.9.6</span><br><span class="line"></span><br><span class="line">如果已经装了这个 2.9.6 可以不装了</span><br><span class="line"></span><br><span class="line">npm install @vue/cli-init -g </span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li><p>创建一个基于 mpvue-quickstart 模板的新项目</p>
-<p>新手一路回车选择默认就可以了</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue init mpvue/mpvue-quickstart my-project</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h2 id="二、-mpvue中配置-vant-weapp"><a href="#二、-mpvue中配置-vant-weapp" class="headerlink" title="二、 mpvue中配置 vant-weapp"></a>二、 mpvue中配置 vant-weapp</h2><ol>
-<li>下载 vant-weapp 资源  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/youzan/vant-weapp.git</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>将dist目录下的所有文件复制到你项目的/static/vant/目录下 </li>
-</ol>
-<p>  注意打开 微信开发者工具中的ES6转ES5功能 </p>
-<ol start="3">
-<li>在需要引入的页面目录下的main.json文件中</li>
-</ol>
-  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;van-button&quot;</span>: <span class="string">&quot;/static/vant/button/index&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>使用</li>
-</ol>
-  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="三、-mpvue中配置-flyio"><a href="#三、-mpvue中配置-flyio" class="headerlink" title="三、 mpvue中配置 flyio"></a>三、 mpvue中配置 flyio</h2><ol>
-<li>安装 flyio  </li>
-</ol>
-  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add flyio -S  </span><br></pre></td></tr></table></figure>
-<ol start="2">
-<li>新建文件 src/api/fly.js    </li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Fly <span class="keyword">from</span> <span class="string">&#x27;flyio/dist/npm/wx&#x27;</span></span><br><span class="line"><span class="keyword">const</span> fly = <span class="keyword">new</span> Fly()</span><br><span class="line"><span class="keyword">const</span> host = <span class="string">&#x27;http://127.0.0.1:5000/&#x27;</span></span><br><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">fly.interceptors.request.use(</span><br><span class="line">  <span class="function">(<span class="params">request</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.showLoading(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;加载中&#x27;</span>,</span><br><span class="line">      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(request)</span><br><span class="line">    <span class="comment">// request.headers[&quot;X-Tag&quot;] = &quot;flyio&quot;;</span></span><br><span class="line">    <span class="comment">// request.headers[&#x27;content-type&#x27;]= &#x27;application/json&#x27;;</span></span><br><span class="line">    request.headers = &#123;</span><br><span class="line">      <span class="string">&#x27;X-Tag&#x27;</span>: <span class="string">&#x27;flyio&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> authParams = &#123;</span><br><span class="line">      <span class="comment">// 公共参数</span></span><br><span class="line">      <span class="string">&#x27;categoryType&#x27;</span>: <span class="string">&#x27;SaleGoodsType@sim&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;streamNo&#x27;</span>: <span class="string">&#x27;wxapp153570682909641893&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;reqSource&#x27;</span>: <span class="string">&#x27;MALL_H5&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;appid&#x27;</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;timestamp&#x27;</span>: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">      <span class="string">&#x27;sign&#x27;</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request.body &amp;&amp; <span class="built_in">Object</span>.keys(request.body).forEach(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (request.body[val] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> request.body[val]</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    request.body = &#123;</span><br><span class="line">      ...request.body,</span><br><span class="line">      ...authParams</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> request</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">fly.interceptors.response.use(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">return</span> response.data<span class="comment">// 请求成功之后将返回值返回</span></span><br><span class="line">&#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 请求出错，根据返回状态码判断出错原因</span></span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;请求失败&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">fly.config.baseURL = host</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> fly</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<ol start="3">
-<li>将fly.js引入main.js然后直接挂载到vue原型上</li>
-</ol>
-  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> fly <span class="keyword">from</span> <span class="string">&#x27;./api/fly&#x27;</span></span><br><span class="line">Vue.prototype.$fly = fly</span><br></pre></td></tr></table></figure>
-
-<h2 id="四、使用Promise封装小程序网络请求"><a href="#四、使用Promise封装小程序网络请求" class="headerlink" title="四、使用Promise封装小程序网络请求"></a>四、使用Promise封装小程序网络请求</h2><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 基于Promise的网络请求库, 包含GET POST请求</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.先引入： import &#123; get, post,... &#125; from 本文件;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.get请求: get(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. post请求: post(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 服务器请求地址 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> domain = <span class="string">&#x27;http://203.195.181.208:8888/&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起get请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数 get请求的参数会自动拼到地址后面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> get = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;GET&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起post请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> post = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;POST&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 接口请求基类方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>method 请求方法 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>header 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">method, url, data, header = &#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    url = domain + url;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url,</span><br><span class="line"></span><br><span class="line">      method,</span><br><span class="line"></span><br><span class="line">      data,</span><br><span class="line"></span><br><span class="line">      header,</span><br><span class="line"></span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> response.success = res,</span><br><span class="line"></span><br><span class="line">      <span class="attr">fail</span>: <span class="function">(<span class="params">error</span>) =&gt;</span> response.fail = error,</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        wx.hideLoading();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response.success) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (response.success.statusCode != <span class="number">200</span>) &#123;</span><br><span class="line"></span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;网络出错，稍后再试&quot;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          resolve(response.success.data);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;数据请求失败，请稍后重试&quot;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;数据请求失败&#x27;</span>, response.fail)</span><br><span class="line"></span><br><span class="line">          reject(response.fail);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"><span class="comment">// const host = &#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;<span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;app.globalData.baseURL&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      <span class="comment">// url: host + url,</span></span><br><span class="line">      <span class="attr">method</span>: options.method,</span><br><span class="line">      <span class="attr">data</span>: options.method === <span class="string">&#x27;GET&#x27;</span> ? options.data : <span class="built_in">JSON</span>.stringify(options.data),</span><br><span class="line">      <span class="attr">header</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;x-token&#x27;</span>: <span class="string">&#x27;x-token&#x27;</span>  <span class="comment">// 看自己是否需要</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: resolve,</span><br><span class="line">      <span class="attr">fail</span>: reject,</span><br><span class="line">      <span class="comment">// success(request) &#123;</span></span><br><span class="line">      <span class="comment">//   // console.log(request)</span></span><br><span class="line">      <span class="comment">//   if (request.statusCode === 200) &#123;</span></span><br><span class="line">      <span class="comment">//     resolve(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125; else &#123;</span></span><br><span class="line">      <span class="comment">//     reject(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125;</span></span><br><span class="line">      <span class="comment">// &#125;,</span></span><br><span class="line">      <span class="comment">// fail(error) &#123;</span></span><br><span class="line">      <span class="comment">//   reject(error.data)</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      	wx.hideLoading()</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> get = <span class="function">(<span class="params">url, options = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> post = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> put = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能声明DELETE（关键字）</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  get,</span><br><span class="line">  post,</span><br><span class="line">  put,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>面试题总结</title>
@@ -3315,7 +3086,11 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 &gt;
 &gt; history使用的是传统的路由分发模式,需要后台配置支持
 </code></pre>
-<h2 id="19-浏览器的缓存机制-能讲一下原理吗"><a href="#19-浏览器的缓存机制-能讲一下原理吗" class="headerlink" title="19. 浏览器的缓存机制?能讲一下原理吗?"></a>19. 浏览器的缓存机制?能讲一下原理吗?</h2><h2 id="20-BOM的location对象的跳转方法和vue的编程式导航有什么区别"><a href="#20-BOM的location对象的跳转方法和vue的编程式导航有什么区别" class="headerlink" title="20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?"></a>20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?</h2><pre><code>&gt; location对象的跳转方法会导致页面刷新或跳转
+<h2 id="19-浏览器的缓存机制-能讲一下原理吗"><a href="#19-浏览器的缓存机制-能讲一下原理吗" class="headerlink" title="19. 浏览器的缓存机制?能讲一下原理吗?"></a>19. 浏览器的缓存机制?能讲一下原理吗?</h2><pre><code>&gt; 强缓存：不会向服务器发送请求，直接命中内存中的缓存资源，从chrome Network中可以看到资源200且from disk cache或from memory cache。
+
+&gt; 协商缓存：向服务器发送请求，服务器根据request header内的参数来判断是否需要更新此资源，如果不需要更新，服务器返回304的状态码，然后通知浏览器读取本地缓存。
+</code></pre>
+<h2 id="20-BOM的location对象的跳转方法和vue的编程式导航有什么区别"><a href="#20-BOM的location对象的跳转方法和vue的编程式导航有什么区别" class="headerlink" title="20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?"></a>20. BOM的location对象的跳转方法和vue的编程式导航有什么区别?</h2><pre><code>&gt; location对象的跳转方法会导致页面刷新或跳转
 &gt;
 &gt; 编程式导航并不会让页面刷新
 </code></pre>
@@ -3332,8 +3107,237 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 &gt; 5. 使用css3的translate水平垂直居中元素 这种方式将脱离文档流的元素，设置top：50%，left：50%，然后使用transform来向左向上偏移半个内元素的宽和高。
 &gt; 6. 使用css3计算的方式居中元素calc 这种方式同样是将脱离文档流的元素，然后使用计算的方式来设置top和left；
 </code></pre>
-<h2 id="24-width：auto和width：100-的区别"><a href="#24-width：auto和width：100-的区别" class="headerlink" title="24.width：auto和width：100%的区别"></a>24.width：auto和width：100%的区别</h2><pre><code>&gt; width：100%是相对你上层的标签而言，基本上跟你上层便签一样的宽度，但是width：auto是根据你这个标签里面的元素的宽度来自动调节本身的宽度
+<h2 id="24-width：auto和width：100-的区别"><a href="#24-width：auto和width：100-的区别" class="headerlink" title="24.width：auto和width：100%的区别"></a>24.width：auto和width：100%的区别</h2><pre><code>width：100%是相对你上层的标签而言，基本上跟你上层便签一样的宽度，但是width：auto是根据你这个标签里面的元素的宽度来自动调节本身的宽度.
 </code></pre>
+]]></content>
+  </entry>
+  <entry>
+    <title>小程序技术栈整合</title>
+    <url>/2022/01/05/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%80%E6%9C%AF%E6%A0%88%E6%95%B4%E5%90%88/</url>
+    <content><![CDATA[<h1 id="小程序技术栈整合"><a href="#小程序技术栈整合" class="headerlink" title="小程序技术栈整合"></a>小程序技术栈整合</h1><h2 id="一、-mpvue配置"><a href="#一、-mpvue配置" class="headerlink" title="一、 mpvue配置"></a>一、 mpvue配置</h2><ol>
+<li>全局安装 vue-cli  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install --global vue-cli@2.9.6</span><br><span class="line"></span><br><span class="line">如果已经装了这个 2.9.6 可以不装了</span><br><span class="line"></span><br><span class="line">npm install @vue/cli-init -g </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><p>创建一个基于 mpvue-quickstart 模板的新项目</p>
+<p>新手一路回车选择默认就可以了</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vue init mpvue/mpvue-quickstart my-project</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="二、-mpvue中配置-vant-weapp"><a href="#二、-mpvue中配置-vant-weapp" class="headerlink" title="二、 mpvue中配置 vant-weapp"></a>二、 mpvue中配置 vant-weapp</h2><ol>
+<li>下载 vant-weapp 资源  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/youzan/vant-weapp.git</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>将dist目录下的所有文件复制到你项目的/static/vant/目录下 </li>
+</ol>
+<p>  注意打开 微信开发者工具中的ES6转ES5功能 </p>
+<ol start="3">
+<li>在需要引入的页面目录下的main.json文件中</li>
+</ol>
+  <figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;usingComponents&quot;</span>: &#123;</span><br><span class="line">    <span class="attr">&quot;van-button&quot;</span>: <span class="string">&quot;/static/vant/button/index&quot;</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>使用</li>
+</ol>
+  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">van-button</span>&gt;</span>测试<span class="tag">&lt;/<span class="name">van-button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、-mpvue中配置-flyio"><a href="#三、-mpvue中配置-flyio" class="headerlink" title="三、 mpvue中配置 flyio"></a>三、 mpvue中配置 flyio</h2><ol>
+<li>安装 flyio  </li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yarn add flyio -S  </span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>新建文件 src/api/fly.js    </li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> Fly <span class="keyword">from</span> <span class="string">&#x27;flyio/dist/npm/wx&#x27;</span></span><br><span class="line"><span class="keyword">const</span> fly = <span class="keyword">new</span> Fly()</span><br><span class="line"><span class="keyword">const</span> host = <span class="string">&#x27;http://127.0.0.1:5000/&#x27;</span></span><br><span class="line"><span class="comment">// 添加请求拦截器</span></span><br><span class="line">fly.interceptors.request.use(</span><br><span class="line">  <span class="function">(<span class="params">request</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.showLoading(&#123;</span><br><span class="line">      <span class="attr">title</span>: <span class="string">&#x27;加载中&#x27;</span>,</span><br><span class="line">      <span class="attr">mask</span>: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="built_in">console</span>.log(request)</span><br><span class="line">    <span class="comment">// request.headers[&quot;X-Tag&quot;] = &quot;flyio&quot;;</span></span><br><span class="line">    <span class="comment">// request.headers[&#x27;content-type&#x27;]= &#x27;application/json&#x27;;</span></span><br><span class="line">    request.headers = &#123;</span><br><span class="line">      <span class="string">&#x27;X-Tag&#x27;</span>: <span class="string">&#x27;flyio&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;content-type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> authParams = &#123;</span><br><span class="line">      <span class="comment">// 公共参数</span></span><br><span class="line">      <span class="string">&#x27;categoryType&#x27;</span>: <span class="string">&#x27;SaleGoodsType@sim&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;streamNo&#x27;</span>: <span class="string">&#x27;wxapp153570682909641893&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;reqSource&#x27;</span>: <span class="string">&#x27;MALL_H5&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;appid&#x27;</span>: <span class="string">&#x27;string&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;timestamp&#x27;</span>: <span class="keyword">new</span> <span class="built_in">Date</span>().getTime(),</span><br><span class="line">      <span class="string">&#x27;sign&#x27;</span>: <span class="string">&#x27;string&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    request.body &amp;&amp; <span class="built_in">Object</span>.keys(request.body).forEach(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (request.body[val] === <span class="string">&#x27;&#x27;</span>) &#123;</span><br><span class="line">        <span class="keyword">delete</span> request.body[val]</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;)</span><br><span class="line">    request.body = &#123;</span><br><span class="line">      ...request.body,</span><br><span class="line">      ...authParams</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> request</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加响应拦截器</span></span><br><span class="line">fly.interceptors.response.use(<span class="function">(<span class="params">response</span>) =&gt;</span> &#123;</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">return</span> response.data<span class="comment">// 请求成功之后将返回值返回</span></span><br><span class="line">&#125;, <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 请求出错，根据返回状态码判断出错原因</span></span><br><span class="line">  <span class="built_in">console</span>.log(err)</span><br><span class="line">  wx.hideLoading()</span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;请求失败&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">fly.config.baseURL = host</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> fly</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>将fly.js引入main.js然后直接挂载到vue原型上</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> fly <span class="keyword">from</span> <span class="string">&#x27;./api/fly&#x27;</span></span><br><span class="line">Vue.prototype.$fly = fly</span><br></pre></td></tr></table></figure>
+
+<h2 id="四、使用Promise封装小程序网络请求"><a href="#四、使用Promise封装小程序网络请求" class="headerlink" title="四、使用Promise封装小程序网络请求"></a>四、使用Promise封装小程序网络请求</h2><h3 id="方式1"><a href="#方式1" class="headerlink" title="方式1"></a>方式1</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 1. 基于Promise的网络请求库, 包含GET POST请求</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.使用方法：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1.先引入： import &#123; get, post,... &#125; from 本文件;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2.get请求: get(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. post请求: post(&quot;/index&quot;, &#123; id: 2 &#125;).then(data =&gt; &#123; &#125;).catch(error =&gt; &#123; &#125;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 服务器请求地址 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> domain = <span class="string">&#x27;http://203.195.181.208:8888/&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起get请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数 get请求的参数会自动拼到地址后面</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> get = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;GET&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 发起post请求</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>headers 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> post = <span class="function">(<span class="params">url, data, headers</span>) =&gt;</span> request(<span class="string">&#x27;POST&#x27;</span>, url, data, headers);</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* 接口请求基类方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>method 请求方法 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>url 请求路径 必填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>data 请求参数</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@param </span>header 请求头 选填</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">* <span class="doctag">@returns <span class="type">&#123;Promise&#125;</span></span></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params">method, url, data, header = &#123;</span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">  <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span></span></span><br><span class="line"><span class="params"><span class="function">&#125;</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;</span><br><span class="line"></span><br><span class="line">    <span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span></span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> response = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    url = domain + url;</span><br><span class="line"></span><br><span class="line">    wx.request(&#123;</span><br><span class="line"></span><br><span class="line">      url,</span><br><span class="line"></span><br><span class="line">      method,</span><br><span class="line"></span><br><span class="line">      data,</span><br><span class="line"></span><br><span class="line">      header,</span><br><span class="line"></span><br><span class="line">      <span class="attr">success</span>: <span class="function">(<span class="params">res</span>) =&gt;</span> response.success = res,</span><br><span class="line"></span><br><span class="line">      <span class="attr">fail</span>: <span class="function">(<span class="params">error</span>) =&gt;</span> response.fail = error,</span><br><span class="line"></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line"></span><br><span class="line">        wx.hideLoading();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (response.success) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">if</span> (response.success.statusCode != <span class="number">200</span>) &#123;</span><br><span class="line"></span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">              <span class="attr">title</span>: <span class="string">&quot;网络出错，稍后再试&quot;</span>,</span><br><span class="line"></span><br><span class="line">              <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          resolve(response.success.data);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">          wx.showToast(&#123;</span><br><span class="line"></span><br><span class="line">            <span class="attr">title</span>: <span class="string">&quot;数据请求失败，请稍后重试&quot;</span>,</span><br><span class="line"></span><br><span class="line">            <span class="attr">icon</span>: <span class="string">&quot;none&quot;</span></span><br><span class="line"></span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          <span class="built_in">console</span>.log(<span class="string">&#x27;数据请求失败&#x27;</span>, response.fail)</span><br><span class="line"></span><br><span class="line">          reject(response.fail);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="方式2"><a href="#方式2" class="headerlink" title="方式2"></a>方式2</h3><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = getApp()</span><br><span class="line"><span class="comment">// const host = &#x27;http://127.0.0.1:3000&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> request = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">   <span class="comment">// 请求之前提示加载中</span></span><br><span class="line">  wx.showLoading(&#123;<span class="attr">title</span>: <span class="string">&#x27;加载中...&#x27;</span>&#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    wx.request(&#123;</span><br><span class="line">      <span class="attr">url</span>: <span class="string">`<span class="subst">$&#123;app.globalData.baseURL&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      <span class="comment">// url: host + url,</span></span><br><span class="line">      <span class="attr">method</span>: options.method,</span><br><span class="line">      <span class="attr">data</span>: options.method === <span class="string">&#x27;GET&#x27;</span> ? options.data : <span class="built_in">JSON</span>.stringify(options.data),</span><br><span class="line">      <span class="attr">header</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json; charset=UTF-8&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;x-token&#x27;</span>: <span class="string">&#x27;x-token&#x27;</span>  <span class="comment">// 看自己是否需要</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">success</span>: resolve,</span><br><span class="line">      <span class="attr">fail</span>: reject,</span><br><span class="line">      <span class="comment">// success(request) &#123;</span></span><br><span class="line">      <span class="comment">//   // console.log(request)</span></span><br><span class="line">      <span class="comment">//   if (request.statusCode === 200) &#123;</span></span><br><span class="line">      <span class="comment">//     resolve(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125; else &#123;</span></span><br><span class="line">      <span class="comment">//     reject(request.data)</span></span><br><span class="line">      <span class="comment">//   &#125;</span></span><br><span class="line">      <span class="comment">// &#125;,</span></span><br><span class="line">      <span class="comment">// fail(error) &#123;</span></span><br><span class="line">      <span class="comment">//   reject(error.data)</span></span><br><span class="line">      <span class="comment">// &#125;</span></span><br><span class="line">      <span class="function"><span class="title">complete</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">      	wx.hideLoading()</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> get = <span class="function">(<span class="params">url, options = &#123;&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> post = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> put = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;PUT&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不能声明DELETE（关键字）</span></span><br><span class="line"><span class="keyword">const</span> remove = <span class="function">(<span class="params">url, options</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> request(url, &#123; <span class="attr">method</span>: <span class="string">&#x27;DELETE&#x27;</span>, <span class="attr">data</span>: options &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  get,</span><br><span class="line">  post,</span><br><span class="line">  put,</span><br><span class="line">  remove</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+  </entry>
+  <entry>
+    <title>Day3 生命周期&amp;render props模式&amp;高阶组件&amp;原理揭秘</title>
+    <url>/2022/01/17/react%E5%9F%BA%E7%A1%80Day03-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/</url>
+    <content><![CDATA[<h1 id="组件生命周期（★★★）"><a href="#组件生命周期（★★★）" class="headerlink" title="组件生命周期（★★★）"></a>组件生命周期（★★★）</h1><h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>说出组件生命周期对应的钩子函数</li>
+<li>钩子函数调用的时机</li>
+</ul>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>意义：组件的生命周期有助于理解组件的运行方式，完成更复杂的组件功能、分析组件错误原因等</p>
+<p>组件的生命周期： 组件从被创建到挂载到页面中运行，再到组件不在时卸载的过程</p>
+<p>生命周期的每个阶段总是伴随着一些方法调用，这些方法就是生命周期的钩子函数</p>
+<p>构造函数的作用：为开发人员在不同阶段操作组件提供了实际</p>
+<h2 id="生命周期阶段"><a href="#生命周期阶段" class="headerlink" title="生命周期阶段"></a>生命周期阶段</h2><p><img src="images/%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png"></p>
+<h3 id="创建时（挂载阶段）"><a href="#创建时（挂载阶段）" class="headerlink" title="创建时（挂载阶段）"></a>创建时（挂载阶段）</h3><ul>
+<li>执行时机：组件创建时（页面加载时）</li>
+<li>执行顺序</li>
+</ul>
+<p><img src="images/%E5%88%9B%E5%BB%BA%E6%97%B6-%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F.png"></p>
+<p><img src="images/%E5%88%9B%E5%BB%BA%E6%97%B6-%E5%87%BD%E6%95%B0%E7%9A%84%E4%BD%9C%E7%94%A8.png"></p>
+<h3 id="更新时"><a href="#更新时" class="headerlink" title="更新时"></a>更新时</h3><p>执行时机：<code>setState()、 forceUpdate()、 组件接收到新的props</code></p>
+<p>说明：以上三者任意一种变化，组件就会重新渲染</p>
+<p>执行顺序：</p>
+<p><img src="images/%E6%9B%B4%E6%96%B0%E6%97%B6.png"></p>
+<p><img src="images/%E6%9B%B4%E6%96%B0%E6%97%B6-%E5%87%BD%E6%95%B0%E4%BD%9C%E7%94%A8.png"></p>
+<h3 id="卸载时"><a href="#卸载时" class="headerlink" title="卸载时"></a>卸载时</h3><p>执行时机：组件从页面中消失</p>
+<p>作用：用来做清理操作</p>
+<p><img src="images/%E5%8D%B8%E8%BD%BD%E6%97%B6.png"></p>
+<h3 id="不常用的钩子函数"><a href="#不常用的钩子函数" class="headerlink" title="不常用的钩子函数"></a>不常用的钩子函数</h3><h4 id="旧版的生命周期钩子函数"><a href="#旧版的生命周期钩子函数" class="headerlink" title="旧版的生命周期钩子函数"></a>旧版的生命周期钩子函数</h4><p><img src="images/%E6%97%A7%E7%89%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0.png"></p>
+<h4 id="新版完整生命会走棋钩子函数"><a href="#新版完整生命会走棋钩子函数" class="headerlink" title="新版完整生命会走棋钩子函数"></a>新版完整生命会走棋钩子函数</h4><p><img src="images/%E6%96%B0%E7%89%88%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%87%BD%E6%95%B0.png"></p>
+<h5 id="getDerivedStateFromProps"><a href="#getDerivedStateFromProps" class="headerlink" title="getDerivedStateFromProps()"></a><code>getDerivedStateFromProps()</code></h5><ul>
+<li><strong><code>getDerivedStateFromProps</code></strong> 会在调用 render 方法之前调用，并且在初始挂载及后续更新时都会被调用。它应返回一个对象来更新 state，如果返回 null 则不更新任何内容</li>
+<li>不管原因是什么，都会在<em>每次</em>渲染前触发此方法</li>
+</ul>
+<h5 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate()"></a><code>shouldComponentUpdate()</code></h5><ul>
+<li>根据 <strong><code>shouldComponentUpdate()</code></strong> 的返回值，判断 React 组件的输出是否受当前 state 或 props 更改的影响。默认行为是 state 每次发生变化组件都会重新渲染</li>
+<li>当 props 或 state 发生变化时，**<code>shouldComponentUpdate()</code>** 会在渲染执行之前被调用。返回值默认为 true</li>
+</ul>
+<h5 id="getSnapshotBeforeUpdate"><a href="#getSnapshotBeforeUpdate" class="headerlink" title="getSnapshotBeforeUpdate()"></a><code>getSnapshotBeforeUpdate()</code></h5><ul>
+<li><strong><code>getSnapshotBeforeUpdate()</code></strong> 在最近一次渲染输出（提交到 DOM 节点）之前调用。它使得组件能在发生更改之前从 DOM 中捕获一些信息（例如，滚动位置）。此生命周期的任何返回值将作为参数传递给 <strong><code>componentDidUpdate()</code></strong></li>
+<li>此用法并不常见，但它可能出现在 UI 处理中，如需要以特殊方式处理滚动位置的聊天线程等</li>
+</ul>
+<h1 id="render-props模式-（★★★）"><a href="#render-props模式-（★★★）" class="headerlink" title="render-props模式 （★★★）"></a>render-props模式 （★★★）</h1><h2 id="目标-1"><a href="#目标-1" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>知道render-props模式有什么作用</li>
+<li>能够说出render-props的使用步骤</li>
+</ul>
+<h2 id="React组件复用概述"><a href="#React组件复用概述" class="headerlink" title="React组件复用概述"></a>React组件复用概述</h2><ul>
+<li>思考：如果两个组件中的部分功能相似或相同，该如何处理？</li>
+<li>处理方式：复用相似的功能</li>
+<li>复用什么？<ul>
+<li>state</li>
+<li>操作state的方法</li>
+</ul>
+</li>
+<li>两种方式：<ul>
+<li>render props模式</li>
+<li>高阶组件（HOC）</li>
+</ul>
+</li>
+<li>注意： 这两种方式不是新的API，而是利用React自身特点的编码技巧，演化而成的固定模式</li>
+</ul>
+<h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><ul>
+<li><p>思路：将要复用的state和操作state的方法封装到一个组件中</p>
+</li>
+<li><p>如何拿到该组件中复用的state</p>
+<ul>
+<li><p>在使用组件时，添加一个值为函数的prop，通过函数参数来获取</p>
+<p><img src="images/render-props-01.png"></p>
+</li>
+</ul>
+</li>
+<li><p>如何渲染到任意的UI</p>
+<ul>
+<li><p>使用该函数的返回值作为要渲染的UI内容</p>
+<p><img src="images/render-props-02.png"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
+<li>创建Mouse组件，在组件中提供复用的逻辑代码</li>
+<li>将要复用的状态作为 props.render(state)方法的参数，暴露到组件外部</li>
+<li>使用props.render() 的返回值作为要渲染的内容</li>
+</ul>
+<p><img src="images/render-props%E6%A8%A1%E5%BC%8F-01.png"></p>
+<h4 id="示例demo"><a href="#示例demo" class="headerlink" title="示例demo"></a>示例demo</h4><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">class Mouse extends React.Component &#123;</span><br><span class="line">    // 鼠标位置状态</span><br><span class="line">    state = &#123;</span><br><span class="line">        x: 0,</span><br><span class="line">        y: 0</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 监听鼠标移动事件</span><br><span class="line">    componentDidMount()&#123;</span><br><span class="line">        window.addEventListener(&#x27;mousemove&#x27;,this.handleMouseMove)</span><br><span class="line">    &#125;</span><br><span class="line">    handleMouseMove = e =&gt; &#123;</span><br><span class="line">        this.setState(&#123;</span><br><span class="line">            x: e.clientX,</span><br><span class="line">            y: e.clientY</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    render()&#123;</span><br><span class="line">        // 向外界提供当前子组件里面的数据</span><br><span class="line">        return this.props.render(this.state)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                App</span><br><span class="line">                &lt;Mouse render=&#123;mouse =&gt; &#123;</span><br><span class="line">                    return &lt;p&gt;X&#123;mouse.x&#125;Y&#123;mouse.y&#125;&lt;/p&gt;</span><br><span class="line">                &#125;&#125;/&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">ReactDOM.render(&lt;App /&gt;,document.getElementById(&#x27;root&#x27;))</span><br></pre></td></tr></table></figure>
+
+<h2 id="children代替render属性"><a href="#children代替render属性" class="headerlink" title="children代替render属性"></a>children代替render属性</h2><ul>
+<li>注意：并不是该模式叫 render props就必须使用名为render的prop，实际上可以使用任意名称的prop</li>
+<li>把prop是一个函数并且告诉组件要渲染什么内容的技术叫做： render props模式</li>
+<li>推荐：使用childre代替render属性</li>
+</ul>
+<p><img src="images/render-props-children%E6%A8%A1%E5%BC%8F.png"></p>
+<h2 id="优化代码"><a href="#优化代码" class="headerlink" title="优化代码"></a>优化代码</h2><ul>
+<li>推荐给render props模式添加props校验</li>
+</ul>
+<p><img src="images/%E4%BC%98%E5%8C%96-%E6%B7%BB%E5%8A%A0%E6%A0%A1%E9%AA%8C.png"></p>
+<ul>
+<li></li>
+</ul>
+<p><img src="images/%E4%BC%98%E5%8C%96-%E7%A7%BB%E9%99%A4%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A.png"></p>
+<h1 id="高阶组件-（★★★）"><a href="#高阶组件-（★★★）" class="headerlink" title="高阶组件 （★★★）"></a>高阶组件 （★★★）</h1><h2 id="目标-2"><a href="#目标-2" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>知道高阶组件的作用</li>
+<li>能够说出高阶的使用步骤</li>
+</ul>
+<h2 id="概述-1"><a href="#概述-1" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>目的：实现状态逻辑复用</li>
+<li>采用 包装模式</li>
+<li>手机：获取保护功能</li>
+<li>手机壳：提供保护功能</li>
+<li>高阶组件就相当于手机壳，通过包装组件，增强组件功能</li>
+</ul>
+<p><img src="images/%E6%89%8B%E6%9C%BA%E5%A3%B3.png"></p>
+<h2 id="思路分析-1"><a href="#思路分析-1" class="headerlink" title="思路分析"></a>思路分析</h2><ul>
+<li>高阶组件(HOC、Higher-Order Component) 是一个函数，接收要包装的组件，返回增强后的组件</li>
+</ul>
+<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-%E5%87%BD%E6%95%B0.png"></p>
+<ul>
+<li>高阶组件内部创建了一个类组件，在这个类组件中提供复用的状态逻辑代码，通过prop将复用的状态传递给被包装组件<code>WrappedComponent</code></li>
+</ul>
+<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-%E7%B1%BB%E7%BB%84%E4%BB%B6%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0.png"></p>
+<h2 id="使用步骤-1"><a href="#使用步骤-1" class="headerlink" title="使用步骤"></a>使用步骤</h2><ul>
+<li>创建一个函数，名称约定以with开头</li>
+<li>指定函数参数，参数应该以大写字母开头</li>
+<li>在函数内部创建一个类组件，提供复用的状态逻辑代码，并返回</li>
+<li>在该组件中，渲染参数组件，同时将状态通过prop传递给参数组件</li>
+<li>调用该高阶组件，传入要增强的组件，通过返回值拿到增强后的组件，并将其渲染到页面</li>
+</ul>
+<p><strong>包装函数</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 定义一个函数，在函数内部创建一个相应类组件</span><br><span class="line">function withMouse(WrappedComponent) &#123;</span><br><span class="line">    // 该组件提供复用状态逻辑</span><br><span class="line">    class Mouse extends React.Component &#123;</span><br><span class="line">        state = &#123;</span><br><span class="line">            x: 0,</span><br><span class="line">            y: 0</span><br><span class="line">        &#125;</span><br><span class="line">        // 事件的处理函数</span><br><span class="line">        handleMouseMove = (e) =&gt; &#123;</span><br><span class="line">            this.setState(&#123;</span><br><span class="line">                x: e.clientX,</span><br><span class="line">                y: e.clientY</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        // 当组件挂载的时候进行事件绑定</span><br><span class="line">        componentDidMount() &#123;</span><br><span class="line">            window.addEventListener(&#x27;mousemove&#x27;, this.handleMouseMove)</span><br><span class="line">        &#125;</span><br><span class="line">        // 当组件移除时候解绑事件</span><br><span class="line">        componentWillUnmount() &#123;</span><br><span class="line">            window.removeEventListener(&#x27;mousemove&#x27;, this.handleMouseMove)</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            // 在render函数里面返回传递过来的组件，把当前组件的状态设置进去</span><br><span class="line">            return &lt;WrappedComponent &#123;...this.state&#125; /&gt;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return Mouse</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>哪个组件需要加强，通过调用<code>withMouse</code>这个函数，然后把返回的值设置到父组件中即可</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function Position(props) &#123;</span><br><span class="line">    return (</span><br><span class="line">        &lt;p&gt;</span><br><span class="line">            X:&#123;props.x&#125;</span><br><span class="line">            Y:&#123;props.y&#125;</span><br><span class="line">        &lt;/p&gt;</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br><span class="line">// 把position 组件来进行包装</span><br><span class="line">let MousePosition = withMouse(Position)</span><br><span class="line"></span><br><span class="line">class App extends React.Component &#123;</span><br><span class="line">    constructor(props) &#123;</span><br><span class="line">        super(props)</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return (</span><br><span class="line">            &lt;div&gt;</span><br><span class="line">                高阶组件</span><br><span class="line">                &lt;MousePosition&gt;&lt;/MousePosition&gt;</span><br><span class="line">            &lt;/div&gt;</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="设置displayName"><a href="#设置displayName" class="headerlink" title="设置displayName"></a>设置<code>displayName</code></h2><ul>
+<li>使用高阶组件存在的问题：得到两个组件的名称相同</li>
+<li>原因：默认情况下，React使用组件名称作为<code>displayName</code></li>
+<li>解决方式：为高阶组件设置<code>displayName</code>，便于调试时区分不同的组件</li>
+<li><code>displayName的作用：用于设置调试信息(React Developer Tools信息)</code></li>
+<li>设置方式：</li>
+</ul>
+<p><img src="images/%E9%AB%98%E9%98%B6%E7%BB%84%E4%BB%B6-displayName.png"></p>
+<h2 id="传递props"><a href="#传递props" class="headerlink" title="传递props"></a>传递props</h2><ul>
+<li>问题：如果没有传递props，会导致props丢失问题</li>
+<li>解决方式： 渲染<code>WrappedComponent</code>时，将state和props一起传递给组件</li>
+</ul>
+<p><img src="images/%E4%BC%A0%E9%80%92props.png"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><ul>
+<li>组件通讯是构建React应用必不可少的一环</li>
+<li>props的灵活性让组件更加强大</li>
+<li>状态提升是React组件的常用模式</li>
+<li>组件生命周期有助于理解组件的运行过程</li>
+<li>钩子函数让开发者可以在特定的时机执行某些功能</li>
+<li><code>render props</code> 模式和高阶组件都可以实现组件状态逻辑的复用</li>
+<li>组件极简模型： <code>(state,props) =&gt; UI</code></li>
+</ul>
+<h1 id="React原理"><a href="#React原理" class="headerlink" title="React原理"></a>React原理</h1><h2 id="目标-3"><a href="#目标-3" class="headerlink" title="目标"></a>目标</h2><ul>
+<li>能够知道<code>setState()</code>更新数据是异步的</li>
+<li>能够知道JSX语法的转化过程</li>
+</ul>
+<h2 id="setState-说明-（★★★）"><a href="#setState-说明-（★★★）" class="headerlink" title="setState()说明 （★★★）"></a><code>setState()</code>说明 （★★★）</h2><h3 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h3><ul>
+<li><code>setState()</code>更新数据是异步的</li>
+<li>注意：使用该语法，后面的<code>setState</code>不要依赖前面<code>setState</code>的值</li>
+<li>多次调用<code>setState</code>，只会触发一次render</li>
+</ul>
+<h3 id="推荐语法"><a href="#推荐语法" class="headerlink" title="推荐语法"></a>推荐语法</h3><ul>
+<li>推荐：使用 <code>setState((state,props) =&gt; &#123;&#125;)</code> 语法</li>
+<li>参数state： 表示最新的state</li>
+<li>参数props： 表示最新的props</li>
+</ul>
+<p><img src="images/%E6%8E%A8%E8%8D%90%E8%AF%AD%E6%B3%95.png"></p>
+<h3 id="第二个参数"><a href="#第二个参数" class="headerlink" title="第二个参数"></a>第二个参数</h3><ul>
+<li>场景：在状态更新(页面完成重新渲染)后立即执行某个操作</li>
+<li>语法：<code>setState(update[,callback])</code></li>
+</ul>
+<p><img src="images/%E7%AC%AC%E4%BA%8C%E4%B8%AA%E5%8F%82%E6%95%B0.png"></p>
+<h2 id="JSX语法的转化过程-（★★★）"><a href="#JSX语法的转化过程-（★★★）" class="headerlink" title="JSX语法的转化过程 （★★★）"></a>JSX语法的转化过程 （★★★）</h2><ul>
+<li>JSX仅仅是<code>createElement()</code> 方法的语法糖(简化语法)</li>
+<li>JSX语法被 @babel/preset-react 插件编译为<code>createElement()</code> 方法</li>
+<li>React 元素： 是一个对象，用来描述你希望在屏幕上看到的内容</li>
+</ul>
+<p><img src="images/%E8%AF%AD%E6%B3%95%E7%B3%96.png"></p>
 ]]></content>
   </entry>
 </search>
