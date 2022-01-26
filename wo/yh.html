@@ -112,8 +112,12 @@
                 var idx = Math.floor(Math.random() * targets.length);
                 var { x, y } = targets[idx];
                 targets.splice(idx, 1);
-                x += canvas2.width / 2 - textWidth / 2;
-                y += canvas2.height / 2 - fontSize / 2;
+                // 烟花到达的高度(Pc端适用)
+                // x += canvas2.width / 2 - textWidth / 2;
+                // y += canvas2.height / 2 - fontSize / 2;
+                //烟花到达的高度(移动端适用)
+                x += canvas2.width / 10 - textWidth / 10;
+                y += canvas2.height / 10 - fontSize / 10;
                 return { x, y };
             }
         }
