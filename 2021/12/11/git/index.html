@@ -474,7 +474,7 @@ git push origin v1.1
     </li>
     
     <li class="nav-item">
-      <a class="nav-item-link" href="/wo/yh.html">虎年大吉</a>
+      <a class="nav-item-link" href="/wo/yh.html">Only Belong To TanKeXin</a>
     </li>
     
     <li class="nav-item">
@@ -737,42 +737,6 @@ git push origin v1.1
 
     
     
-<script>
-  const password = "css123";
-  const lock_password = window.sessionStorage.getItem("lock_password");
-  console.log(password, lock_password);
-  if (lock_password !== password) {
-    Swal.fire({
-      title: "Please enter password",
-      input: "text",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
-      showCancelButton: false,
-      showLoaderOnConfirm: true,
-      allowOutsideClick: false,
-      confirmButtonText: "Ok",
-    }).then((result) => {
-      console.log(result);
-      if (result.isConfirmed) {
-        console.log(password);
-        if (result.value === password) {
-          window.sessionStorage.setItem("lock_password", result.value);
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Incorrect password, please try again",
-            confirmButtonText: "Ok",
-            allowOutsideClick: false,
-          }).then(() => {
-            window.location.reload();
-          });
-        }
-      }
-    });
-  }
-</script>
-
 
   </div>
 </body>
