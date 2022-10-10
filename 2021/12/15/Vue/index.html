@@ -106,7 +106,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="VUE的基本原理"><a href="#VUE的基本原理" class="headerlink" title="VUE的基本原理"></a>VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
+  <h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="1-VUE的基本原理"><a href="#1-VUE的基本原理" class="headerlink" title="1.VUE的基本原理"></a>1.VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
 <p>每个组件都有相应的watcher实例,它会在组件渲染过程中将属性记录为依赖,当依赖项的setter被调用时通知watcher重新计算,致使关联的组件更新</p>
 <h4 id="VUE的优点"><a href="#VUE的优点" class="headerlink" title="VUE的优点"></a>VUE的优点</h4><p>轻量级框架</p>
 <p>上手快,学习成本低</p>
@@ -466,7 +466,7 @@
 <p>5、在element中使用el-input实现点击显示输入框，失去焦点时生成新的tag标签，出现两行数据下的输入框会同时修改的bug，因此要为他们单独设置自己的false和输入框的值</p>
 <p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626541015762.png" alt="1626541015762"></p>
 <p><img src="/2021/12/15/Vue/Users\pc\AppData\Roaming\Typora\typora-user-images\1626540686684.png" alt="1626540686684"></p>
-<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><h1 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h1><h4 id="登录授权"><a href="#登录授权" class="headerlink" title="登录授权"></a>登录授权</h4><ul>
+<h4 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h4><h1 id="二-微信小程序"><a href="#二-微信小程序" class="headerlink" title="二.微信小程序"></a>二.微信小程序</h1><h4 id="登录授权"><a href="#登录授权" class="headerlink" title="登录授权"></a>登录授权</h4><ul>
 <li><p>小程序端调用wx.login()，获取登录凭证code，并wx.request提交code给己方服务器</p>
 </li>
 <li><p>服务器提交Appid + appSecret + code到微信方服务器，获取session_key &amp; openid</p>
@@ -483,7 +483,7 @@
 <p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/dashucoding/p/9917371.html">https://www.cnblogs.com/dashucoding/p/9917371.html</a></p>
 </li>
 </ul>
-<h1 id="React"><a href="#React" class="headerlink" title="React"></a>React</h1><h4 id="什么react"><a href="#什么react" class="headerlink" title="什么react"></a>什么react</h4><p>react是一个构建用户界面的JavaScript库</p>
+<h1 id="三-React"><a href="#三-React" class="headerlink" title="三.React"></a>三.React</h1><h4 id="什么react"><a href="#什么react" class="headerlink" title="什么react"></a>什么react</h4><p>react是一个构建用户界面的JavaScript库</p>
 <h4 id="React的生命周期"><a href="#React的生命周期" class="headerlink" title="React的生命周期"></a>React的生命周期</h4><p>组件挂载阶段:</p>
 <ul>
 <li><p>constructor</p>
@@ -548,7 +548,7 @@
 <p>全局状态管理⼯具: 借助Redux或者Mobx等全局状态管理工具进行通信</p>
 <h4 id="PureComponent和Component的区别是什么"><a href="#PureComponent和Component的区别是什么" class="headerlink" title="PureComponent和Component的区别是什么"></a>PureComponent和Component的区别是什么</h4><p>PureComponent会自动执行shouldComponentUpdate函数,通过shallowEqual的浅对比,实现react性能优化</p>
 <p>Component必须通过自己调用shouldComponentUpdate来实现react组件的优化</p>
-<h1 id="JAVASCRIPT"><a href="#JAVASCRIPT" class="headerlink" title="JAVASCRIPT"></a>JAVASCRIPT</h1><h4 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h4><p>将特定功能的代码抽取出来,使之成为程序中的一个独立实体</p>
+<h1 id="四-JAVASCRIPT"><a href="#四-JAVASCRIPT" class="headerlink" title="四.JAVASCRIPT"></a>四.JAVASCRIPT</h1><h4 id="什么是函数"><a href="#什么是函数" class="headerlink" title="什么是函数"></a>什么是函数</h4><p>将特定功能的代码抽取出来,使之成为程序中的一个独立实体</p>
 <h4 id="箭头函数和普通函数的区别"><a href="#箭头函数和普通函数的区别" class="headerlink" title="箭头函数和普通函数的区别"></a>箭头函数和普通函数的区别</h4><p>箭头函数使用箭头定义,普通函数没有</p>
 <p>箭头函数比普通函数更简洁</p>
 <p>箭头函数的参数可以设置默认值</p>
@@ -866,7 +866,7 @@
 <p>使用 Object 对象的原型方法 toString 来判断数据类型</p>
 </li>
 </ul>
-<h1 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h1><h4 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h4><p>块级格式化上下文</p>
+<h1 id="五-CSS"><a href="#五-CSS" class="headerlink" title="五.CSS"></a>五.CSS</h1><h4 id="什么是BFC"><a href="#什么是BFC" class="headerlink" title="什么是BFC"></a>什么是BFC</h4><p>块级格式化上下文</p>
 <p>BFC是一个独立的布局环境，可以理解为一个容器，在这个容器中按照一定规则进行物品摆放，并且不会影响其它环境中的物品</p>
 <h4 id="怎么创建BFC"><a href="#怎么创建BFC" class="headerlink" title="怎么创建BFC"></a>怎么创建BFC</h4><p>使用浮动布局 绝对定位 </p>
 <p>overflow不为visible</p>
@@ -980,7 +980,7 @@
 
 
 
-<h1 id="HTML5"><a href="#HTML5" class="headerlink" title="HTML5"></a>HTML5</h1><h4 id="html5的新增特性"><a href="#html5的新增特性" class="headerlink" title="html5的新增特性"></a>html5的新增特性</h4><p>语义化标签</p>
+<h1 id="六-HTML5"><a href="#六-HTML5" class="headerlink" title="六.HTML5"></a>六.HTML5</h1><h4 id="html5的新增特性"><a href="#html5的新增特性" class="headerlink" title="html5的新增特性"></a>html5的新增特性</h4><p>语义化标签</p>
 <p>表单类型</p>
 <p>表单属性</p>
 <p>媒体标签</p>
