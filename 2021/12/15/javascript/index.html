@@ -450,7 +450,9 @@ b/s   browser -- server  浏览器--服务器    主流  跨域平台,方便 (�
 <p>原型的作用是: 可以让同一个构造函数创建的所有对象共享属性和方法. 也就是说, 你可以不在<br> 构造函数中定义对象的属性和方法,<br>而是可以直接将这些信息添加到原型对象中。</p>
 </blockquote>
 <h5 id="3-原型的好处"><a href="#3-原型的好处" class="headerlink" title="3.原型的好处?"></a>3.原型的好处?</h5><p>优点:<br>1, 实例对象都有自己的独有属性<br>2, 同时共享了原型中的方法,最大限度的节省了内存<br>3, 支持向构造函数传递参数 (初始值)</p>
-<h5 id="4-什么是原型链"><a href="#4-什么是原型链" class="headerlink" title="4.什么是原型链?"></a>4.什么是原型链?</h5><p>当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构，我们称为原型链<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC93ZWJwLzExOTY2NDUvMTU5MTE3MTk5OTc2My1lN2RlNTlmZi05MWYyLTRhZDktOGZmZi03NjE2M2Y1YzAxOTEud2VicA?x-oss-process=image/format,png"></p>
+<h5 id="4-什么是原型链"><a href="#4-什么是原型链" class="headerlink" title="4.什么是原型链?"></a>4.什么是原型链?</h5><p>当访问一个对象的某个属性时，会先在这个对象本身属性上查找，如果没有找到，则会去它的__proto__隐式原型上查找，即它的构造函数的prototype，如果还没有找到就会再在构造函数的prototype的__proto__中查找，这样一层一层向上查找就会形成一个链式结构，我们称为原型链</p>
+<!-- ![](@/public/img/1.jpg) -->
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9jZG4ubmxhcmsuY29tL3l1cXVlLzAvMjAyMC93ZWJwLzExOTY2NDUvMTU5MTE3MTk5OTc2My1lN2RlNTlmZi05MWYyLTRhZDktOGZmZi03NjE2M2Y1YzAxOTEud2VicA?x-oss-process=image/format,png"></p>
 <h3 id="三十三-、进程与线程的区别"><a href="#三十三-、进程与线程的区别" class="headerlink" title="三十三 、进程与线程的区别?"></a>三十三 、进程与线程的区别?</h3><ol>
 <li><p>线程是<strong>程序执行的最小单位</strong>，而进程是操作<strong>系统分配资源的最小单位</strong>；</p>
 </li>

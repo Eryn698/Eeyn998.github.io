@@ -108,15 +108,15 @@
        
   <h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="1-VUE的基本原理"><a href="#1-VUE的基本原理" class="headerlink" title="1.VUE的基本原理"></a>1.VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
 <p>每个组件都有相应的watcher实例,它会在组件渲染过程中将属性记录为依赖,当依赖项的setter被调用时通知watcher重新计算,致使关联的组件更新</p>
-<h4 id="VUE的优点"><a href="#VUE的优点" class="headerlink" title="VUE的优点"></a>VUE的优点</h4><p>轻量级框架</p>
+<h4 id="2-VUE的优点"><a href="#2-VUE的优点" class="headerlink" title="2.VUE的优点"></a>2.VUE的优点</h4><p>轻量级框架</p>
 <p>上手快,学习成本低</p>
 <p>双向数据绑定,保留了angular的特点,数据操作更简单</p>
 <p>组件化,保留了react的特点,实现了html的封装和重用,在构建单页面应用方面有着独特的优势</p>
 <p>视图、数据、结构分离,使数据更改更简单</p>
 <p>虚拟DOM,操作DOM是非常消耗性能的,不再使用原生的DOM操作节点,极大解放了DOM操作</p>
 <p>相较于react运行速度更快</p>
-<h4 id="双向数据绑定原理"><a href="#双向数据绑定原理" class="headerlink" title="双向数据绑定原理:"></a>双向数据绑定原理:</h4><p>采用数据劫持结合发布者-订阅者模式的方式,通过Object.defineProperty()来劫持各个属性的setter, getter,在数据变动时发布消息给订阅者,触发相应的回调</p>
-<h4 id="单向数据流和双向数据流的理解"><a href="#单向数据流和双向数据流的理解" class="headerlink" title="单向数据流和双向数据流的理解"></a>单向数据流和双向数据流的理解</h4><ul>
+<h4 id="3-双向数据绑定原理"><a href="#3-双向数据绑定原理" class="headerlink" title="3.双向数据绑定原理:"></a>3.双向数据绑定原理:</h4><p>采用数据劫持结合发布者-订阅者模式的方式,通过Object.defineProperty()来劫持各个属性的setter, getter,在数据变动时发布消息给订阅者,触发相应的回调</p>
+<h4 id="4-单向数据流和双向数据流的理解"><a href="#4-单向数据流和双向数据流的理解" class="headerlink" title="4.单向数据流和双向数据流的理解"></a>4.单向数据流和双向数据流的理解</h4><ul>
 <li><p>v-bind和vuex就是单向数据流</p>
 <p>如一个父组件有两个子组件，分别为a和b ，父组件向子组件传递数据，两个组件都接收到了父组件传递过来的数据，在组件a中修改父组件传递过来的数据，子组件b和父组件的值不会发生变化 这就是单向的数据流</p>
 </li>
@@ -124,7 +124,7 @@
 <p>Model数据变化会触发View的刷新， View层用户改变数据也会在Model中同步</p>
 </li>
 </ul>
-<h4 id="defineProperty-的使用方法"><a href="#defineProperty-的使用方法" class="headerlink" title="defineProperty()的使用方法"></a>defineProperty()的使用方法</h4><p>defineProperty()有三个参数</p>
+<h4 id="5-defineProperty-的使用方法"><a href="#5-defineProperty-的使用方法" class="headerlink" title="5.defineProperty()的使用方法"></a>5.defineProperty()的使用方法</h4><p>defineProperty()有三个参数</p>
 <ul>
 <li><p>1.将要被修改的对象</p>
 </li>
@@ -133,17 +133,17 @@
 <li><p>3.将要被修改的属性的描述符,就是一个对象,里面有两个属性get和set</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> book = &#123;</span><br><span class="line">    <span class="attr">_year</span>: <span class="number">2004</span>,</span><br><span class="line">    <span class="attr">edition</span>: <span class="number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(book, <span class="string">&quot;year&quot;</span>, &#123;</span><br><span class="line">    <span class="attr">get</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>._year;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">newValue</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (newValue &gt; <span class="number">2004</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>._year = newValue;</span><br><span class="line">            <span class="built_in">this</span>.edition += newValue - <span class="number">2004</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line">book.year = <span class="number">2005</span>;</span><br><span class="line">alert(book.edition);  <span class="comment">//2</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-<h4 id="v-model实现原理"><a href="#v-model实现原理" class="headerlink" title="v-model实现原理"></a>v-model实现原理</h4><p>v-model实际上是一个语法糖</p>
+<h4 id="6-v-model实现原理"><a href="#6-v-model实现原理" class="headerlink" title="6.v-model实现原理"></a>6.v-model实现原理</h4><p>v-model实际上是一个语法糖</p>
 <p>v-bind绑定value指向message变量</p>
 <p>v-on绑定input事件</p>
 <p>触发input事件时通过$event.target.value将值赋给message</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=<span class="string">&quot;sth&quot;</span> /&gt;</span><br><span class="line"><span class="comment">//  等同于</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> </span></span></span><br><span class="line"><span class="tag"><span class="xml">    <span class="attr">v-bind:value</span>=<span class="string">&quot;message&quot;</span> </span></span></span><br><span class="line"><span class="tag"><span class="xml">    <span class="attr">v-on:input</span>=<span class="string">&quot;message=$event.target.value&quot;</span></span></span></span><br><span class="line"><span class="tag"><span class="xml">&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<h4 id="使用Object-defineProperty-缺点"><a href="#使用Object-defineProperty-缺点" class="headerlink" title="使用Object.defineProperty()缺点:"></a>使用Object.defineProperty()缺点:</h4><p>无法检测到对象属性的新增或删除 无法监听数组变化, Vue 内部通过重写函数的方式解决了这个问题 </p>
-<h4 id="Vue3-0如何解决Object-defineProperty-缺点"><a href="#Vue3-0如何解决Object-defineProperty-缺点" class="headerlink" title="Vue3.0如何解决Object.defineProperty()缺点:"></a>Vue3.0如何解决Object.defineProperty()缺点:</h4><p>Vue3.0中使用Proxy(对象代理)可以完美的监听到任何数据的变化<br>缺点:兼容性问题</p>
-<h4 id="data为什么是一个函数而不是对象"><a href="#data为什么是一个函数而不是对象" class="headerlink" title="data为什么是一个函数而不是对象:"></a>data为什么是一个函数而不是对象:</h4><p>javascript的对象是引用类型，多个组件引用同一个data对象时，当其中一个组件修改对象的数据时其他组件的数据也会发生变化</p>
+<h4 id="7-使用Object-defineProperty-缺点"><a href="#7-使用Object-defineProperty-缺点" class="headerlink" title="7.使用Object.defineProperty()缺点:"></a>7.使用Object.defineProperty()缺点:</h4><p>无法检测到对象属性的新增或删除 无法监听数组变化, Vue 内部通过重写函数的方式解决了这个问题 </p>
+<h4 id="8-Vue3-0如何解决Object-defineProperty-缺点"><a href="#8-Vue3-0如何解决Object-defineProperty-缺点" class="headerlink" title="8.Vue3.0如何解决Object.defineProperty()缺点:"></a>8.Vue3.0如何解决Object.defineProperty()缺点:</h4><p>Vue3.0中使用Proxy(对象代理)可以完美的监听到任何数据的变化<br>缺点:兼容性问题</p>
+<h4 id="9-data为什么是一个函数而不是对象"><a href="#9-data为什么是一个函数而不是对象" class="headerlink" title="9.data为什么是一个函数而不是对象:"></a>9.data为什么是一个函数而不是对象:</h4><p>javascript的对象是引用类型，多个组件引用同一个data对象时，当其中一个组件修改对象的数据时其他组件的数据也会发生变化</p>
 <p>写成函数的形式当组件复用时，就会返回一个新的data,每个组件都有私有数据空间，不会影响其他组件 </p>
-<h4 id="常见的事件修饰符"><a href="#常见的事件修饰符" class="headerlink" title="常见的事件修饰符"></a>常见的事件修饰符</h4><p>.stop 防止冒泡</p>
+<h4 id="10-常见的事件修饰符"><a href="#10-常见的事件修饰符" class="headerlink" title="10.常见的事件修饰符"></a>10.常见的事件修饰符</h4><p>.stop 防止冒泡</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div @click=<span class="string">&quot;div&quot;</span>&gt;</span><br><span class="line">	<span class="xml"><span class="tag">&lt;<span class="name">button</span> @<span class="attr">click.stop</span>=<span class="string">&quot;button&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span>    </span><br><span class="line">&lt;/div&gt;</span><br><span class="line"><span class="comment">// 当点击button时，先执行button的点击事件，再执行div的点击事件，加上.stop后，就只会执行button的</span></span><br></pre></td></tr></table></figure>
 
 
@@ -160,7 +160,7 @@
 
 <p>.self 只会触发自身事件,不包含子元素 </p>
 <p>.once 只触发一次</p>
-<h4 id="MVVM、MVC、MVP的区别"><a href="#MVVM、MVC、MVP的区别" class="headerlink" title="MVVM、MVC、MVP的区别:"></a>MVVM、MVC、MVP的区别:</h4><p>MVC,MVP,MVVM是三种常见的软件架构设计模式, 主要通过分离关注点的方式来组织代码结构 </p>
+<h4 id="11-MVVM、MVC、MVP的区别"><a href="#11-MVVM、MVC、MVP的区别" class="headerlink" title="11.MVVM、MVC、MVP的区别:"></a>11.MVVM、MVC、MVP的区别:</h4><p>MVC,MVP,MVVM是三种常见的软件架构设计模式, 主要通过分离关注点的方式来组织代码结构 </p>
 <ul>
 <li><p>MVVM</p>
 <p>MVVM分为View、Model、VIewModel</p>
@@ -184,7 +184,7 @@
 <p>MVC中的Controller只知道Model的接口,没有办法控制View层更新</p>
 </li>
 </ul>
-<h4 id="对于axios的理解"><a href="#对于axios的理解" class="headerlink" title="对于axios的理解:"></a>对于axios的理解:</h4><p>axios是一种基于Promise封装的HTTP客户端，是对ajax的进一步封装</p>
+<h4 id="12-对于axios的理解"><a href="#12-对于axios的理解" class="headerlink" title="12.对于axios的理解:"></a>12.对于axios的理解:</h4><p>axios是一种基于Promise封装的HTTP客户端，是对ajax的进一步封装</p>
 <p>特点：</p>
 <p>浏览器端发起XMLHttpRequest请求</p>
 <p>node端发起http请求</p>
@@ -193,9 +193,9 @@
 <p>自动转换成JSON数据</p>
 <p>能够取消请求<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41772754/article/details/88258051">https://blog.csdn.net/qq_41772754/article/details/88258051</a></p>
 <p>客户端支持抵御XSRF攻击<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangjiachen666/p/11351295.html">https://www.cnblogs.com/wangjiachen666/p/11351295.html</a></p>
-<h4 id="axios-ajax请求一般放在哪个钩子函数中"><a href="#axios-ajax请求一般放在哪个钩子函数中" class="headerlink" title="axios || ajax请求一般放在哪个钩子函数中"></a>axios || ajax请求一般放在哪个钩子函数中</h4><p>一般放在created钩子函数中,因为此时data已经初始化,可以缓存获取到的数据，并且请求比较快，用户体验好</p>
+<h4 id="13-axios-ajax请求一般放在哪个钩子函数中"><a href="#13-axios-ajax请求一般放在哪个钩子函数中" class="headerlink" title="13.axios || ajax请求一般放在哪个钩子函数中"></a>13.axios || ajax请求一般放在哪个钩子函数中</h4><p>一般放在created钩子函数中,因为此时data已经初始化,可以缓存获取到的数据，并且请求比较快，用户体验好</p>
 <p>mounted中也可以发送请求,但是由于mounted是在模板渲染成html页面后调用,请求比较慢，如果数据比较庞大，这时候可能会导致页面闪屏</p>
-<h4 id="ajax、fetch的区别"><a href="#ajax、fetch的区别" class="headerlink" title="ajax、fetch的区别"></a>ajax、fetch的区别</h4><ul>
+<h4 id="14-ajax、fetch的区别"><a href="#14-ajax、fetch的区别" class="headerlink" title="14.ajax、fetch的区别"></a>14.ajax、fetch的区别</h4><ul>
 <li><p>ajax</p>
 <p>ajax是一种创建交互式网页应用的网页开发技术</p>
 <p>是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术</p>
@@ -207,14 +207,14 @@
 <p>基于标准Peomise实现，支持async/await</p>
 </li>
 </ul>
-<h4 id="v-if和v-show的区别"><a href="#v-if和v-show的区别" class="headerlink" title="v-if和v-show的区别:"></a>v-if和v-show的区别:</h4><p>v-if是动态的向DOM树内添加或删除元素 </p>
+<h4 id="15-v-if和v-show的区别"><a href="#15-v-if和v-show的区别" class="headerlink" title="15.v-if和v-show的区别:"></a>15.v-if和v-show的区别:</h4><p>v-if是动态的向DOM树内添加或删除元素 </p>
 <p>v-show是通过设置DOM元素的display来控制元素的显示隐藏</p>
 <p>v-if有更高的切换消耗 </p>
 <p>v-show有更高的初始渲染消耗</p>
 <p>v-if适合运营条件不大改变 </p>
 <p>v-show适合频繁的切换</p>
 <p>一般权限按钮上会用到v-if</p>
-<h4 id="key的作用"><a href="#key的作用" class="headerlink" title="key的作用"></a>key的作用</h4><ul>
+<h4 id="16-key的作用"><a href="#16-key的作用" class="headerlink" title="16.key的作用"></a>16.key的作用</h4><ul>
 <li><p>v-if</p>
 <p>通过使用 key 来唯一的标识一个元素，这个情况下，使用 key 的元素不会被复用。这个时候 key 的作用是用来标识一个独立的元素。</p>
 </li>
@@ -222,10 +222,10 @@
 <p> 通过为每个列表项提供一个 key 值 ，以便Vue跟踪元素的身份，从而高效的更新渲染虚拟DOM</p>
 </li>
 </ul>
-<h4 id="为什么不建议用index作为key的值"><a href="#为什么不建议用index作为key的值" class="headerlink" title="为什么不建议用index作为key的值"></a>为什么不建议用index作为key的值</h4><p>如果使用index,不管数组怎么变化下标都是0,1,2，导致vue会复用错误的旧子节点</p>
-<h4 id="插槽的作用"><a href="#插槽的作用" class="headerlink" title="插槽的作用"></a>插槽的作用</h4><p>一般在组件封装的时候使用</p>
+<h4 id="17-为什么不建议用index作为key的值"><a href="#17-为什么不建议用index作为key的值" class="headerlink" title="17.为什么不建议用index作为key的值"></a>17.为什么不建议用index作为key的值</h4><p>如果使用index,不管数组怎么变化下标都是0,1,2，导致vue会复用错误的旧子节点</p>
+<h4 id="18-插槽的作用"><a href="#18-插槽的作用" class="headerlink" title="18.插槽的作用"></a>18.插槽的作用</h4><p>一般在组件封装的时候使用</p>
 <p>对已封装好的组件插入自己想要定义的不同组件</p>
-<h4 id="组件通信的方式"><a href="#组件通信的方式" class="headerlink" title="组件通信的方式"></a>组件通信的方式</h4><p>父组件通过props向子组件传值</p>
+<h4 id="19-组件通信的方式"><a href="#19-组件通信的方式" class="headerlink" title="19.组件通信的方式"></a>19.组件通信的方式</h4><p>父组件通过props向子组件传值</p>
 <p>子组件通过$emit发布订阅父组件监听</p>
 <p>ref和$refs可以获取整个子组件的数据和方法</p>
 <p>vuex全局状态管理工具</p>
@@ -238,7 +238,7 @@
 <li><p>通过bus.$on监听自定义事件处理传递来的参数</p>
 </li>
 </ul>
-<h4 id="路由的传参方式"><a href="#路由的传参方式" class="headerlink" title="路由的传参方式:"></a>路由的传参方式:</h4><p>直接通过$router.push路径中携带参数 路由配置路径中需要预留参数位置  可以通过设置路由中的 “props:true” 让子组件通过props获取参数</p>
+<h4 id="20-路由的传参方式"><a href="#20-路由的传参方式" class="headerlink" title="20.路由的传参方式:"></a>20.路由的传参方式:</h4><p>直接通过$router.push路径中携带参数 路由配置路径中需要预留参数位置  可以通过设置路由中的 “props:true” 让子组件通过props获取参数</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;examine&quot;</span> @click=<span class="string">&quot;insurance(2)&quot;</span>&gt;查看详情&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">methods：&#123;</span><br><span class="line">  <span class="function"><span class="title">insurance</span>(<span class="params">id</span>)</span> &#123;</span><br><span class="line">       <span class="comment">//直接调用$router.push 实现携带参数的跳转</span></span><br><span class="line">        <span class="built_in">this</span>.$router.push(&#123;</span><br><span class="line">          <span class="attr">path</span>: <span class="string">`/particulars/<span class="subst">$&#123;id&#125;</span>`</span>,</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;</span><br><span class="line">    </span><br><span class="line"><span class="comment">// 路由配置</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="attr">path</span>: <span class="string">&#x27;/particulars/:id&#x27;</span>,</span><br><span class="line">     <span class="attr">name</span>: <span class="string">&#x27;particulars&#x27;</span>,</span><br><span class="line">     <span class="attr">component</span>: particulars</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
 
 
@@ -254,17 +254,17 @@
 
 
 
-<h4 id="什么是-mixin"><a href="#什么是-mixin" class="headerlink" title="什么是 mixin"></a>什么是 mixin</h4><p>提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能</p>
+<h4 id="21-什么是-mixin"><a href="#21-什么是-mixin" class="headerlink" title="21.什么是 mixin"></a>21.什么是 mixin</h4><p>提供了一种非常灵活的方式，来分发 Vue 组件中的可复用功能</p>
 <p>相当于扩展了父组件的对象与方法，可以理解为形成了一个新的组件</p>
 <p>可以定义共用的变量，在每个组件中使用，引入组件中之后，各个变量是相互独立的，值的修改在组件中不会相互影响</p>
-<h4 id="对SSR的理解"><a href="#对SSR的理解" class="headerlink" title="对SSR的理解:"></a>对SSR的理解:</h4><p>SSR就是将Vue在客户端把标签渲染成HTML的工作放在服务端完成,然后再把html页面返回给客户端</p>
+<h4 id="22-对SSR的理解"><a href="#22-对SSR的理解" class="headerlink" title="22.对SSR的理解:"></a>22.对SSR的理解:</h4><p>SSR就是将Vue在客户端把标签渲染成HTML的工作放在服务端完成,然后再把html页面返回给客户端</p>
 <p>优点:</p>
 <p>更好的SEO</p>
 <p>首屏加载速度更快</p>
 <p>缺点:</p>
 <p>开发条件会受到限制</p>
 <p>更多的服务端负载</p>
-<h4 id="服务端渲染-SSR-和预渲染-Prerendering-有什么区别"><a href="#服务端渲染-SSR-和预渲染-Prerendering-有什么区别" class="headerlink" title="服务端渲染(SSR)和预渲染(Prerendering)有什么区别"></a>服务端渲染(SSR)和预渲染(Prerendering)有什么区别</h4><p>服务端渲染:</p>
+<h4 id="23-服务端渲染-SSR-和预渲染-Prerendering-有什么区别"><a href="#23-服务端渲染-SSR-和预渲染-Prerendering-有什么区别" class="headerlink" title="23.服务端渲染(SSR)和预渲染(Prerendering)有什么区别"></a>23.服务端渲染(SSR)和预渲染(Prerendering)有什么区别</h4><p>服务端渲染:</p>
 <ul>
 <li><p>服务端渲染是指将客户端渲染的过程放到了服务端</p>
 </li>
@@ -275,7 +275,7 @@
 <ul>
 <li>直接输出HTML页面给浏览器 比服务端渲染少了解析js的步骤</li>
 </ul>
-<h4 id="Vue的性能优化"><a href="#Vue的性能优化" class="headerlink" title="Vue的性能优化"></a>Vue的性能优化</h4><ul>
+<h4 id="24-Vue的性能优化"><a href="#24-Vue的性能优化" class="headerlink" title="24.Vue的性能优化"></a>24.Vue的性能优化</h4><ul>
 <li><p>编码阶段</p>
 <p>减少data中的数据,data中的数据都会增加getter和setter</p>
 <p>v-if v-for不能连用</p>
@@ -303,7 +303,7 @@
 <p>在内容还没有出现之前的页面使用骨架屏填充,以免留白</p>
 </li>
 </ul>
-<h4 id="防抖节流的区别"><a href="#防抖节流的区别" class="headerlink" title="防抖节流的区别"></a>防抖节流的区别</h4><ul>
+<h4 id="25-防抖节流的区别"><a href="#25-防抖节流的区别" class="headerlink" title="25.防抖节流的区别"></a>25.防抖节流的区别</h4><ul>
 <li><p>防抖</p>
 <p>在事件触发n秒之后执行回调，如果在n秒内再次触发事件则重新计时</p>
 <p>运用场景:输入框输入时</p>
@@ -313,11 +313,11 @@
 <p>运用场景:鼠标多次点击时</p>
 </li>
 </ul>
-<h4 id="vue初始化页面闪动问题"><a href="#vue初始化页面闪动问题" class="headerlink" title="vue初始化页面闪动问题"></a>vue初始化页面闪动问题</h4><p>在css上添加[v-cloak] {    display: none;}</p>
-<h4 id="methods、watch、computed的区别"><a href="#methods、watch、computed的区别" class="headerlink" title="methods、watch、computed的区别:"></a>methods、watch、computed的区别:</h4><p>methods: 适合用于业务逻辑处理, 数据不能缓存, 每次使用都会重新调用</p>
+<h4 id="26-vue初始化页面闪动问题"><a href="#26-vue初始化页面闪动问题" class="headerlink" title="26.vue初始化页面闪动问题"></a>26.vue初始化页面闪动问题</h4><p>在css上添加[v-cloak] {    display: none;}</p>
+<h4 id="27-methods、watch、computed的区别"><a href="#27-methods、watch、computed的区别" class="headerlink" title="27.methods、watch、computed的区别:"></a>27.methods、watch、computed的区别:</h4><p>methods: 适合用于业务逻辑处理, 数据不能缓存, 每次使用都会重新调用</p>
 <p>watch:   当想要执行异步或者昂贵的操作以响应不断的变化时使用watch,  支持异步监听, 也可以监听路由变化, 不支持缓存, 数据变化时, 就会触发相应的操作</p>
 <p>computed: 适合计算属性,  不支持异步, 可以缓存数据, 只有在相关依赖发生变化时才会重新求值</p>
-<h4 id="如何实现路由懒加载"><a href="#如何实现路由懒加载" class="headerlink" title="如何实现路由懒加载:"></a>如何实现路由懒加载:</h4><ul>
+<h4 id="28-如何实现路由懒加载"><a href="#28-如何实现路由懒加载" class="headerlink" title="28.如何实现路由懒加载:"></a>28.如何实现路由懒加载:</h4><ul>
 <li>使用箭头函数 + import动态加载</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> List = <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/components/list.vue&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> VueRouter(&#123;</span><br><span class="line">  <span class="attr">routes</span>: [</span><br><span class="line">    &#123; <span class="attr">path</span>: <span class="string">&#x27;/list&#x27;</span>, <span class="attr">component</span>: List &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -330,9 +330,9 @@
 <ul>
 <li>使用webpack的require.ensure技术</li>
 </ul>
-<h4 id="router和-route的区别"><a href="#router和-route的区别" class="headerlink" title="$router和$route的区别"></a>$router和$route的区别</h4><p>$route是”信息路由对象”,包含path、params、query、name等路由信息参数</p>
+<h4 id="29-router和-route的区别"><a href="#29-router和-route的区别" class="headerlink" title="29.$router和$route的区别"></a>29.$router和$route的区别</h4><p>$route是”信息路由对象”,包含path、params、query、name等路由信息参数</p>
 <p>$router是”路由实例”对象包括了路由的跳转方法、钩子函数等</p>
-<h4 id="hash和history的区别"><a href="#hash和history的区别" class="headerlink" title="hash和history的区别"></a>hash和history的区别</h4><ul>
+<h4 id="30-hash和history的区别"><a href="#30-hash和history的区别" class="headerlink" title="30.hash和history的区别"></a>30.hash和history的区别</h4><ul>
 <li><p>hash</p>
 <p>hash模式是开发中默认的模式,它的URL带着一个#</p>
 <p>hash值会出现在URL里面,但是不会出现在HTTP请求中,对后端完全没有影响</p>
@@ -342,14 +342,14 @@
 <p>history模式需要后台配置支持</p>
 </li>
 </ul>
-<h4 id="什么是路由导航守卫"><a href="#什么是路由导航守卫" class="headerlink" title="什么是路由导航守卫"></a>什么是路由导航守卫</h4><p>路由守卫分为 全局的、 单个路由独享的 、组件级的</p>
+<h4 id="3-什么是路由导航守卫"><a href="#3-什么是路由导航守卫" class="headerlink" title="3.什么是路由导航守卫"></a>3.什么是路由导航守卫</h4><p>路由守卫分为 全局的、 单个路由独享的 、组件级的</p>
 <p>主要用来通过跳转或取消的方式守卫导航</p>
 <ul>
 <li>全局前置/钩子：beforeEach、beforeResolve、afterEach</li>
 <li>路由独享的守卫：beforeEnter</li>
 <li>组件内的守卫：beforeRouteEnter、beforeRouteUpdate、beforeRouteLeave</li>
 </ul>
-<h4 id="权限路由的实现"><a href="#权限路由的实现" class="headerlink" title="权限路由的实现"></a>权限路由的实现</h4><p>在定义路由规则时,在路由上标记响应的权限信息,当要跳转路由时,判断用户是否有权限访问,没有权限则跳到事先定义好的界面</p>
+<h4 id="32-权限路由的实现"><a href="#32-权限路由的实现" class="headerlink" title="32.权限路由的实现"></a>32.权限路由的实现</h4><p>在定义路由规则时,在路由上标记响应的权限信息,当要跳转路由时,判断用户是否有权限访问,没有权限则跳到事先定义好的界面</p>
 <p>两种方法:</p>
 <ul>
 <li><p>通过router.beforeEach() 路由拦截的方式实现</p>
@@ -358,7 +358,7 @@
 <p>只需要配置静态的路由表，登录、注册页，登录成功后根据后台返回的权限动态注入路由</p>
 </li>
 </ul>
-<h4 id="嵌套路由"><a href="#嵌套路由" class="headerlink" title="嵌套路由"></a>嵌套路由</h4><p>app：</p>
+<h4 id="33-嵌套路由"><a href="#33-嵌套路由" class="headerlink" title="33.嵌套路由"></a>33.嵌套路由</h4><p>app：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;app&quot;</span>&gt;</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">router-view</span>&gt;</span><span class="tag">&lt;/<span class="name">router-view</span>&gt;</span></span></span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <p>home组件中又提供了<router-view></router-view>用来嵌套其他组件：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Home = &#123;</span><br><span class="line">  <span class="attr">template</span>: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;div class=&quot;user&quot;&gt;</span></span><br><span class="line"><span class="string">      &lt;h2&gt;User &#123;&#123; $route.params.id &#125;&#125;&lt;/h2&gt;</span></span><br><span class="line"><span class="string">      &lt;router-view&gt;&lt;/router-view&gt;</span></span><br><span class="line"><span class="string">    &lt;/div&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -367,26 +367,25 @@
 
 
 
-<h4 id="按钮权限控制"><a href="#按钮权限控制" class="headerlink" title="按钮权限控制"></a>按钮权限控制</h4><p>当前组件路由携带可使用的按钮权限，存入数组中，通过v-if来判断是否显示</p>
+<h4 id="34-按钮权限控制"><a href="#34-按钮权限控制" class="headerlink" title="34.按钮权限控制"></a>34.按钮权限控制</h4><p>当前组件路由携带可使用的按钮权限，存入数组中，通过v-if来判断是否显示</p>
 <p>登录时，单独获取整个系统的按钮权限，将获取到的所有按钮 存入一个数组中，放入全局中，然后，通过 v-if 来判断是否显示</p>
-<h4 id="vue自定义指令实现权限按钮功能"><a href="#vue自定义指令实现权限按钮功能" class="headerlink" title="vue自定义指令实现权限按钮功能"></a>vue自定义指令实现权限按钮功能</h4><p>登录验证：用户登录–&gt; 验证成功–&gt; 服务器返回token–&gt; 将token存储至本地–&gt; 前端根据token调用后端接口获取（用户权限，用户信息）</p>
+<h4 id="35-vue自定义指令实现权限按钮功能"><a href="#35-vue自定义指令实现权限按钮功能" class="headerlink" title="35.vue自定义指令实现权限按钮功能"></a>35.vue自定义指令实现权限按钮功能</h4><p>登录验证：用户登录–&gt; 验证成功–&gt; 服务器返回token–&gt; 将token存储至本地–&gt; 前端根据token调用后端接口获取（用户权限，用户信息）</p>
 <p>权限验证：通过token获取对应的role–&gt; 使用自定义指令判断role是否在路由meta属性里btnPermissions数组里面–&gt; 不在就删除该按钮DOM</p>
 <p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xxl910/p/12706469.html">https://www.cnblogs.com/xxl910/p/12706469.html</a></p>
-<h4 id="如何保存页面当前状态"><a href="#如何保存页面当前状态" class="headerlink" title="如何保存页面当前状态"></a>如何保存页面当前状态</h4><p>在组件即将销毁的声命周期中，将当前组件的状态存储在LocalStorage/SessionStorage中</p>
+<h4 id="36-如何保存页面当前状态"><a href="#36-如何保存页面当前状态" class="headerlink" title="36.如何保存页面当前状态"></a>36.如何保存页面当前状态</h4><p>在组件即将销毁的声命周期中，将当前组件的状态存储在LocalStorage/SessionStorage中</p>
 <p>单页面渲染 要切换的组件作为子组件全屏渲染，父组件中正常储存页面状态</p>
 <p>用keep-alive缓存组件</p>
-<h4 id="什么是keep-alive"><a href="#什么是keep-alive" class="headerlink" title="什么是keep-alive"></a>什么是keep-alive</h4><p> keep-alive用来缓存组件,避免多次加载相应的组件,减少性能消耗</p>
+<h4 id="37-什么是keep-alive"><a href="#37-什么是keep-alive" class="headerlink" title="37.什么是keep-alive"></a>37.什么是keep-alive</h4><p> keep-alive用来缓存组件,避免多次加载相应的组件,减少性能消耗</p>
 <p>如果需要在组件切换的时候,保存一些组件的状态防止多次渲染,可以用keep-alive组件包裹需要保存的组件</p>
-<h4 id="nextTick原理"><a href="#nextTick原理" class="headerlink" title="$nextTick原理"></a>$nextTick原理</h4><p>本质是对JavaScript执行原理EventLoop的应用</p>
+<h4 id="38-nextTick原理"><a href="#38-nextTick原理" class="headerlink" title="38.$nextTick原理"></a>38.$nextTick原理</h4><p>本质是对JavaScript执行原理EventLoop的应用</p>
 <p>nextTick的核心是利用了Promise、MutationObserver、setImmediate、setTimeout的原生js方法来模拟微/宏任务的实现</p>
-<p>keep-alive 只对第一个组件有效</p>
-<p>$nextTick()方法的作用：当页面上的元素被重新渲染后，才会执行回调函数中的代码。</p>
-<h4 id="什么情况使用nextTick"><a href="#什么情况使用nextTick" class="headerlink" title="什么情况使用nextTick"></a>什么情况使用nextTick</h4><p>在数据变化后执行的某个操作,需要使用随数据变化而变化的DOM结构时,就需要将这个操作放在nextTick的回调函数中</p>
+<p>keep-alive 只对第一个组件有效<br> $nextTick()方法的作用：当页面上的元素被重新渲染后，才会执行回调函数中的代码</p>
+<h4 id="39-什么情况使用nextTick"><a href="#39-什么情况使用nextTick" class="headerlink" title="39.什么情况使用nextTick"></a>39.什么情况使用nextTick</h4><p>在数据变化后执行的某个操作,需要使用随数据变化而变化的DOM结构时,就需要将这个操作放在nextTick的回调函数中</p>
 <p>在creatd()钩子进行DOM操作,一定要放在nextTick()回调函数中</p>
-<h4 id="Vue-data中某一个属性值发生变化后-视图会立即同步执行重新渲染吗"><a href="#Vue-data中某一个属性值发生变化后-视图会立即同步执行重新渲染吗" class="headerlink" title="Vue data中某一个属性值发生变化后,视图会立即同步执行重新渲染吗?"></a>Vue data中某一个属性值发生变化后,视图会立即同步执行重新渲染吗?</h4><p>不会立即同步执行重新渲染</p>
+<h4 id="40-Vue-data中某一个属性值发生变化后-视图会立即同步执行重新渲染吗"><a href="#40-Vue-data中某一个属性值发生变化后-视图会立即同步执行重新渲染吗" class="headerlink" title="40.Vue data中某一个属性值发生变化后,视图会立即同步执行重新渲染吗?"></a>40.Vue data中某一个属性值发生变化后,视图会立即同步执行重新渲染吗?</h4><p>不会立即同步执行重新渲染</p>
 <p>Vue更新DOM时是异步执行的,只要侦听到数据变化,Vue将开启一个队列,并缓冲在同一事件循环中发生的所有数据变更</p>
 <p>如果watcher被多次触发,只会被推入队列一次,在下一个事件循环tick中,Vue刷新队列并执行已去重的工作</p>
-<h4 id="Vue-SPA与MPA的区别"><a href="#Vue-SPA与MPA的区别" class="headerlink" title="Vue SPA与MPA的区别"></a>Vue SPA与MPA的区别</h4><ul>
+<h4 id="4-Vue-SPA与MPA的区别"><a href="#4-Vue-SPA与MPA的区别" class="headerlink" title="4.Vue SPA与MPA的区别"></a>4.Vue SPA与MPA的区别</h4><ul>
 <li><p>概念</p>
 <p>SPA单页面应用,只有一个主页面的应用,只需要加载一次js、css等相关资源,所有内容都在主页面,单页面应用跳转,就是切换相关组件,仅刷新局部资源,  相对服务器压力小 , 前后端职责分离，架构清晰 </p>
 <p>MPA多页面应用,拥有多个独立页面的应用,每个页面需要重复加载js、css相关资源,多页面应用跳转,需要刷新整页资源</p>
@@ -398,24 +397,24 @@
 <p>SPA不利于SEO(搜索引擎优化) MPA适用于SEO要求较高的应用</p>
 </li>
 </ul>
-<h4 id="Vue在哪个生命周期执行异步操作"><a href="#Vue在哪个生命周期执行异步操作" class="headerlink" title="Vue在哪个生命周期执行异步操作"></a>Vue在哪个生命周期执行异步操作</h4><p>可以在created和beforeMount、mounted中执行 ，因为data此时已经创建,可以将服务端返回的数据进行赋值</p>
+<h4 id="42-Vue在哪个生命周期执行异步操作"><a href="#42-Vue在哪个生命周期执行异步操作" class="headerlink" title="42.Vue在哪个生命周期执行异步操作"></a>42.Vue在哪个生命周期执行异步操作</h4><p>可以在created和beforeMount、mounted中执行 ，因为data此时已经创建,可以将服务端返回的数据进行赋值</p>
 <p>但是推荐在created中执行异步操作，获取数据快，用户体验好，服务器渲染不支持beforeMount、mounted</p>
-<h4 id="什么时候需要使用beforeDestory"><a href="#什么时候需要使用beforeDestory" class="headerlink" title="什么时候需要使用beforeDestory"></a>什么时候需要使用beforeDestory</h4><p>此时DOM还没有销毁</p>
+<h4 id="43-什么时候需要使用beforeDestory"><a href="#43-什么时候需要使用beforeDestory" class="headerlink" title="43.什么时候需要使用beforeDestory"></a>43.什么时候需要使用beforeDestory</h4><p>此时DOM还没有销毁</p>
 <p>1、当前页面使用了$on方法,需要在组件解绑前销毁</p>
 <p>2、清除自己定义的定时器</p>
 <p>3、解除事件的绑定</p>
-<h4 id="什么时候使用destoryed"><a href="#什么时候使用destoryed" class="headerlink" title="什么时候使用destoryed"></a>什么时候使用destoryed</h4><p>移除监听事件</p>
+<h4 id="44-什么时候使用destoryed"><a href="#44-什么时候使用destoryed" class="headerlink" title="44.什么时候使用destoryed"></a>44.什么时候使用destoryed</h4><p>移除监听事件</p>
 <p>移除对dom的操作</p>
 <p>销毁VueX中存储的数据，否则页面不刷新，在页面刚渲染时，一直展示的是上次的数据</p>
-<h4 id="什么是Vuex"><a href="#什么是Vuex" class="headerlink" title="什么是Vuex"></a>什么是Vuex</h4><p>vuex是一种全局状态管理模式 每个vuex都有一个核心store(仓库) vuex的状态存储是响应式的</p>
-<h4 id="vuex的五大核心"><a href="#vuex的五大核心" class="headerlink" title="vuex的五大核心"></a>vuex的五大核心</h4><p>  state: 存储数据,存储状态</p>
+<h4 id="45-什么是Vuex"><a href="#45-什么是Vuex" class="headerlink" title="45.什么是Vuex"></a>45.什么是Vuex</h4><p>vuex是一种全局状态管理模式 每个vuex都有一个核心store(仓库) vuex的状态存储是响应式的</p>
+<h4 id="46-vuex的五大核心"><a href="#46-vuex的五大核心" class="headerlink" title="46.vuex的五大核心"></a>46.vuex的五大核心</h4><p>  state: 存储数据,存储状态</p>
 <p>  getter: 可以认为是store的计算属性,它的返回值会根据它的依赖缓存起来</p>
 <p>  mutation: 提交更改数据的方法 只能进行同步操作</p>
 <p>  action: 像一个装饰器 包裹mutations 使之可以异步</p>
 <p>  module: 模块化Vuex</p>
-<h4 id="mutation和action的区别"><a href="#mutation和action的区别" class="headerlink" title="mutation和action的区别"></a>mutation和action的区别</h4><p>mutation中的操作是一系列同步函数,用于修改state中的变量的状态 </p>
+<h4 id="47-mutation和action的区别"><a href="#47-mutation和action的区别" class="headerlink" title="47.mutation和action的区别"></a>47.mutation和action的区别</h4><p>mutation中的操作是一系列同步函数,用于修改state中的变量的状态 </p>
 <p>action中可以包含任意异步操作 action提交的是mutation,而不是直接修改状态</p>
-<h4 id="vuex和localStorage的区别"><a href="#vuex和localStorage的区别" class="headerlink" title="vuex和localStorage的区别"></a>vuex和localStorage的区别</h4><p>vuex:</p>
+<h4 id="48-vuex和localStorage的区别"><a href="#48-vuex和localStorage的区别" class="headerlink" title="48.vuex和localStorage的区别"></a>48.vuex和localStorage的区别</h4><p>vuex:</p>
 <ul>
 <li><p>存储在内存当中 页面刷新就存储的值消失</p>
 </li>
@@ -431,19 +430,19 @@
 <li><p>用于页面之间传值</p>
 </li>
 </ul>
-<h4 id="loacalStorage和sessionStorage的区别"><a href="#loacalStorage和sessionStorage的区别" class="headerlink" title="loacalStorage和sessionStorage的区别"></a>loacalStorage和sessionStorage的区别</h4><p>localStorage存储的值是永久的</p>
+<h4 id="49-loacalStorage和sessionStorage的区别"><a href="#49-loacalStorage和sessionStorage的区别" class="headerlink" title="49.loacalStorage和sessionStorage的区别"></a>49.loacalStorage和sessionStorage的区别</h4><p>localStorage存储的值是永久的</p>
 <p>sessionStorage存储的值在当前窗口关闭后就会消失</p>
 <p>相同浏览器的不同页面间可以共享相同的 localStorage</p>
 <p>不同页面或标签页间无法共享sessionStorage的信息</p>
-<h4 id="Vue3-0的更新"><a href="#Vue3-0的更新" class="headerlink" title="Vue3.0的更新"></a>Vue3.0的更新</h4><p>消除了Vue2中Object.defineProperty的很多限制</p>
+<h4 id="50-Vue3-0的更新"><a href="#50-Vue3-0的更新" class="headerlink" title="50.Vue3.0的更新"></a>50.Vue3.0的更新</h4><p>消除了Vue2中Object.defineProperty的很多限制</p>
 <p>带来了基于代理Proxy的observer实现</p>
 <p>检测属性的添加和删除</p>
 <p>支持Map、Set、WeakMap 和 WeakSet</p>
 <p>3.0 修改了组件的声明方式，改成了类式的写法，这样使得和 TypeScript 的结合变得很容易</p>
 <p>3.0 把作用域插槽改成了函数的方式，这样只会影响子组件的重新渲染，提升了渲染的性能 </p>
-<h4 id="有哪些常见的Loader？他们是解决什么问题的？"><a href="#有哪些常见的Loader？他们是解决什么问题的？" class="headerlink" title="有哪些常见的Loader？他们是解决什么问题的？"></a>有哪些常见的Loader？他们是解决什么问题的？</h4><p>file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件</p>
+<h4 id="51-有哪些常见的Loader？他们是解决什么问题的？"><a href="#51-有哪些常见的Loader？他们是解决什么问题的？" class="headerlink" title="51..有哪些常见的Loader？他们是解决什么问题的？"></a>51..有哪些常见的Loader？他们是解决什么问题的？</h4><p>file-loader：把文件输出到一个文件夹中，在代码中通过相对 URL 去引用输出的文件</p>
 <p>url-loader：和 file-loader 类似，但是能在文件很小的情况下以 base64 的方式把文件内容注入到代码中去</p>
-<h4 id="uni-app的bug"><a href="#uni-app的bug" class="headerlink" title="uni-app的bug"></a>uni-app的bug</h4><p>无法覆盖uni-app提供的组件的样式 直接重写不会生效</p>
+<h4 id="52-uni-app的bug"><a href="#52-uni-app的bug" class="headerlink" title="52.uni-app的bug"></a>52.uni-app的bug</h4><p>无法覆盖uni-app提供的组件的样式 直接重写不会生效</p>
 <p>ios真机下键盘遮挡住弹框底部部分内容 </p>
 <p>取消了顶部导航栏，出现页面和手机基本信息(信号，时间等)重合</p>
 <p>input框被输入键盘覆盖 自身有一个属性设置键盘到输入框的距离</p>
@@ -456,7 +455,7 @@
 <li>组件内引入图片要使用绝对路径</li>
 <li>用tap事件代替click事件</li>
 </ul>
-<h4 id="项目中遇到的难点"><a href="#项目中遇到的难点" class="headerlink" title="项目中遇到的难点"></a>项目中遇到的难点</h4><p>1、mounted钩子函数中请求数据导致页面闪屏问题</p>
+<h4 id="53-项目中遇到的难点"><a href="#53-项目中遇到的难点" class="headerlink" title="53.项目中遇到的难点"></a>53.项目中遇到的难点</h4><p>1、mounted钩子函数中请求数据导致页面闪屏问题</p>
 <p>​    解决：其实就是加载时机问题，放在created里会比mounted触发早一点，如果在页面挂载完之前请求完成的话就不会看到闪屏了</p>
 <p>2、IE9中template标签使用问题</p>
 <p>​    解决：之前在tr标签里面用template标签包裹td标签，出现了比较严重的UI错乱，所以。。IE9不能在tr标签中使用template标签</p>
@@ -536,7 +535,7 @@
 <li><p>内部不维护state,只根据外部传入的props进行渲染,props改变时,组件重新渲染</p>
 </li>
 </ul>
-<h4 id="组件通信的方式-1"><a href="#组件通信的方式-1" class="headerlink" title="组件通信的方式"></a>组件通信的方式</h4><p>父传子: 父组件通过props向子组件传递信息</p>
+<h4 id="组件通信的方式"><a href="#组件通信的方式" class="headerlink" title="组件通信的方式"></a>组件通信的方式</h4><p>父传子: 父组件通过props向子组件传递信息</p>
 <p>子传父: props+回调函数的方式</p>
 <p>非父子组件传递: </p>
 <ul>
