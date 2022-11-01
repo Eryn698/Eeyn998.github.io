@@ -296,6 +296,10 @@
 </ol>
   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sortByKey</span>(<span class="params">arr, key</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> arr.sort(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">var</span> x = a[key]</span><br><span class="line">  <span class="keyword">var</span> y = b[key]</span><br><span class="line">  <span class="keyword">return</span> x - y</span><br><span class="line">&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> arrList = [&#123; <span class="attr">pxxh</span>: <span class="number">2</span> &#125;, &#123; <span class="attr">pxxh</span>: <span class="number">3</span> &#125;,  &#123; <span class="attr">pxxh</span>: <span class="number">4</span> &#125;, &#123; <span class="attr">pxxh</span>: <span class="number">1</span> &#125;]</span><br><span class="line">sortByKey(arrList, <span class="string">&#x27;pxxh&#x27;</span>)</span><br><span class="line"><span class="built_in">console</span>.log(arrList);<span class="comment">//[&#123; pxxh: 1 &#125;, &#123; pxxh: 2 &#125;, &#123; pxxh: 3 &#125;, &#123; pxxh: 4 &#125;]</span></span><br></pre></td></tr></table></figure>
 <ol start="18">
+<li>数组内模糊查询</li>
+</ol>
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组内模糊查询</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">fuzzyQuery</span>(<span class="params">list, keyWord, attribute = <span class="string">&quot;name&quot;</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(keyWord)</span><br><span class="line">  <span class="keyword">const</span> arr = []</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">      <span class="keyword">if</span> (reg.test(list[i][attribute])) &#123;</span><br><span class="line">          arr.push(list[i])</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> arr</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">fuzzyQuery(arr, <span class="string">&#x27;需要模糊查的值&#x27;</span>, <span class="string">&quot;查的字段名&quot;</span>)</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+<ol start="18">
 <li>在main.js 文件中引入  </li>
 </ol>
   <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;lib-flexible&#x27;</span></span><br></pre></td></tr></table></figure>
@@ -1966,7 +1970,7 @@
   
   <nav class="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
   </nav>
   
 </section>
@@ -2041,10 +2045,6 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/uti/index.html">屏幕录制工具</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wo/yh.html">Only Belong To TanKeXin</a>
     </li>
     
     <li class="nav-item">

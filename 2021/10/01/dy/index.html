@@ -11,7 +11,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Git命令 |  Hexo</title>
+      <title>dy |  Hexo</title>
   <meta name="generator" content="hexo-theme-ayer">
        
 <link rel="stylesheet" href="/dist/main.css">
@@ -55,7 +55,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-git"
+  id="post-dy"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -66,7 +66,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Git命令
+  dy
 </h1>
  
 
@@ -74,15 +74,15 @@
     </header>
      
     <div class="article-meta">
-      <a href="/2021/12/11/git/" class="article-date">
-  <time datetime="2021-12-11T03:05:31.000Z" itemprop="datePublished">2021-12-11</time>
+      <a href="/2021/10/01/dy/" class="article-date">
+  <time datetime="2021-10-01T02:10:10.000Z" itemprop="datePublished">2021-10-01</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">3k</span>
+            <span class="post-count">815</span>
         </span>
     </span>
 
@@ -91,7 +91,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">11 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -106,150 +106,22 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="1-1-git基础命令"><a href="#1-1-git基础命令" class="headerlink" title="1.1 git基础命令"></a>1.1 git基础命令</h3><p>$ git init 初始化git本地仓库</p>
-<p>$ git status 查看监听的状态  (可选)</p>
-<p>git add .  全部添加到可操作的状态 （当前状态应该为绿色）</p>
-<p>git commit -m ‘first’  把监听的文件添加到本地仓库       </p>
-<p>git log    查看修改日志   (可选)</p>
-<p>git remote add origin http  http是你的运程仓库地址  需要你在 github 或者 码云上创建    </p>
-<p>git push -u origin master  提交到主分支上   </p>
-<p>git branch 分支名称 创建新分支</p>
-<p>git checkout -b 分支的名称  创建并切换到新分支   </p>
-<p>git branch     查看分支  </p>
-<p>git checkout 分支名称   切换分支  </p>
-<p>git push -u origin  分支名称</p>
-<p>git reset –hard commit_id   代码回退  </p>
-<h3 id="1-2-合并"><a href="#1-2-合并" class="headerlink" title="1.2 合并"></a>1.2 合并</h3><p>git merge 分支名称      要确保你是在master 分支上操作</p>
-<h3 id="1-3-删除"><a href="#1-3-删除" class="headerlink" title="1.3 删除"></a>1.3 删除</h3><p>git branch -d 分支名称 删除本地分支</p>
-<p>git branch -D 分支名称 强制删除本地分支</p>
-<p>git push origin –delete 分支名称 删除远程分支</p>
-<h3 id="1-4-重命名"><a href="#1-4-重命名" class="headerlink" title="1.4 重命名"></a>1.4 重命名</h3><p>git branch -m 要改的本地分支名 修改后的分支名(修改本地分支)</p>
-<p>git push origin :远程修改前的分支名（删除远程分支）</p>
-<p>git push origin 修改后的分支名:修改后的分支名（push 到远程分支）</p>
-<p>git branch –set-upstream  修改后的分支名 origin/修改后的分支名（绑定远程分支）</p>
-<h3 id="1-5-代码拉取"><a href="#1-5-代码拉取" class="headerlink" title="1.5 代码拉取"></a>1.5 代码拉取</h3><p>git pull origin master </p>
-<h3 id="1-6-强制删除远程分支"><a href="#1-6-强制删除远程分支" class="headerlink" title="1.6 强制删除远程分支"></a>1.6 强制删除远程分支</h3><p>git push origin –delete 分支名称   </p>
-<p>出现这个问题是因为gitee中的文件不在本地代码目录中，可以通过如下命令进行代码合并,之后在提交<br>代码合并 </p>
-<p>git merge 分支名称     本地合并   </p>
-<p>git push              提交到远程  </p>
-<p>git pull –rebase origin master   同步远程和本地的代码 </p>
-<h3 id="2-单人使用"><a href="#2-单人使用" class="headerlink" title="2 单人使用"></a>2 单人使用</h3><p>单人流程:<br>    一、准备工作(只做一次):<br>  1.创建一个工作区<br>    2.在工作区中的打开git终端<br>    3.通过git init指令, 初始化版本库<br>    4.通过<br>            git config user.name “姓名”<br>        git config user.email “邮箱”<br>      设置用户名和邮箱(不设置要挨骂)<br>    5.通过git config -l查看设置情况<br>    二、开发阶段(反复执行)<br>    1.编写代码<br>    2.通过”git add 文件名称”/“git add .” 添加到版本库的暂缓区中<br>    3.通过git commit -m”说明” 将暂缓区的文件添加到HEAD指针指向的分支中<br>    (默认只有一个分支, master分支, 也称之为主分支)<br>    注意点:<br>    1.不是写一句代码就add commit一次, 应该是完成一个功能后再add commit<br>    2.commit时-m注释一定要认真编写, 与当前提交内容保持一致, 否则要挨骂</p>
-<p>单人使用Git管理项目好处:<br>    1.可以通过git status查看哪些文件没有被管理, 修改了哪些文件<br>      红色(没有被管理或者被修改了)、绿色(在暂缓区)<br>    2.可以通过 git diff查看具体修改了哪些代码<br>    3.可以通过git log / git reflog查看项目演变历史<br>    4.可以通过git reset –hard 版本号  在任意版本之间切换<br>    5.无需备份多个文件, 每次commit提交Git会自动备份</p>
-<h3 id="2-1-多人使用"><a href="#2-1-多人使用" class="headerlink" title="2.1 多人使用"></a>2.1 多人使用</h3><p>多人开发:<br>一、在远程服务器上创建一个共享版本库 github、gitee、gitlab<br>    1.项目负责人打开远程的服务器, 然后创建一个工作区<br>    2.在远程的服务器上打开工作区, 在工作区中打开Git终端工具<br>    3.在Git终端工具中输入 git init –bare<br>    4.经过以上几步, 就代表远程服务器上的共享版本库已经创建好了<br>二、开发人员下载远程版本库<br>    1.开发人员在自己的电脑上打开Git终端工具<br>    2.从远程的服务器上下载当前项目的共享版本库  git clone 远程服务器共享版本库地址<br>      和单人开发使用Git的区别: 单人开发是自己创建版本库, 而多人开发是从远程服务器下载版本库<br>三、进入开发阶段<br>    和单人开发一样<br>    1.设置用户名和邮箱<br>    2.编写代码<br>    3.git add .添加到暂缓区<br>    4.git commit -m 添加到HEADER指针指向的分支<br>    5.注意点:<br>    commit是将编写好的代码提交到本地的版本库, 所以其它的开发人员是拿不到我们提交的代码的<br>    如果想让其它开发人员也能拿到我们提交的代码, 还必须将编写好的代码提交到远程的服务器</p>
-<pre><code>多人开发特有
-6.将代码提交到远程的服务器 git push
-7.其它的开发人员只需要通过 git pull 就可以拿到更新的代码了
-</code></pre>
-<p>多人开发使用Git注意点:<br>    1.不能将不能运行的代码提交到本地和远程服务器(切记一定不能)<br>    2.如果服务器上有其它开发人员的更新内容, 那么我们不能直接通过push将我们的代码提交到服务器<br>      如果服务器上有其它开发人员更新的内容, 我们必须先将其它开发人员更新的内容更新到本地之后才能通过push提交我们的内容<br>    3.如何我们更新的内容和其它同事更新的内容有冲突(修改了同一个文件的同一行代码), 这个时候需要我们自己手动修改冲突, 修改完冲突之后才能将代码提交到远程服务器</p>
-<pre><code>开发技巧:
-只要开发完了一个功能就要立即提交代码, 因为在企业开发中谁后提交谁就负责解决冲突, 谁的工作量就会变大
-</code></pre>
-<h3 id="2-2-分支使用"><a href="#2-2-分支使用" class="headerlink" title="2.2 分支使用"></a>2.2 分支使用</h3><p>一、如何查看有多少个分支?<br>    1.通过git branch指令就可以查看当前版本库中有多少个分支<br>    注意点:<br>    1.如果当前的版本库是空的, 那么无法查看<br>    2.如果通过git branch指令查看当前版本库中有多少个分支, 输出的内容中哪一个分支前面有*号<br>    就代表当前的HEADER指针指向哪一个分支, 我们提交的代码就会提交到指向的分支中</p>
-<p>二、如何创建一个分支<br>    1.通过git branch 分支名称 来创建一个新的分支<br>    注意点:<br>    在哪个分支中创建了新的分支, 那么创建出来的新的分支就会继承当前分支的所有状态<br>    例如:<br>    在master分支中做了两个操作, 然后在master分支中创建了Dev分支<br>    那么创建出来的Dev分支就会继承master分支中的这两个操作<br>    注意点:<br>    一旦分支被创建出来之后, 分支就是独立的, 分支之间不会相互影响</p>
-<p>三、如何切换分支?<br>    1.通过git switch 分支名称 来修改HEADER指针的指向</p>
-<pre><code>    git checkout 分支名称   
-
-    git checkout -b 分支名称  切换并创建新的分支，指针会跳转到新分支 
-
-注意点: 只要HEADER指针的指向发生了改变, 那么commit的代码就会发生改变
-HEADER指针指向谁commit提交的代码就提交到谁里面
-</code></pre>
-<p>四、如何将分支提交到远程服务器<br>    git branch<br>    1.通过git branch -r 来查看远程服务器上有多少个分支<br>    2.首先需要在本地切换到新建的分支中, 然后通过git push指令提交新建的分支到远程的服务器<br>    git push –set-upstream origin Dev</p>
-<pre><code>    git push -u origin master 
-    git push -u origin dev 
-</code></pre>
-<p>五、如何合并分支<br>    可以通过 git merge 分支名称 来合并分支<br>    例如:<br>    在master分支中执行  git merge Dev 就代表需要将Dev分支中的代码都合并到master分支中<br>    例如:<br>    在Dev分支中执行 git merge master 就代表需要将master分支中的代码都合并到Dev分支中</p>
-<p>六、如何删除分支<br>    1.可以通过git branch -D 分支名称 来删除本地的分支<br>    2.可以通过git push origin –delete 分支名称 来删除远程服务器的分支</p>
-<h3 id="2-3-Gitflow工作流"><a href="#2-3-Gitflow工作流" class="headerlink" title="2.3 Gitflow工作流"></a>2.3 Gitflow工作流</h3><p>就像写代码需要代码规范一样，代码管理同样需要一个清晰的流程和规范<br><a target="_blank" rel="noopener" href="https://nvie.com/posts/a-successful-git-branching-model/">https://nvie.com/posts/a-successful-git-branching-model/</a></p>
-<p>一、准备阶段<br>    1.初始化远程工作区和共享版本库<br>    git init –bare</p>
-<pre><code>2.项目经理初始化项目, 并在master定制标记
-添加初始化文件
-git add .
-git commit -m
-git push
-git tag v0.1
-git push origin v0.1
-
-3.项目经理基于master分支创建develop分支
-git switch master
-git branch Develop
-git switch Develop
-git push
-
-4.项目经理给开发人员分配工作任务
-</code></pre>
-<p>二、开发阶段<br>    1.开发人员基于develop分支创建功能分支<br>    git branch feature/home<br>    git switch feature/login</p>
-<pre><code>2.开发人员在自己的分支上add commit push
-
-3.开发完成告诉项目经理, 由项目经理审核代码并合并代码到develop
-git pull
-git switch feature/home  检查代码
-git switch Develop
-git merge feature/home
-git switch feature/login  检查代码
-git switch Develop
-git merge feature/login
-</code></pre>
-<p>三、准备上线阶段<br>    1.项目经理基于develop分支创建release分支<br>    git switch Develop<br>    git branch Release/v1.0</p>
-<pre><code>2.测试人员获取release分支代码进行测试
-
-3.发现bug由开发人员基于release分支创建bugfix分支进行修复
-git pull
-git switch Release/v1.0
-git branch bugfix/issue32
-修复bug / add / commit
-
-4.修复完成后重新合并到release分支
-git switch Release/v1.0
-git merge bugfix/issue32
-git push
-
-5.将测试和修复完所有bug的最终代码合并到master分支和develop分支
-git switch Develop
-git merge Release/v1.0
-git switch master
-git merge Release/v1.0
-</code></pre>
-<p>四、项目上线<br>    1.项目经理在master分支定制标记<br>    git switch master<br>    git tag -a v1.0 -m”项目第一次上线”<br>    2.项目经理项目经理将标记提交到远程服务器<br>    git push origin v1.0</p>
-<p>五、上线之后<br>    1.项目上线后发现紧急bug<br>    2.基于master分支创建hotfix分支, 在该分支上修复bug<br>    git switch master<br>    git branch hotfix/issue66<br>    修复bug / add / commit</p>
-<pre><code>3.修复完成后重新合并到master分支和develop分支
-git switch Develop
-git merge hotfix/issue66
-
-4.项目经理重新在master分支定制标记
-git switch master
-git merge hotfix/issue66
-git tag v1.1
-git push origin v1.1
-</code></pre>
-<ul>
-<li>master主分支:<ul>
-<li>负责记录上线版本的迭代，该分支代码与线上代码是完全一致的。</li>
-</ul>
-</li>
-<li>develop开发分支:<ul>
-<li>该分支记录相对稳定的版本，所有的feature分支都从该分支创建</li>
-</ul>
-</li>
-<li>feature/* 特性（功能）分支:<ul>
-<li>用于开发新的功能，不同的功能创建不同的功能分支，功能分支开发完成并自测通过之后，需要合并到 develop 分支。</li>
-</ul>
-</li>
-<li>release/*发布分支：<ul>
-<li>用于代码上线准备，该分支从develop分支创建，创建之后由测试发布到测试环境进行测试，测试过程中发现bug需要开发人员在该release分支上进行bug修复，所有bug修复完后，在上线之前，需要合并该release分支到master分支和develop分支。</li>
-</ul>
-</li>
-<li>bugfix/* bug修复分支:<ul>
-<li>用于修复不紧急的bug，普通bug均需要创建bugfix分支开发，开发完成自测没问题后合并到 develop 分支后，删除该分支。</li>
-</ul>
-</li>
-<li>hotfix/*紧急bug修复分支：<ul>
-<li>该分支只有在紧急情况下使用，从master分支创建，用于紧急修复线上bug，修复完成后，需要合并该分支到master分支以便上线，同时需要再合并到develop分支。</li>
-</ul>
-</li>
-</ul>
-<pre><code>https://gitee.com/help/articles/4181
-</code></pre>
+  <h2 id="1-探店码项目"><a href="#1-探店码项目" class="headerlink" title="1. 探店码项目"></a>1. 探店码项目</h2><ol>
+<li>项目介绍</li>
+</ol>
+<ol start="2">
+<li>项目推广话术</li>
+</ol>
+<p>理清楚6点:<br>1.我是谁   2.我来干嘛  3.能提供哪些帮助  4.店铺目前存在的问题(获客渠道)<br>5.怎么解决  6.案例展示  7.套餐介绍</p>
+<p>例:<br>第一阶段:<br>  老板你好,我是抖音官方的服务商,专注于做咱们餐饮行业这一块的线上扶持,抖音呢现在大力扶持实体实业,我今天来就是来帮你在抖音上做营销的,让抖音上更多的用户来咱们店里消费.</p>
+<p>第二阶段:<br>问老板:”不知道你现在的店铺都是怎么吸引顾客的?”<br>老板大概率会说:通过美团,大众点评等<br>如果有提到美团,就可以把美团的缺点说下,如:<br>抽佣高(10个点的抽佣)让商家做多种优惠活动导致套餐利润很低<br>美团成交模式是搜索-&gt;成交 也就是说顾客在有需求的情况下才会去搜索,而且还要多家对比才会下单,没有触达到顾客,没有刺激消费,只有在客户想吃饭的时候才会去搜索,而且充钱啥的才能排名靠前<br>抖音的话 抽佣2.5个点  省下来的钱都是营收,<br>成交模式 只要视频内容好播放量高,顾客就能直接看到咱们家的菜品,想吃或者是向屯券都会直接下单购买,</p>
+<p>第三阶段:<br>老板会说:’怎么做,我不会之类的’<br>答:这时候可以介绍我们的产品,如:你做餐饮这么久了,应该对抖音有一定的了解,应该知道现在找团购达人拍摄是什么样的一个价格,一条视频就几百块起步,并且之拍摄一条视频的话,最多一个星期就没有什么流量了,但现在有这么一个模式,让所有进店的顾客,都成为咱们店的团购达人,帮咱们在抖音上发同城视频,一个人就算只有300的播放,一般个人就是3万的播放,并且发的人多,上热门的几率也就越大.</p>
+<p>第四阶段:<br>案例展示:最好是本地的案例,然后现场演示,这里不占用太多时间</p>
+<p>第五阶段:<br>介绍一整套抖音上的引流营销方案<br>如:<br>套餐包括:报价(1500)<br>1.抖音起号装修<br>2.抖音企业号认证<br>3.抖音团购设置<br>4.同城探店码(660)<br>5.视频拍摄</p>
+<p>可单买</p>
+<p>老板答疑:<br>1.视频谁来拍?我不会,顾客也不会.<br>答:视频我们拍(可单独收费或套餐包含)</p>
+<p>2.顾客发完了删了怎么办?<br>答:顾客转发视频,视频七天内播放达到1千或者两千,再来到店内消费可以送一道菜或几瓶啤酒,这样防止顾客删视频同时还能增加顾客的复购率,多送的啤酒喝不了,肯定还会带朋友一起来,这样又会多点菜,一样的可以增加营收.</p>
+<p>注意:探店嘛后台注册<br><img src="/2021/10/01/dy/public/img/1.jpg"></p>
  
       <!-- reward -->
       
@@ -320,7 +192,7 @@ git push origin v1.1
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/12/11/git/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2021/10/01/dy/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -331,20 +203,15 @@ git push origin v1.1
    
   <nav class="article-nav">
     
-      <a href="/2021/12/11/nodejs/" class="article-nav-link">
+      <a href="/2021/10/15/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            Node.js
+            面试题总结
           
         </div>
       </a>
     
-    
-      <a href="/2021/12/11/vueX/" class="article-nav-link">
-        <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">vueX快速上手</div>
-      </a>
     
   </nav>
 

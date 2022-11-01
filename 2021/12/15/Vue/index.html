@@ -82,7 +82,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">11.3k</span>
+            <span class="post-count">11.9k</span>
         </span>
     </span>
 
@@ -91,7 +91,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">42 min</span>
+            <span class="post-count">44 min</span>
         </span>
     </span>
 </div>
@@ -106,8 +106,23 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="1-VUE的基本原理"><a href="#1-VUE的基本原理" class="headerlink" title="1.VUE的基本原理"></a>1.VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
+  <h1 id="一-VUE"><a href="#一-VUE" class="headerlink" title="一.    VUE"></a>一.    VUE</h1><h4 id="1-1-VUE的基本原理"><a href="#1-1-VUE的基本原理" class="headerlink" title="1-1.VUE的基本原理"></a>1-1.VUE的基本原理</h4><p>一个vue实例创建时,会遍历data中的属性,用Object.defineProperty(vue3.0中使用proxy)将它们转化为getter/setter,并在内部追踪相关依赖,在属性被访问和修改时通知变化</p>
 <p>每个组件都有相应的watcher实例,它会在组件渲染过程中将属性记录为依赖,当依赖项的setter被调用时通知watcher重新计算,致使关联的组件更新</p>
+<h4 id="1-2-VUE的生命周期"><a href="#1-2-VUE的生命周期" class="headerlink" title="1-2.VUE的生命周期"></a>1-2.VUE的生命周期</h4><p>vue的生命周期就是vue实例从创建到销毁的过程就是生命周期,就是指从创建,初始化数据,编译模板,挂载Dom到渲染,更新到渲染,<br>销毁等一系列的过程.他主要分为8个阶段,创建前后,载入前后,更新前后,销毁前后,以及一些特殊场景的生命周期:</p>
+<p>vue生命周期的整体流程:</p>
+<p>beforeCreate 组件实例被创建之初:<br>执行时组件实例还未创建,通常用于插件开发中执行一些初始化任务</p>
+<p>created      组件实例已经创建完成:<br>组件初始化完毕,各种数据可以使用,常用于异步数据获取</p>
+<p>beforeMount  组件挂在之前:<br>未执行渲染,更新,dom未创建</p>
+<p>mounted      组件挂载到实例上去之后:<br>初始化结束,dom已创建,可用于获取访问数据和dom元素</p>
+<p>beforeUpdate 组件数据发生变化,更新之前:<br>可用于获取更新前各种状态</p>
+<p>updated      组件数据更新之后:<br>更新后,所有状态已是更新</p>
+<p>beforeDestroy组件实例销毁之前:<br>可用于一些定时器或订阅的消息</p>
+<p>destroyed    组件实例销毁之后:<br>组件已销毁</p>
+<p>activated    keep-alive缓存的组件激活时<br>deactivated  keep-alive缓存的组件停用时调用<br>errorCaptured捕获一个来自子孙组件的错误时被调用</p>
+<p>created和mounted区别:</p>
+<p>created:是在组件实例一旦创建完成的时候立刻调用,这个时候页面dom节点并未生成</p>
+<p>mounted:是在页面dom节点渲染完毕之后就立刻执行的,created的触发时机比mounted的更早一点</p>
+<p>两者的相同点:时都能拿到实例对象的属性和方法,但是如果放在mounted请求有可能导致页面闪动,但如果在页面加载前完成则不会出现此情况</p>
 <h4 id="2-VUE的优点"><a href="#2-VUE的优点" class="headerlink" title="2.VUE的优点"></a>2.VUE的优点</h4><p>轻量级框架</p>
 <p>上手快,学习成本低</p>
 <p>双向数据绑定,保留了angular的特点,数据操作更简单</p>
@@ -115,7 +130,8 @@
 <p>视图、数据、结构分离,使数据更改更简单</p>
 <p>虚拟DOM,操作DOM是非常消耗性能的,不再使用原生的DOM操作节点,极大解放了DOM操作</p>
 <p>相较于react运行速度更快</p>
-<h4 id="3-双向数据绑定原理"><a href="#3-双向数据绑定原理" class="headerlink" title="3.双向数据绑定原理:"></a>3.双向数据绑定原理:</h4><p>采用数据劫持结合发布者-订阅者模式的方式,通过Object.defineProperty()来劫持各个属性的setter, getter,在数据变动时发布消息给订阅者,触发相应的回调</p>
+<h4 id="3-双向数据绑定原理"><a href="#3-双向数据绑定原理" class="headerlink" title="3.双向数据绑定原理:"></a>3.双向数据绑定原理:</h4><p>3-1.双向数据绑定原理:采用数据劫持结合发布者-订阅者模式的方式,通过Object.defineProperty()来劫持各个属性的setter, getter,在数据变动时发布消息给订阅者,触发相应的回调</p>
+<p>3-2.v-model双向数据绑定原理:利用标签上v-bind绑定数据,再利用v-on:input监听数据变化,当检测到数据变化的时候重新赋值</p>
 <h4 id="4-单向数据流和双向数据流的理解"><a href="#4-单向数据流和双向数据流的理解" class="headerlink" title="4.单向数据流和双向数据流的理解"></a>4.单向数据流和双向数据流的理解</h4><ul>
 <li><p>v-bind和vuex就是单向数据流</p>
 <p>如一个父组件有两个子组件，分别为a和b ，父组件向子组件传递数据，两个组件都接收到了父组件传递过来的数据，在组件a中修改父组件传递过来的数据，子组件b和父组件的值不会发生变化 这就是单向的数据流</p>
@@ -455,7 +471,7 @@
 <li>组件内引入图片要使用绝对路径</li>
 <li>用tap事件代替click事件</li>
 </ul>
-<h4 id="53-项目中遇到的难点"><a href="#53-项目中遇到的难点" class="headerlink" title="53.项目中遇到的难点"></a>53.项目中遇到的难点</h4><p>1、mounted钩子函数中请求数据导致页面闪屏问题</p>
+<h4 id="53-项目中遇到的难点-问题"><a href="#53-项目中遇到的难点-问题" class="headerlink" title="53.项目中遇到的难点(问题)"></a>53.项目中遇到的难点(问题)</h4><p>1、mounted钩子函数中请求数据导致页面闪屏问题</p>
 <p>​    解决：其实就是加载时机问题，放在created里会比mounted触发早一点，如果在页面挂载完之前请求完成的话就不会看到闪屏了</p>
 <p>2、IE9中template标签使用问题</p>
 <p>​    解决：之前在tr标签里面用template标签包裹td标签，出现了比较严重的UI错乱，所以。。IE9不能在tr标签中使用template标签</p>
@@ -1077,9 +1093,9 @@
       </a>
     
     
-      <a href="/2021/12/11/git/" class="article-nav-link">
+      <a href="/2021/12/11/nodejs/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Git命令</div>
+        <div class="article-nav-title">Node.js</div>
       </a>
     
   </nav>
@@ -1207,10 +1223,6 @@
     
     <li class="nav-item">
       <a class="nav-item-link" href="/uti/index.html">屏幕录制工具</a>
-    </li>
-    
-    <li class="nav-item">
-      <a class="nav-item-link" href="/wo/yh.html">Only Belong To TanKeXin</a>
     </li>
     
     <li class="nav-item">
