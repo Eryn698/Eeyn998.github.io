@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cs</title>
+  <!-- 引入ElementUI样式 -->
+  <script src="../vue/vue.js"></script>
+  <link rel="stylesheet" href="../css/element.css">
+  <script src="../js/axios.js"></script>
+
+  <script src="../js/element.js"></script>
+  <!--    引入css样式文件-->
+  <!-- <link rel="stylesheet" href="static/css/main.css"> -->
+  <style type="text/css">
+    .h90 {
+      height: 90rpx;
+    }
+
+    .hlc {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .w50 {
+      width: 50rpx;
+    }
+
+    .h35 {
+      height: 35rpx;
+
+    }
+
+    .mlr30 {
+      margin-left: 30rpx;
+      margin-right: 30rpx;
+
+    }
+
+    .overflow {
+      overflow: hidden;
+
+    }
+
+    .h40 {
+      height: 40rpx;
+
+    }
+
+    .hlc {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .w600 {
+      width: 600rpx;
+    }
+
+    .text1 {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .marquee {
+      width: 100%;
+      background: #fff;
+      border: none;
+      display: block;
+      margin: 0 auto;
+      white-space: nowrap;
+      text-overflow: clip;
+      position: relative;
+      font-size: 28rpx;
+      height: auto;
+    }
+
+    .marquee p {
+      height: 40rpx;
+      display: block;
+    }
+
+    .w640 {
+      width: 640rpx;
+    }
+
+    .marquee1 {
+      width: auto;
+      background: #fff;
+      border: none;
+      display: block;
+      margin: 0 auto;
+      white-space: nowrap;
+      text-overflow: clip;
+      position: relative;
+      font-size: 28rpx;
+      height: 40rpx;
+    }
+
+    .marquee1 p {
+      height: 40rpx;
+      display: inline-block;
+      width: 640rpx;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="h90 hlc">
+      <div class="h40 overflow">
+        <div class=" f28pc text1  marquee"
+          :style="{'transform':'translateY('+translateY+'rpx)','transition':'transform '+transform+'ms'}">
+          <p class="text1 w600" v-for="item in 6" :key="item">测试跑马灯跑马灯跑马灯{{item}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 测试左右滚动 -->
+    <div class="h90 hlc">
+      <div class="h40 overflow w640">
+        <div class=" f28pc  marquee1 hlc"
+          :style="{'transform':'translateX('+translateX+'rpx)','transition':'transform '+transform+'ms'}">
+          <p class="text1 w600" v-for="item in 6" :key="item">测试跑马灯跑马灯跑马灯{{item}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  new Vue({
+    el: '#app',
+
+    data() {
+      return {
+        data: {
+          translateY: 0,
+          transform: 300,
+          index: 0,
+          translateX: 0,
+        }
+      };
+    },
+    methods: {
+      marquee() {
+        let that = this;
+        let index = that.index;
+
+        // if (this.notice.length == 2) {
+
+        //   return;
+
+        // }
+
+        if (index == 6) {
+          // y
+          that.index = 0;
+          that.translateY = 0;
+          that.transform = 0;
+          // x
+          that.translateX = 0;
+        } else {
+          // y
+          that.index = index + 1;
+          that.translateY = '-' + index * 40;
+          that.transform = 300;
+          // x
+          that.translateX = '-' + index * 640;
+        }
+        setTimeout(() => this.marquee(), 3000);
+      },
+
+    },
+    created() {
+      this.marquee()
+      axios.get('http://localhost:3000/wenzi').then(res => {
+        this.orgNameData = res.data[0].name
+
+      })
+
+    }
+  })
+
+</script>

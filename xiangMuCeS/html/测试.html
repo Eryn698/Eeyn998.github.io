@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  #test15645 {
+    display: inline-block;
+    padding: 5px 10px;
+    background: red;
+    color: #fff;
+  }
+</style>
+
+<body>
+  <div id="test15645"></div>
+
+</body>
+
+</html>
+<script>
+  function demo(el, msg) {
+    el.innerHTML = msg
+    var timer = setInterval(function () {
+      msg = msg.substring(1) + msg.substr(0, 1)
+      el.innerHTML = msg
+    }, 150)
+  }
+
+  demo(document.getElementById('test15645'), '欢迎使用XXX示例，这只是测试数据！欢迎使用XXX示例，这只是测试数据！欢迎使用XXX示例，这只是测试数据！')
+</script>

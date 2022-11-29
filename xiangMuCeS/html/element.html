@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cs</title>
+    <!-- 引入ElementUI样式 -->
+    <script src="../vue/vue.js"></script>
+    <link rel="stylesheet" href="../css/element.css">
+    <script src="../js/element.js"></script>
+    <!--    引入css样式文件-->
+    <!-- <link rel="stylesheet" href="static/css/main.css"> -->
+</head>
+
+<body>
+    <div id="app" style="width: 100000px;">
+        <el-tag>标签一</el-tag>
+        <el-tag type="success">标签二</el-tag>
+        <el-tag type="info">标签三</el-tag>
+        <el-tag type="warning">标签四</el-tag>
+        <el-tag type="danger">标签五</el-tag>
+
+
+
+        <el-table :data="wmsOrderProcessList" style="width: 600px;">
+            <el-table-column type="selection" width="55" align="center" />
+            <el-table-column type="selection" width="55" align="center" />
+            <el-table-column type="selection" width="55" align="center" />
+            <el-table-column type="selection" width="55" align="center" />
+            <el-table-column type="selection" width="55" align="center" />
+
+        </el-table>
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                wmsOrderProcessList: []
+            }
+        },
+        methods: {
+
+        }
+    });
+</script>

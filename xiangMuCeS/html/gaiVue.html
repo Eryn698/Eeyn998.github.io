@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>cs</title>
+  <!-- 引入ElementUI样式 -->
+  <script src="../vue/vue.js"></script>
+  <link rel="stylesheet" href="../css/element.css">
+  <script src="../js/axios.js"></script>
+
+  <script src="../js/element.js"></script>
+  <!--    引入css样式文件-->
+  <!-- <link rel="stylesheet" href="static/css/main.css"> -->
+  <style>
+    .pad_right {
+      padding-right: 2em;
+    }
+
+    #scroll_div {
+      height: 26px;
+      overflow: hidden;
+      white-space: nowrap;
+      width: 535px;
+      margin-left: 10px;
+    }
+
+    #scroll_begin,
+    #scroll_end {
+      display: inline;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div id="scroll_div" class="fl">
+      <div id="scroll_begin">
+        {{orgNameData}} <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">{{orgNameData}}</span>
+        <span class="pad_right">50999999元巨人点卡奖励</span>
+      </div>
+      <div id="scroll_end"></div>
+    </div>
+  </div>
+</body>
+<script>
+  new Vue({
+    el: '#app',
+
+    data() {
+      return {
+        orgNameData: '',
+      };
+    },
+    methods: {
+      datas() {
+        var speed = 0;
+        var MyMar = null;
+        var scroll_begin = document.getElementById("scroll_begin");
+        var scroll_end = document.getElementById("scroll_end");
+        var scroll_div = document.getElementById("scroll_div");
+        scroll_end.innerHTML = scroll_begin.innerHTML;
+        function Marquee() {
+          console.log(scroll_div.scrollLeft);
+          console.log(scroll_begin.offsetWidth);
+          if (scroll_end.offsetWidth - scroll_div.scrollLeft <= 0)
+            scroll_div.scrollLeft -= scroll_begin.offsetWidth;
+          else
+            scroll_div.scrollLeft++
+        }
+        setInterval(Marquee, speed);
+
+
+      }
+
+    },
+    created() {
+      axios.get('http://localhost:3000/wenzi').then(res => {
+        this.orgNameData = res.data[0].name
+        this.datas()
+
+      })
+
+    }
+  })
+
+</script>

@@ -1,0 +1,42 @@
+<html>
+
+<head>
+  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
+
+</head>
+
+<body>
+  <div id="testDiv" style="width:300px;overflow:hidden;white-space:nowrap;position:relative;">
+    wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwpppppppppppppppppppppppppppppppssssssssssssss
+  </div>
+  <button class="btn1">开始跑马灯</button>
+</body>
+
+</html>
+<script type="text/javascript">
+  var position = $("div").scrollLeft();
+  var t;
+  var flag = true;
+  $(document).ready(function () {
+    $("button").click(function () {
+      if (flag) {
+        position = 0;
+        fun();
+        $(".btn1").text("重置跑马灯");
+      } else {
+        $(".btn1").text("开始跑马灯")
+        clearTimeout(t);
+        $("div").scrollLeft(0);
+      }
+      flag = !flag;
+
+    });
+  });
+  function fun() {
+    if (position > 400) {
+      position = 0;
+    }
+    $("div").scrollLeft(position++);
+    t = setTimeout("fun()", 30);
+  }
+</script>

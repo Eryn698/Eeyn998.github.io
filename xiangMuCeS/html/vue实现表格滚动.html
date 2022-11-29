@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="backround">
+            <div class="toptitle">
+                <div class="item">日期</div>
+                <div class="item">姓名</div>
+                <div class="item">地址</div>
+            </div>
+            <vue-seamless-scroll :data="listData" :class-option="optionHover" class="seamless-warp">
+                <el-table :data="listData" border :show-header="status">
+                    <el-table-column prop="date" label="日期">
+                    </el-table-column>
+                    <el-table-column prop="title" label="姓名">
+                    </el-table-column>
+                    <el-table-column prop="test" label="地址">
+                    </el-table-column>
+                </el-table>
+            </vue-seamless-scroll>
+        </div>
+
+    </div>
+</body>
+
+</html>

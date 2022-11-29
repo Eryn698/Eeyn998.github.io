@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>vue.js动态文字滚动公告代码</title>
+  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+  <script src="../js/axios.js"></script>
+
+  <style>
+    div,
+    ul,
+    li,
+    span,
+    img {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      box-sizing: border-box;
+    }
+
+    .marquee {
+      width: 100%;
+      height: 308px;
+      color: #3a3a3a;
+      box-sizing: border-box;
+    }
+
+    .marquee_box {
+      display: block;
+      position: relative;
+      width: 60%;
+      /* 占四分之三的高度  */
+      height: 86%;
+      overflow: hidden;
+    }
+
+    .marquee_boxTow {
+      display: block;
+      position: relative;
+      width: 60%;
+      /* 占四分之三的高度  */
+      height: 86%;
+      overflow: hidden;
+    }
+
+    .marquee_list {
+      display: block;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .marquee_top {
+      transition: all 0.5s ease-out;
+      margin-top: -44px;
+    }
+
+    .marquee_list li {
+      height: 44px;
+      line-height: 30px;
+      font-size: 14px;
+      padding-left: 20px;
+    }
+
+    .marquee_list li span {
+      padding: 0 2px;
+    }
+
+    .red {
+      color: #ff0101;
+    }
+
+    .aabb {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  </style>
+</head>
+
+<body style="width: 100vw; height: 100vh; padding: 10px; box-sizing: border-box;">
+  <div class="vueBox">
+    <div class="marquee">
+      <!-- <div class="marquee_boxTow">
+        <ul class="marquee_list">
+          <li :style="{ display: 'flex', 'justify-content': 'space-between',  'align-items': 'center'}">
+            <span>item.name</span>
+            <span>在</span>
+            <span class="red aabb"> em.city</span>
+            <span>杀敌</span>
+            <span class="red"> em.amou</span>
+            <span>万</span>
+            <span></span>
+          </li>
+        </ul>
+      </div> -->
+      <div class="marquee_box">
+
+        <ul class="marquee_list" :class="{marquee_top:animate}">
+          <li v-for="(item, index) in marqueeList" :key="index"
+            :style="{background: item.background, display: 'flex', 'justify-content': 'space-between',  'align-items': 'center'}">
+            <span class="aabb">{{item.name}}</span>
+            <span>在</span>
+            <span class="red"> {{item.city}}</span>
+            <span>杀敌</span>
+            <span class="red"> {{item.amount}}</span>
+            <span>万</span>
+            <span><img :src="item.src?item.src: ''" style="width: 15px; height: 15px;" alt="" /></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    const vm = new Vue({
+      el: ".vueBox",
+      data: {
+        animate: false,
+        marqueeList: [{ name: 'nana' }, { name: 'na666na' }, { name: 'na44na' }, { name: 'na33na' }, { name: 'na99na' }]
+      },
+      created: function () {
+        // axios.get('http://localhost:3000/rows').then(res => {
+        //   console.log(res.data);
+        //   this.marqueeList = res.data
+        //   setInterval(this.showMarquee, 2000);
+        // })
+
+      },
+      methods: {
+        // showMarquee: function () {
+        //   this.animate = true;
+        //   setTimeout(() => {
+        //     // if (this.marqueeList.length % 2 != 0) {
+        //     //   this.marqueeList[0]["background"] =
+        //     //     this.marqueeList[0]["background"] === "rgba(0,0,0,.4)"
+        //     //       ? "rgba(0,0,0,.6)"
+        //     //       : "rgba(0,0,0,.4)";
+        //     // }
+        //     this.marqueeList.push(this.marqueeList[0]);
+        //     this.marqueeList.shift();
+        //     this.animate = false;
+        //   }, 500);
+        // }
+      }
+    });
+  </script>
+</body>
+
+</html>
